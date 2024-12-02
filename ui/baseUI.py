@@ -20,8 +20,6 @@ def getHeader():
 '''
 
 
-
-
 def getFooter():
     return '''
 -------------------------------------------------------------------------------
@@ -30,27 +28,17 @@ def getFooter():
 Choose a option:
 '''
 
-
-
-
-
-
 def printBaseMenu(name: str, options: list) -> None:
     baseMenu = ''
     baseMenu += getHeader()
-    baseMenu += '''    Manager Menu
+    baseMenu += '''    Main Menu
         -----------------'''
     baseMenu += getOptions(options)
     baseMenu += getFooter()
 
     print(baseMenu)
 
-
-
-
-
-
-printBaseMenu('Manager menu', ['Add employee', 'Edit employee', 'List employees'])
+printBaseMenu('Main menu', ['Add employee', 'Edit employee', 'List employees'])
 
 
 def takeInput(possibilites: list) -> int:
