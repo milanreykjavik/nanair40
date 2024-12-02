@@ -1,7 +1,7 @@
 
 
-def printOptions(options: list) -> str:
-    returnStr = ''
+def getOptions(options: list) -> str:
+    returnStr = '\n'
 
     for option in options:
         firstLetter = option[0]
@@ -11,6 +11,24 @@ def printOptions(options: list) -> str:
     
     return returnStr
 
+def getHeader():
+    return '''
+===============================================================================
+                                NaN Air
+===============================================================================
+          
+'''
+
+
+
+
+def getFooter():
+    return '''
+-------------------------------------------------------------------------------
+    [Q]uit   [B]ack
+
+Choose a option:
+'''
 
 
 
@@ -18,27 +36,19 @@ def printOptions(options: list) -> str:
 
 
 def printBaseMenu(name: str, options: list) -> None:
-    baseMenu: str = f"""
-===============================================================================
-                                NaN Air
-===============================================================================
-
-    {name}
-        -----------------
-{printOptions(options)}
--------------------------------------------------------------------------------
-    [Q]uit
-
-Choose a option:
-    """
+    baseMenu = ''
+    baseMenu += getHeader()
+    baseMenu += '''    Manager Menu
+        -----------------'''
+    baseMenu += getOptions(options)
+    baseMenu += getFooter()
 
     print(baseMenu)
 
 
-printBaseMenu("Manager Menu", ["Add employee", "Edit employee", "List employee"])
 
 
 
-
+printBaseMenu('Manager menu', ['Add employee', 'Edit employee', 'List employees'])
 
 
