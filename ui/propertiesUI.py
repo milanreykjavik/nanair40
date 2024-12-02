@@ -1,10 +1,10 @@
 class PropertiesUI:
-    def add_property():
+    def addProperty():
         pass
 
 
-    def edit_property():
+    def editProperty():
         pass
 
-    def list_properties():
+    def listProperties():
         pass
