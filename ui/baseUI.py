@@ -31,12 +31,12 @@ class BaseUI:
 
     @staticmethod
     def getFooter(inputOption: str)->str:
-        return f'''
+        return (f'''
     -------------------------------------------------------------------------------
         [Q]uit   [B]ack
 
     {inputOption}:
-    '''
+    ''')
 
 
 
@@ -48,7 +48,7 @@ class BaseUI:
         baseMenu += self.getOptions(options)
         baseMenu += self.getFooter(inputOption)
 
-        print(baseMenu)
+        print(baseMenu.strip(), end='')
 
 
 
@@ -56,7 +56,7 @@ class BaseUI:
 
 
     def takeInput(self, possibilites: list) -> str:
-        user_option = input() 
+        user_option = input(' ') 
 
         options_list = self.available_options(possibilites) 
 
@@ -69,7 +69,7 @@ class BaseUI:
         elif user_option.lower() == 'q':
             return 'q' # quit program instead?
         
-        raise InvalidInputError
+        raise InvalidInputError("smuuuu")
 
         
 
@@ -90,4 +90,4 @@ class BaseUI:
 	[S]earh (Front desk)	
 	[Q]uit
 -------------------------------------------------------------------------------
-Choose a option: ''')
+Choose a option: ''', end='')

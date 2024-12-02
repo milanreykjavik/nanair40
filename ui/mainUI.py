@@ -3,138 +3,207 @@ from baseUI import BaseUI
 from employeeUI import EmployeeUI
 from contractorsUI import ContractorsUI
 from workUI import WorkUI
+from janitorUI import JanitorUI
+from searchUI import SearchUI
 
 baseUI = BaseUI()
 employeeUI = EmployeeUI()
 contractorsIU = ContractorsUI()
 propertiesUI = PropertiesUI()
 workUI = WorkUI()
+janitorUI = JanitorUI()
+searchUI = SearchUI()
+
+
+
+def mainMenu() -> None:
+    optionInput = ''
+    while optionInput.lower() != 'q':
+        baseUI.printMainMenu()
+        options = ['Manager', 'Janitor', 'Search']
+
+        optionInput = userInput(options)
+
+        if not optionInput:
+            invalidInput()
+            continue
+
+        match optionInput.lower():  
+            case 'm':  # Matching case for comparison
+                ShowManagerMenu()
+            case 'j':  # Matching case for comparison
+                ShowMaintenanceMenu()
+            case 's':  # Matching case for comparison
+                ShowSearchMenu()
+
+
+    
 
 
 
 
 def ShowManagerMenu() -> None:
-    while True:
-        options = ['Manager menu', 'Properties menu', 'Work orders menu', 'Constructors']
-        baseUI.printBaseMenu('Manager', options)
+    optionInput = ''
+    while optionInput.lower() != 'q':
+        options = ['Employee menu', 'Properties menu', 'Work orders menu', 'Constructors']
+        baseUI.printBaseMenu('Manager', options, 'Choose a option')
 
-        input = userInput(options)
+        optionInput = userInput(options)
 
-        if not input:
-            print('Invalid Input')
+        if not optionInput:
+            invalidInput()
             continue
         
-        if input.lower() == 'e':
-            employeeMenu()
-        
-        elif input.lower() == 'p':
-            propertiesMenu()
-        
-        elif input.lower() == 'w':
-            workOrderMenu()
-
-        elif input.lower() == 'c':
-            ContractorsUI()
-
-        elif input.lower() == 'b':
-            return False
-        
+        match optionInput.lower():  
+            case 'e':  # Matching case for comparison
+                employeeMenu()
+            case 'p':  # Matching case for comparison
+                propertiesMenu()
+            case 'w':  # Matching case for comparison
+                workOrderMenu()
+            case 'c':  # Matching case for comparison
+                contractorsIU()
+            case 'b':  # Matching case for comparison
+                return False
 
 
 
 
-
-def employeeMenu():
-    while True:
+def employeeMenu() -> None:
+    optionInput = ''
+    while optionInput.lower() != 'q':
         options = ['Add employee', 'Edit employee', 'List employees']
         baseUI.printBaseMenu('Employee menu', options, 'Choose a option') # Prints base menu
 
-        input = userInput(options) #Gets the user input
+        optionInput = userInput(options) #Gets the user input
 
-        if not input: # If the user entered a options that is not available we ask again
+        if not optionInput: # If the user entered a options that is not available we ask again
+            invalidInput()
             continue
-            
-        if input.lower() == 'a':
-            employeeUI.addEmployee() # Go to the employeeUI class and add a new employee
-            
-        elif input.lower() == 'e':
-            employeeUI.editEmployee() # Go to the employeeUI class and add edit a employee
-            
-        elif input.lower() == 'l':
-            employeeUI.listEmployess() # Go to the employeeUI class and list all employees
 
-        elif input.lower() == 'b':
-            return False
+        match optionInput.lower():
+            case 'a':
+                employeeUI.addEmployee() # Go to the employeeUI class and add a new employee
+                
+            case 'e':
+                employeeUI.editEmployee() # Go to the employeeUI class and add edit a employee
+                
+            case 'l':
+                employeeUI.listEmployess() # Go to the employeeUI class and list all employees
 
-
-
+            case 'b':
+                return False
 
 
 
 
-def propertiesMenu():
-    while True:
-        baseUI.printBaseMenu('Properties menu', ['Add property', 'Edit property', 'List properties'], 'Choose a option')
 
-        input = userInput(['Add employee', 'Edit employee', 'List employees'])
 
-        if not input:
-            print('Invalid Input')
+
+def propertiesMenu() -> None:
+    optionInput = ''
+    while optionInput.lower() != 'q':
+        options = ['Add property', 'Edit property', 'List properties']
+        baseUI.printBaseMenu('Properties menu', options, 'Choose a option')
+
+        optionInput = userInput(options)
+
+        if not optionInput:
+            invalidInput()
             continue
-                
-        if input.lower() == 'a':
-            propertiesUI.add_property()
-                
-        elif input.lower() == 'e':
-            propertiesUI.edit_property()
-                
-        elif input.lower() == 'l':
-            propertiesUI.list_properties()
 
-        elif input.lower() == 'b':
-            return False
-    
+        match optionInput.lower():
+            case 'a':
+                propertiesUI.addProperty()    
+            case 'e':
+                propertiesUI.editProperty()
+            case 'l':
+                propertiesUI.listProperties()
+            case 'b':
+                return False
+        
 
 
 
     
-def workOrderMenu():
-    while True:
+def workOrderMenu() -> None:
+    optionInput = ''
+    while optionInput.lower() != 'q':
         options = ['Add work order', 'Completed work reports', 'Edit work orders']
         baseUI.printBaseMenu('Work order menu', options, 'Choose a option')
 
-        input = userInput(options)
+        optionInput = userInput(options)
 
-        if not input:
-            print('Invalid Input')
+        if not optionInput:
+            invalidInput()
             continue
                 
-        if input.lower() == 'a':
-            workUI.add_work_order()
-                
-        elif input.lower() == 'c':
-            workUI.edit_work_order()
-                
-        elif input.lower() == 'e':
-            workUI.completed_work_order()
-
-        elif input.lower() == 'b':
-            return False
-
-    
+        match optionInput.lower():
+            case 'a':
+                workUI.addWorkOrder()
+            case 'c':
+                workUI.editWorkOrder()
+            case 'e':
+                workUI.completedWorkOrder()
+            case 'b':
+                return False
 
     
 
 
 
 
-def ShowMaintenanceMenu():
-    baseUI.printBaseMenu('Janitor menu', ['Work orders', 'Create work report'], 'Choose a option')
+
+def ShowMaintenanceMenu() -> None:
+    optionInput = ''
+    while optionInput.lower() != 'q':
+        options = ['Work orders', 'Create work report']
+        baseUI.printBaseMenu('Janitor menu', options, 'Choose a option')
+        optionInput = userInput(options)
+
+        if not optionInput:
+            invalidInput()
+            continue
+
+        match optionInput.lower():
+            case 'w':
+                janitorUI.workOrders()
+            case 'c':
+                janitorUI.workReports()
+            case 'b':
+                return False
+                
+                
 
 
 
-def ShowSearchMenu():
-    baseUI.printBaseMenu('Janitor menu', ['Employee Search', 'Propertie'], 'Choose a option')
+
+
+
+def ShowSearchMenu() -> None:
+    optionInput = ''
+    while optionInput.lower() != 'q':
+        options = ['Employee Search', 'Property search', 'Work order search', 'Report search', 'Contractors']
+        baseUI.printBaseMenu('Search menu', options, 'Choose a option')
+        optionInput = userInput(options)
+
+        if not optionInput:
+            invalidInput()
+            continue
+
+        match optionInput.lower():
+            case 'e':
+                searchUI.employeeSearch()
+            case 'p':
+                searchUI.propertySearch()
+            case 'w':
+                searchUI.workOrderSearch()
+            case 'r':
+                searchUI.workReportSearch
+            case 'c':
+                searchUI.contractors()
+            case 'b':
+                return False
 
 
 
@@ -143,7 +212,10 @@ def ShowSearchMenu():
 
 
 
-def userInput(options):
+
+
+
+def userInput(options) -> str | bool:
     try:
         input = baseUI.takeInput(options)
     except Exception as e:
@@ -154,7 +226,10 @@ def userInput(options):
     return input
 
 
-ShowManagerMenu()
+def invalidInput() -> None:
+    print('Try again')
+
+mainMenu()
 
 
 

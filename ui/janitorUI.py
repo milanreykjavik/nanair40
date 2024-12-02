@@ -1,7 +1,7 @@
 from baseUI import BaseUI
 
 
-class Janitor:
+class JanitorUI:
     def workOrders():
         pass
 

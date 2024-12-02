@@ -1,9 +1,9 @@
 class WorkUI:
-    def add_work_order():
+    def addWorkOrder():
         pass
 
-    def edit_work_order():
+    def editWorkOrder():
         pass
 
-    def completed_work_order():
+    def completedWorkOrder():
         pass
