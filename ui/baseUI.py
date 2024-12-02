@@ -62,3 +62,4 @@ def takeInput(possibilites: list) -> int:
     # return -1 if option is invalid and let user choose again
     return 0 # I want you to return index (number) of option user choose from the list
 
+dfdjniogdf
