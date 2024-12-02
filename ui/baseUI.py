@@ -19,7 +19,7 @@ def getHeader()->str:
           
 '''
 
-def getFooter(inputOption)->str:
+def getFooter(inputOption: str)->str:
     return f'''
 -------------------------------------------------------------------------------
     [Q]uit   [B]ack
@@ -30,7 +30,7 @@ def getFooter(inputOption)->str:
 
 
 
-def printBaseMenu(name: str, options: list, inputOption) -> None:
+def printBaseMenu(name: str, options: list, inputOption: str) -> None:
     baseMenu = ''
     baseMenu += getHeader()
     baseMenu += f'''       {name}
@@ -39,8 +39,6 @@ def printBaseMenu(name: str, options: list, inputOption) -> None:
     baseMenu += getFooter(inputOption)
 
     print(baseMenu)
-
-
 
 
 
