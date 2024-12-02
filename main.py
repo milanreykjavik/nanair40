@@ -1,5 +1,6 @@
-from baseClasses.Employee import Employee
+from logic.Search import Search
 
-x = Employee()
+x = Search()
 
-print(x.id)
+print(x.searchEmployees())
+
