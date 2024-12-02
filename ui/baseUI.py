@@ -39,8 +39,14 @@ class BaseUI:
         print(baseMenu)
 
     @staticmethod
-    def takeInput(possibilites: list) -> int:
-        inp = input()
+    def takeInput(self, possibilites: list) -> int:
+        inp = input() 
+        for index, option in enumerate(possibilites):
+            print(f"{index+1}: {option}")
+        if 0 < inp < len(possibilites): 
+            return self.takeInput(possibilites)
+        else:
+            return index 
 
         # you need to check if option si valid
         # return -1 if option is invalid and let user choose again
