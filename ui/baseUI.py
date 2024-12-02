@@ -1,3 +1,22 @@
+
+
+def printOptions(options: list) -> str:
+    returnStr = ''
+
+    for option in options:
+        firstLetter = option[0]
+        returnStr += f'{"":<7}[{firstLetter}]{option[1:]}\n'
+
+
+    
+    return returnStr
+
+
+
+
+
+
+
 def printBaseMenu(name: str, options: list) -> None:
     baseMenu: str = f"""
 ===============================================================================
@@ -6,11 +25,7 @@ def printBaseMenu(name: str, options: list) -> None:
 
     {name}
         -----------------
-    [E]mployee menu
-    [P]roperties menu
-    [W]orkorders menu
-    [C]onstructors
-
+{printOptions(options)}
 -------------------------------------------------------------------------------
     [Q]uit
 
@@ -20,4 +35,10 @@ Choose a option:
     print(baseMenu)
 
 
-printBaseMenu("Manager Menu", ["1", "2", "3"])
+printBaseMenu("Manager Menu", ["Add employee", "Edit employee", "List employee"])
+
+
+
+
+
+
