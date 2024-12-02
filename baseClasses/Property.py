@@ -1,6 +1,3 @@
-from typing import Type
-
-
 class Property:
     def __init__(self) -> None:
         self.id: int = 0
@@ -10,7 +7,7 @@ class Property:
         self.facilitiesL: list[str] = ["Hotubs", ]
 
 
-    def addProperty(self, employee: Type[Property]) -> bool:
+    def addProperty(self, property: 'Property') -> bool:
         # call data layer here
         return True
 

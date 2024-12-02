@@ -1,6 +1,3 @@
-from typing import Type
-
-
 class Employee:
     def __init__(self) -> None:
         self.id: int = -1
@@ -13,6 +10,6 @@ class Employee:
         self.country: int = -1 # country will be list of countries as dict
 
 
-    def addEmployee(self, employee: Type[Employee]) -> bool:
+    def addEmployee(self, employee: 'Employee') -> bool:
         # call data layer here
         return True
