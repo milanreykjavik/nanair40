@@ -41,7 +41,6 @@ class BaseUI:
     @staticmethod
     def takeInput(self, possibilites: list) -> int:
         index = int(input()) 
-
         if 0 < index < len(possibilites): 
             return self.takeInput(possibilites)
         return index
