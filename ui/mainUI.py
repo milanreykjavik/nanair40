@@ -25,6 +25,7 @@ def mainMenu() -> None:
         optionInput = userInput(options)
 
         if not optionInput:
+            optionInput = ''
             invalidInput()
             continue
 
@@ -35,9 +36,6 @@ def mainMenu() -> None:
                 ShowMaintenanceMenu()
             case 's':  # Matching case for comparison
                 ShowSearchMenu()
-
-
-    
 
 
 
@@ -51,6 +49,7 @@ def ShowManagerMenu() -> None:
         optionInput = userInput(options)
 
         if not optionInput:
+            optionInput = ''
             invalidInput()
             continue
         
@@ -78,6 +77,7 @@ def employeeMenu() -> None:
         optionInput = userInput(options) #Gets the user input
 
         if not optionInput: # If the user entered a options that is not available we ask again
+            optionInput = ''
             invalidInput()
             continue
 
@@ -97,9 +97,6 @@ def employeeMenu() -> None:
 
 
 
-
-
-
 def propertiesMenu() -> None:
     optionInput = ''
     while optionInput.lower() != 'q':
@@ -109,6 +106,7 @@ def propertiesMenu() -> None:
         optionInput = userInput(options)
 
         if not optionInput:
+            optionInput = ''
             invalidInput()
             continue
 
@@ -135,6 +133,7 @@ def workOrderMenu() -> None:
         optionInput = userInput(options)
 
         if not optionInput:
+            optionInput = ''
             invalidInput()
             continue
                 
@@ -162,6 +161,7 @@ def ShowMaintenanceMenu() -> None:
         optionInput = userInput(options)
 
         if not optionInput:
+            optionInput = ''
             invalidInput()
             continue
 
@@ -188,6 +188,7 @@ def ShowSearchMenu() -> None:
         optionInput = userInput(options)
 
         if not optionInput:
+            optionInput = ''
             invalidInput()
             continue
 
@@ -228,6 +229,7 @@ def userInput(options) -> str | bool:
 
 def invalidInput() -> None:
     print('Try again')
+
 
 mainMenu()
 
