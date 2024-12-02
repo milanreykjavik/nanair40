@@ -40,16 +40,8 @@ class BaseUI:
 
     @staticmethod
     def takeInput(self, possibilites: list) -> int:
-        inp = input() 
-        for index, option in enumerate(possibilites):
-            print(f"{index+1}: {option}")
-        if 0 < inp < len(possibilites): 
+        index = int(input()) 
+
+        if 0 < index < len(possibilites): 
             return self.takeInput(possibilites)
-        else:
-            return index 
-
-        # you need to check if option si valid
-        # return -1 if option is invalid and let user choose again
-        return 0 # I want you to return index (number) of option user choose from the list
-
-
+        return index

@@ -8,8 +8,11 @@ class EmployeeController:
 
         return True
 
-    def changeInFile(self, data) -> bool:
+    def changeOneEntry(self, change, **kwargs) -> bool:
         # do the search and change
+        return True
+
+    def changeEntireEntry(self, change, **kwargs) -> bool:
         return True
 
 
@@ -19,4 +22,3 @@ class EmployeeController:
         # parse obj
 
         return data
-
