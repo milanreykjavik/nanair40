@@ -11,37 +11,32 @@ def getOptions(options: list) -> str:
     
     return returnStr
 
-def getHeader():
-    return '''
+def getHeader()->str:
+    return f'''
 ===============================================================================
                                 NaN Air
 ===============================================================================
           
 '''
 
-
-
-
-def getFooter():
-    return '''
+def getFooter(inputOption)->str:
+    return f'''
 -------------------------------------------------------------------------------
     [Q]uit   [B]ack
 
-Choose a option:
+{inputOption}:
 '''
 
 
 
 
-
-
-def printBaseMenu(name: str, options: list) -> None:
+def printBaseMenu(name: str, options: list, inputOption) -> None:
     baseMenu = ''
     baseMenu += getHeader()
-    baseMenu += '''    Manager Menu
+    baseMenu += f'''       {name}
         -----------------'''
     baseMenu += getOptions(options)
-    baseMenu += getFooter()
+    baseMenu += getFooter(inputOption)
 
     print(baseMenu)
 
@@ -52,6 +47,13 @@ def printBaseMenu(name: str, options: list) -> None:
 
 printBaseMenu('Manager menu', ['Add employee', 'Edit employee', 'List employees'])
 
+
+def takeInput(possibilites: list) -> int:
+    inp = input()
+
+    # you need to check if option si valid
+    # return -1 if option is invalid and let user choose again
+    return 0 # I want you to return index (number) of option user choose from the list
 
 def takeInput(possibilites: list) -> int:
     inp = input()
