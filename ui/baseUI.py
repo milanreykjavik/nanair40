@@ -49,6 +49,14 @@ def printBaseMenu(name: str, options: list) -> None:
 
 
 
+
 printBaseMenu('Manager menu', ['Add employee', 'Edit employee', 'List employees'])
 
+
+def takeInput(possibilites: list) -> int:
+    inp = input()
+
+    # you need to check if option si valid
+    # return -1 if option is invalid and let user choose again
+    return 0 # I want you to return index (number) of option user choose from the list
 
