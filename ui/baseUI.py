@@ -7,41 +7,34 @@ def getOptions(options: list) -> str:
 
     return returnStr
 
-def getHeader():
-    return '''
+def getHeader()->str:
+    return f'''
 ===============================================================================
                                 NaN Air
 ===============================================================================
           
 '''
 
-
-
-
-def getFooter():
-    return '''
+def getFooter(inputOption: str)->str:
+    return f'''
 -------------------------------------------------------------------------------
     [Q]uit   [B]ack
 
-Choose a option:
+{inputOption}:
 '''
 
 
 
 
-
-
-def printBaseMenu(name: str, options: list) -> None:
+def printBaseMenu(name: str, options: list, inputOption: str) -> None:
     baseMenu = ''
     baseMenu += getHeader()
-    baseMenu += '''    Manager Menu
+    baseMenu += f'''       {name}
         -----------------'''
     baseMenu += getOptions(options)
-    baseMenu += getFooter()
+    baseMenu += getFooter(inputOption)
 
     print(baseMenu)
-
-
 
 
 
