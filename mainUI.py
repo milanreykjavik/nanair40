@@ -19,7 +19,6 @@ class mainUI(BaseUI):
 
 
 
-
     def mainMenu(self) -> None:
         optionInput = ''
         while optionInput.lower() != 'q':
