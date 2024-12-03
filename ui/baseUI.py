@@ -42,7 +42,6 @@ class BaseUI:
     ''')
 
 
-
     def printBaseMenu(self, name: str, options: list, inputOption: str) -> None:
         baseMenu = ''
         baseMenu += self.getHeader()
@@ -53,10 +52,6 @@ class BaseUI:
 
         clearTerminal()
         print(baseMenu.strip(), end='')
-
-
-
-
 
 
     def takeInput(self, possibilites: list) -> str:
@@ -75,7 +70,6 @@ class BaseUI:
         
         raise InvalidInputError("smuuuu")
 
-        
 
     @staticmethod
     def printMainMenu():
@@ -98,12 +92,9 @@ class BaseUI:
 Choose a option:''', end='')
 
 
-
 def clearTerminal():
     """Clear the terminal screen based on the operating system."""
     if os.name == 'nt':  # For Windows
         os.system('cls')
     else:  # For Unix/Linux/Mac
         os.system('clear')
-
-    
