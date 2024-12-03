@@ -8,17 +8,18 @@ class EmployeeController:
 
         return True
 
-    def changeOneEntry(self, change, **kwargs) -> bool:
+    def changeOneEntry(self, kennitala: str, **kwargs) -> bool:
         # do the search and change
         return True
 
-    def changeEntireEntry(self, change, **kwargs) -> bool:
+    def changeEntireEntry(self, kennitala: str, **kwargs) -> bool:
         return True
 
 
     def readFile(self) -> list[str]:
         data = []
-
-        # parse obj
+        with open(self.filePath, "r") as f:
+            for line in f:
+                data.append(line.replace("\n", ""))
 
         return data
