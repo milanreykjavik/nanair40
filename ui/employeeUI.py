@@ -69,7 +69,39 @@ class EmployeeUI(BaseUI):
         # talk to wrapper with the kennitala entered 
 
 
-    def editEmployee():
+        # Here a instance would get created in order to send to data layer
+
+
+        while True:
+            self.printBaseMenu('Add employee', [f'{key}: {value}' for key, value in user_dict.items()], 'Choose an option: ') # if the user finished entering all the information needed then he gets to choose either to quit or go back
+            optionInput = self.takeInput(['Back', 'Quit'])
+
+            match optionInput.lower():
+                case 'b':
+                    return False
+                case 'q':
+                    return 'q'
+
+
+
+    def editEmployee(self):
+    
+        lookUpKennitala = self.getValidInput( 'View/edit employee',"Look up employee by kennitala: ", validation.validateKennitala)
+
+        match lookUpKennitala.lower():
+            case 'q':
+                return 'q'
+            case 'b':
+                return False
+
+        # talk to wrapper with the kennitala entered
+        
+
+
+
+       
+        
+    def listEmployess(self):
         pass
         
 
