@@ -1,6 +1,7 @@
 from logic.Search import Search
+from mainUI
 
-x = Search()
+mainUI =
 
 print(x.searchEmployees())
 

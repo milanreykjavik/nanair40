@@ -6,232 +6,251 @@ from workUI import WorkUI
 from janitorUI import JanitorUI
 from searchUI import SearchUI
 
-baseUI = BaseUI()
-employeeUI = EmployeeUI()
-contractorsIU = ContractorsUI()
-propertiesUI = PropertiesUI()
-workUI = WorkUI()
-janitorUI = JanitorUI()
-searchUI = SearchUI()
+class mainUI(BaseUI):
+    def __init__(self):
+        self.baseUI = BaseUI()
+        self.employeeUI = EmployeeUI()
+        self.contractorsIU = ContractorsUI()
+        self.propertiesUI = PropertiesUI()
+        self.workUI = WorkUI()
+        self.janitorUI = JanitorUI()
+        self.searchUI = SearchUI()
 
 
 
-def mainMenu() -> None:
-    optionInput = ''
-    while optionInput.lower() != 'q':
-        baseUI.printMainMenu()
-        options = ['Manager', 'Janitor', 'Search']
+    def mainMenu(self) -> None:
+        optionInput = ''
+        while optionInput.lower() != 'q':
+            self.printMainMenu() 
+            options = ['Manager', 'Janitor', 'Search'] # each option the user gets to pick from
 
-        optionInput = userInput(options)
+            optionInput, isValid = self.userInput(options)
+            if not isValid:
+                continue
 
-        if not optionInput:
-            optionInput = ''
-            invalidInput()
-            continue
-
-        match optionInput.lower():  
-            case 'm':  # Matching case for comparison
-                ShowManagerMenu()
-            case 'j':  # Matching case for comparison
-                ShowMaintenanceMenu()
-            case 's':  # Matching case for comparison
-                ShowSearchMenu()
-
-
-
-
-def ShowManagerMenu() -> None:
-    optionInput = ''
-    while optionInput.lower() != 'q':
-        options = ['Employee menu', 'Properties menu', 'Work orders menu', 'Constructors']
-        baseUI.printBaseMenu('Manager', options, 'Choose a option')
-
-        optionInput = userInput(options)
-
-        if not optionInput:
-            optionInput = ''
-            invalidInput()
-            continue
-        
-        match optionInput.lower():  
-            case 'e':  # Matching case for comparison
-                employeeMenu()
-            case 'p':  # Matching case for comparison
-                propertiesMenu()
-            case 'w':  # Matching case for comparison
-                workOrderMenu()
-            case 'c':  # Matching case for comparison
-                contractorsIU()
-            case 'b':  # Matching case for comparison
-                return False
-
-
-
-
-def employeeMenu() -> None:
-    optionInput = ''
-    while optionInput.lower() != 'q':
-        options = ['Add employee', 'Edit employee', 'List employees']
-        baseUI.printBaseMenu('Employee menu', options, 'Choose a option') # Prints base menu
-
-        optionInput = userInput(options) #Gets the user input
-
-        if not optionInput: # If the user entered a options that is not available we ask again
-            optionInput = ''
-            invalidInput()
-            continue
-
-        match optionInput.lower():
-            case 'a':
-                employeeUI.addEmployee() # Go to the employeeUI class and add a new employee
+            match optionInput.lower():  
+                case 'm':  
+                    returnValue = self.ShowManagerMenu() 
+                case 'j':  
+                    returnValue = self.ShowMaintenanceMenu() 
+                case 's':  
+                    returnValue = self.ShowSearchMenu()
+            
+                case 'q':  # Matching case for comparison
+                    return 'q'
                 
-            case 'e':
-                employeeUI.editEmployee() # Go to the employeeUI class and add edit a employee
+            if returnValue == 'q': # if the user entered q then we go back until the program ends
+               return 'q'
+
+
+
+
+
+    def ShowManagerMenu(self) -> None:
+        optionInput = ''
+        while optionInput.lower() != 'q':
+            options = ['Employee menu', 'Properties menu', 'Work orders menu', 'Constructors']
+            self.printBaseMenu('Manager', options, 'Choose a option')
+
+
+            optionInput, isValid = self.userInput(options)
+            if not isValid:
+                continue
+            
+            match optionInput.lower():  
+                case 'e':  # Matching case for comparison
+                    returnValue = self.employeeMenu()
+                case 'p':  # Matching case for comparison
+                    returnValue = self.propertiesMenu()
+                case 'w':  # Matching case for comparison
+                    returnValue = self.workOrderMenu()
+                case 'c':  # Matching case for comparison
+                    returnValue = self.contractorsIU()
+                case 'b':  # Matching case for comparison
+                    return False
+                case 'q':  # Matching case for comparison
+                    return 'q'
                 
-            case 'l':
-                employeeUI.listEmployess() # Go to the employeeUI class and list all employees
-
-            case 'b':
-                return False
+            if returnValue == 'q':
+                return 'q'
 
 
 
 
-def propertiesMenu() -> None:
-    optionInput = ''
-    while optionInput.lower() != 'q':
-        options = ['Add property', 'Edit property', 'List properties']
-        baseUI.printBaseMenu('Properties menu', options, 'Choose a option')
+    def employeeMenu(self) -> None:
+        optionInput = ''
+        while optionInput.lower() != 'q':
+            options = ['Add employee', 'Edit employee', 'List employees']
+            self.printBaseMenu('Employee menu', options, 'Choose a option') # Prints base menu
 
-        optionInput = userInput(options)
-
-        if not optionInput:
-            optionInput = ''
-            invalidInput()
-            continue
-
-        match optionInput.lower():
-            case 'a':
-                propertiesUI.addProperty()    
-            case 'e':
-                propertiesUI.editProperty()
-            case 'l':
-                propertiesUI.listProperties()
-            case 'b':
-                return False
-        
+            optionInput, isValid = self.userInput(options)
+            if not isValid:
+                continue
 
 
+            match optionInput.lower():
+                case 'a':
+                    returnValue = self.employeeUI.addEmployee() # Go to the employeeUI class and add a new employee
+                    
+                case 'e':
+                    returnValue = self.employeeUI.editEmployee() # Go to the employeeUI class and add edit a employee
+                    
+                case 'l':
+                    returnValue = self.employeeUI.listEmployess() # Go to the employeeUI class and list all employees
 
+                case 'b':
+                    return False
     
-def workOrderMenu() -> None:
-    optionInput = ''
-    while optionInput.lower() != 'q':
-        options = ['Add work order', 'Completed work reports', 'Edit work orders']
-        baseUI.printBaseMenu('Work order menu', options, 'Choose a option')
+                case 'q':  # Matching case for comparison
+                    return 'q'
 
-        optionInput = userInput(options)
+            if returnValue == 'q': # if the user entered q then we go back until the program ends
+                return 'q'
 
-        if not optionInput:
-            optionInput = ''
-            invalidInput()
-            continue
+
+
+
+
+
+
+    def propertiesMenu(self) -> None:
+        optionInput = ''
+        while optionInput.lower() != 'q':
+            options = ['Add property', 'Edit property', 'List properties']
+            self.printBaseMenu('Properties menu', options, 'Choose a option')
+
+
+            optionInput, isValid = self.userInput(options)
+            if not isValid:
+                continue
+
+            match optionInput.lower():
+                case 'a':
+                    returnValue = self.propertiesUI.addProperty()    
+                case 'e':
+                    returnValue = self.propertiesUI.editProperty()
+                case 'l':
+                    returnValue = self.propertiesUI.listProperties()
+                case 'b':
+                    return False
+
+                case 'q':  # Matching case for comparison
+                    return 'q'
+
+
+            if returnValue == 'q':
+               return 'q'
+
+
+           
+    def workOrderMenu(self) -> None:
+        optionInput = ''
+        while optionInput.lower() != 'q':
+            options = ['Add work order', 'Completed work reports', 'Edit work orders']
+            self.printBaseMenu('Work order menu', options, 'Choose a option')
+
+            optionInput, isValid = self.userInput(options)
+            if not isValid:
+                continue
+                    
+            match optionInput.lower():
+                case 'a':
+                    returnValue = self.workUI.addWorkOrder()
+                case 'c':
+                    returnValue = self.workUI.editWorkOrder()
+                case 'e':
+                    returnValue = self.workUI.completedWorkOrder()
+                case 'b':
+                    return False
                 
-        match optionInput.lower():
-            case 'a':
-                workUI.addWorkOrder()
-            case 'c':
-                workUI.editWorkOrder()
-            case 'e':
-                workUI.completedWorkOrder()
-            case 'b':
-                return False
+                case 'q':  # Matching case for comparison
+                    return 'q'
 
-    
+
+            if returnValue == 'q':
+               return 'q'
+
+
+        
 
 
 
 
 
-def ShowMaintenanceMenu() -> None:
-    optionInput = ''
-    while optionInput.lower() != 'q':
-        options = ['Work orders', 'Create work report']
-        baseUI.printBaseMenu('Janitor menu', options, 'Choose a option')
-        optionInput = userInput(options)
+    def ShowMaintenanceMenu(self) -> None:
+        optionInput = ''
+        while optionInput.lower() != 'q':
+            options = ['Work orders', 'Create work report']
+            self.printBaseMenu('Janitor menu', options, 'Choose a option')
 
-        if not optionInput:
-            optionInput = ''
-            invalidInput()
-            continue
+            optionInput, isValid = self.userInput(options)
+            if not isValid:
+                continue
 
-        match optionInput.lower():
-            case 'w':
-                janitorUI.workOrders()
-            case 'c':
-                janitorUI.workReports()
-            case 'b':
-                return False
-                
-                
+            match optionInput.lower():
+                case 'w':
+                    returnValue = self.janitorUI.workOrders()
+                case 'c':
+                    returnValue = self.janitorUI.workReports()
+                case 'b':
+                    return False
 
+                case 'q':  # Matching case for comparison
+                    return 'q'
 
-
-
+            if returnValue == 'q':
+               return 'q'
 
 
-def ShowSearchMenu() -> None:
-    optionInput = ''
-    while optionInput.lower() != 'q':
-        options = ['Employee Search', 'Property search', 'Work order search', 'Report search', 'Contractors']
-        baseUI.printBaseMenu('Search menu', options, 'Choose a option')
-        optionInput = userInput(options)
-
-        if not optionInput:
-            optionInput = ''
-            invalidInput()
-            continue
-
-        match optionInput.lower():
-            case 'e':
-                searchUI.employeeSearch()
-            case 'p':
-                searchUI.propertySearch()
-            case 'w':
-                searchUI.workOrderSearch()
-            case 'r':
-                searchUI.workReportSearch
-            case 'c':
-                searchUI.contractors()
-            case 'b':
-                return False
+                    
 
 
+    def ShowSearchMenu(self) -> None:
+        optionInput = ''
+        while optionInput.lower() != 'q':
+            options = ['Employee Search', 'Property search', 'Work order search', 'Report search', 'Contractors']
+            self.printBaseMenu('Search menu', options, 'Choose a option')
 
+            optionInput, isValid = self.userInput(options)
+            if not isValid:
+                continue
 
+            match optionInput.lower():
+                case 'e':
+                    returnValue = self.searchUI.employeeSearch()
+                case 'p':
+                    returnValue = self.searchUI.propertySearch()
+                case 'w':
+                    returnValue = self.searchUI.workOrderSearch()
+                case 'r':
+                    returnValue = self.searchUI.workReportSearch
+                case 'c':
+                    returnValue = self.searchUI.contractors()
+                case 'b':
+                    return False
+                case 'q':  # Matching case for comparison
+                    return 'q'
+
+            if returnValue == 'q':
+               return 'q'
 
 
 
 
 
 
+    def userInput(self, options) -> tuple[str, bool]:
+        try:
+            input = self.baseUI.takeInput(options)
+        except Exception as e:
+            return '_', False
 
-def userInput(options) -> str | bool:
-    try:
-        input = baseUI.takeInput(options)
-    except Exception as e:
-        print('Invalid Input')
-        return False
-
-
-    return input
+        return input, True
 
 
-def invalidInput() -> None:
-    print('Try again')
 
-
-mainMenu()
+mainUI = mainUI()
+mainUI.mainMenu()
 
 
 
