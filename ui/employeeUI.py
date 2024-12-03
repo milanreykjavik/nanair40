@@ -5,7 +5,7 @@ from validationUI import ValidationUI
 validation = ValidationUI() 
 
 class EmployeeUI(BaseUI):
-    def addEmployee():
+    def addEmployee(self):
         validkennitala = False
         while not validkennitala:
             kennitala = input("Enter youre kennitala: ")
@@ -23,12 +23,23 @@ class EmployeeUI(BaseUI):
         
         validhomephone = False
         while not validhomephone:
-            phone = input("Enter a homephone: ")
-            validphone = validation.validatePhone(validhomephone)
-        
-            #address = input("Enter youre address: ")
-            #email = input("Enter youre email: ")
-            #country = input("Enter a country: ")
+            homephone = input("Enter a homephone: ")
+            validhomephone = validation.validatePhone(homephone)
+
+        validaddress = False
+        while not validaddress:
+            address = input("Enter youre address: ")
+            validaddress = validation.validateAddress(address)
+
+        validateemail = False
+        while not validateemail:
+            email = input("Enter youre email: ")
+            validateemail = validation.validateEmail(email)
+
+        validcountry = False
+        while not validcountry:
+            country = input("Enter a country: ")
+            validcountry = validation.validateCountry(country)
 
 
     def editEmployee():
