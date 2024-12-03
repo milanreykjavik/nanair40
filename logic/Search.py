@@ -4,9 +4,9 @@ from dataControl.employeeController import EmployeeController
 class Search:
     @staticmethod
     def searchEmployees(**kwargs) -> list[Employee] | None:
-        employeesJson = EmployeeController().readFile()
+        employeesJson: list[dict] = EmployeeController().readFile()
 
-        employees = Employee().normalize(employeesJson)
+        employees: list[Employee] = Employee().normalize(employeesJson)
 
         allowedKeys = ["a", "b", "c"]
         if not len(kwargs):

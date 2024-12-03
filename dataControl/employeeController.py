@@ -18,14 +18,16 @@ class EmployeeController:
         return True
 
     def changeOneEntry(self, kennitala: str, **kwargs) -> bool:
+        print(kennitala)
+        print(kwargs.items())
         # do the search and change
         return True
 
-    def changeEntireEntry(self, kennitala: str, **kwargs) -> bool:
-        return True
+    #def changeEntireEntry(self, kennitala: str, **kwargs) -> bool:
+    #    return True
 
 
-    def readFile(self) -> list[str]:
+    def readFile(self) -> list[dict]:
         data = []
         with open(self.filePath, "r") as f:
             data = json.load(f)

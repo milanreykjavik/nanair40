@@ -12,3 +12,14 @@ class EmployeeHandler:
         employeeJson = self.employee.toJSON(employee)
         self.employeeControl.appendIntoFile(employeeJson)
         return True
+
+
+    def editEmployee(self, kennitala: str, **kwargs) -> bool:
+        if any(kwarg not in vars(self.employee) for kwarg in kwargs):
+            return False
+        self.employeeControl.changeOneEntry(kennitala, **kwargs)
+        return True
+
+
+    def listEmployess(self, employee: 'Employee', **kwargs) -> bool:
+        return True
