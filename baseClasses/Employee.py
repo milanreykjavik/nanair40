@@ -1,10 +1,10 @@
 import json
 
 class Employee:
-    def __init__(self, id: int = -1, kinnetala: str = "", name: str = "", phone: str = "",
+    def __init__(self, id: int = -1, kennitala: str = "", name: str = "", phone: str = "",
                  homePhone: str = "", address: str = "", email: str = "", country: int = -1) -> None:
         self.id: int = id
-        self.kinnetala: str = kinnetala
+        self.kennitala: str = kennitala
         self.name: str = name
         self.phone: str = phone
         self.homePhone: str = homePhone
@@ -19,7 +19,7 @@ class Employee:
 
 
     def __repr__(self) -> str:
-        return f"Employee(id={self.id}, kinnetala={self.kinnetala}, name={self.name}, phone={self.phone}, homePhone={self.homePhone}, address={self.address}, email={self.email}, country={self.country})"
+        return f"Employee(id={self.id}, kennitala={self.kennitala}, name={self.name}, phone={self.phone}, homePhone={self.homePhone}, address={self.address}, email={self.email}, country={self.country})"
 
 
     def normalize(self, jsonStringList: list[str]) -> list['Employee']:
