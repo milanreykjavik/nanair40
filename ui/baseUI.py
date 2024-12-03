@@ -3,11 +3,10 @@ import os
 class BaseUI:
     @staticmethod
     def getOptions(options: list) -> str:
-        '''Returns a string that represents the options the user can do, first letter of every option is inside a []'''
+        '''Returns a string that represents the options the user can do'''
         returnStr = '\n'
         for option in options:
-            firstLetter = option[0] # Get the first letter
-            returnStr += f'{"":<7}[{firstLetter}]{option[1:]}\n' # Formats the options so that the first letter is inside a []
+            returnStr += f'       {option}\n'# Formats the options 
 
         return returnStr
     
@@ -17,13 +16,14 @@ class BaseUI:
         options = []
 
         for word in possibilites:
-            options.append(word[0])
+            options.append(word[1])
 
         return options
 
 
     @staticmethod
     def getHeader()->str:
+        '''Returns the standard header'''
         return f'''
 ===============================================================================
                                     NaN Air
@@ -32,17 +32,18 @@ class BaseUI:
     '''
 
     @staticmethod
-    def getFooter(inputOption: str)->str:
+    def getFooter(inputOption: str = '')->str:
+        '''Returns the standard footer'''
         return (f'''
 -------------------------------------------------------------------------------
         [Q]uit   [B]ack
 
-{inputOption}:
+{inputOption}
     ''')
 
 
-
-    def printBaseMenu(self, name: str, options: list, inputOption: str, error_message = '') -> None:
+    def printBaseMenu(self, name: str, options: list = [], inputOption: str = '') -> None:
+        '''Prints the menu based on the arguments given'''
         baseMenu = ''
         baseMenu += self.getHeader()
         baseMenu += f'''   {name}
@@ -62,6 +63,7 @@ class BaseUI:
 
 
     def takeInput(self, possibilites: list) -> str:
+        '''Takes input and checks whether the input is valid based on the options given, if not a error will be raised'''
         user_option = input(' ') 
 
         options_list = self.available_options(possibilites) 
@@ -102,7 +104,7 @@ Choose a option:''', end='')
 
 
 def clearTerminal():
-    """Clear the terminal screen based on the operating system."""
+    """Clear the terminal screen before a new menu is printed"""
     if os.name == 'nt':  # For Windows
         os.system('cls')
     else:  # For Unix/Linux/Mac
