@@ -17,7 +17,6 @@ class mainUI(BaseUI):
         self.searchUI = SearchUI()
 
 
-
     def mainMenu(self) -> None:
         optionInput = ''
         while optionInput.lower() != 'q':
@@ -41,9 +40,6 @@ class mainUI(BaseUI):
                 
             if returnValue == 'q': # if the user entered q then we go back until the program ends
                return 'q'
-
-
-
 
 
     def ShowManagerMenu(self) -> None:
@@ -75,8 +71,6 @@ class mainUI(BaseUI):
                 return 'q'
 
 
-
-
     def employeeMenu(self) -> None:
         optionInput = ''
         while optionInput.lower() != 'q':
@@ -86,7 +80,6 @@ class mainUI(BaseUI):
             optionInput, isValid = self.userInput(options)
             if not isValid:
                 continue
-
 
             match optionInput.lower():
                 case 'a':
@@ -106,11 +99,6 @@ class mainUI(BaseUI):
 
             if returnValue == 'q': # if the user entered q then we go back until the program ends
                 return 'q'
-
-
-
-
-
 
 
     def propertiesMenu(self) -> None:
@@ -141,7 +129,6 @@ class mainUI(BaseUI):
             if returnValue == 'q':
                return 'q'
 
-
            
     def workOrderMenu(self) -> None:
         optionInput = ''
@@ -166,15 +153,8 @@ class mainUI(BaseUI):
                 case 'q':  # Matching case for comparison
                     return 'q'
 
-
             if returnValue == 'q':
                return 'q'
-
-
-        
-
-
-
 
 
     def ShowMaintenanceMenu(self) -> None:
@@ -200,9 +180,6 @@ class mainUI(BaseUI):
 
             if returnValue == 'q':
                return 'q'
-
-
-                    
 
 
     def ShowSearchMenu(self) -> None:
@@ -235,10 +212,6 @@ class mainUI(BaseUI):
                return 'q'
 
 
-
-
-
-
     def userInput(self, options) -> tuple[str, bool]:
         try:
             input = self.baseUI.takeInput(options)
@@ -248,9 +221,5 @@ class mainUI(BaseUI):
         return input, True
 
 
-
 mainUI = mainUI()
 mainUI.mainMenu()
-
-
-
