@@ -97,7 +97,6 @@ class BaseUI:
 	[S]earh (Front desk)	
 	[Q]uit
 -------------------------------------------------------------------------------
-{errorMessage}
 Choose a option:''', end='')
 
 
