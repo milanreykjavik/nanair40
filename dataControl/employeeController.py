@@ -1,10 +1,19 @@
+import json
+
 class EmployeeController:
     def __init__(self):
         self.filePath = "data/employees.json"
 
     def appendIntoFile(self, data) -> bool:
-        with open(self.filePath, "a") as f:
-            f.write(data+"\n")
+        with open(self.filePath) as f:
+            currentData = json.load(f)
+
+        currentData.append(json.loads(data))
+        with open(self.filePath, "w") as f:
+            json.dump(currentData, f, indent=4)
+
+
+
 
         return True
 
@@ -19,7 +28,5 @@ class EmployeeController:
     def readFile(self) -> list[str]:
         data = []
         with open(self.filePath, "r") as f:
-            for line in f:
-                data.append(line.replace("\n", ""))
-
+            data = json.load(f)
         return data

@@ -15,10 +15,9 @@ class Employee:
         return f"Employee(kennitala={self.kennitala}, name={self.name}, phone={self.phone}, homePhone={self.homePhone}, address={self.address}, email={self.email}, country={self.country})"
 
 
-    def normalize(self, jsonStringList: list[str]) -> list['Employee']:
+    def normalize(self, jsonData: list[dict]) -> list['Employee']:
         employees: list['Employee'] = []
-        for jsonString in jsonStringList:
-            data = json.loads(jsonString)
+        for data in jsonData:
 
             employee: 'Employee' = Employee(**data)
 

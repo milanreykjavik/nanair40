@@ -13,10 +13,9 @@ class Property:
         return f"Property(id={self.id}, country={self.country}, address={self.address}, condition={self.condition}, facilities={self.facilities})"
 
 
-    def normalize(self, jsonStringList: list[str]) -> list['Property']:
+    def normalize(self, jsonData: list[str]) -> list['Property']:
         properties: list['Property'] = []
-        for jsonString in jsonStringList:
-            data = json.loads(jsonString)
+        for data in jsonData:
 
             property: 'Property' = Property(**data)
 

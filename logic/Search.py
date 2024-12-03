@@ -4,8 +4,7 @@ from dataControl.employeeController import EmployeeController
 class Search:
     @staticmethod
     def searchEmployees(**kwargs) -> list[Employee] | None:
-        employeesJson: list[str] = EmployeeController().readFile()
-        print(employeesJson)
+        employeesJson = EmployeeController().readFile()
 
         employees = Employee().normalize(employeesJson)
 
