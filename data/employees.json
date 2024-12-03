@@ -6,7 +6,7 @@
         "homePhone": "+3545432109",
         "address": "654 Pine Ave, Kopavogur",
         "email": "sven.jonsson@example.com",
-        "country": 3
+        "location": 3
     },
     {
         "kennitala": "6789012345",
@@ -15,7 +15,7 @@
         "homePhone": "+3544321098",
         "address": "987 Cedar Blvd, Mosfellsbaer",
         "email": "hanna.thoroddsen@example.com",
-        "country": 1
+        "location": 1
     },
     {
         "kennitala": "7890123456",
@@ -24,6 +24,6 @@
         "homePhone": "+3543210987",
         "address": "135 Maple Rd, Isafjordur",
         "email": "bjorn.rognvaldsson@example.com",
-        "country": 1
+        "location": 1
     }
 ]
