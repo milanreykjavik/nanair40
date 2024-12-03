@@ -4,7 +4,7 @@ class EmployeeController:
 
     def appendIntoFile(self, data) -> bool:
         with open(self.filePath, "a") as f:
-            f.write(data)
+            f.write(data+"\n")
 
         return True
 
