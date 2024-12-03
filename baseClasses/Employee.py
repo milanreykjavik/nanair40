@@ -1,8 +1,7 @@
 import json
 
 class Employee:
-    def __init__(self,kennitala: str = "", name: str = "", phone: str = "",
-                 homePhone: str = "", address: str = "", email: str = "", country: int = -1) -> None:
+    def __init__(self,kennitala: str = "", name: str = "", phone: str = "", homePhone: str = "", address: str = "", email: str = "", country: int = -1) -> None:
         self.kennitala: str = kennitala
         self.name: str = name
         self.phone: str = phone
@@ -10,11 +9,6 @@ class Employee:
         self.address: str = address
         self.email: str = email
         self.country: int = country
-
-
-    def addEmployee(self, employee: 'Employee') -> bool:
-        # call data layer here
-        return True
 
 
     def __repr__(self) -> str:

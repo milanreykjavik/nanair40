@@ -1,12 +1,29 @@
+import json
+
 class Contractor:
-    def __init__(self) -> None:
-        self.id: int = 0
-        self.name: str = ""
-        self.phoneNumber: str = ""
-        self.openingHours: str = "" # might change to date
-        self.country: int = -1
+    def __init__(self, id: int = -1, name: str = "", phone: str = "", openingHours: str = "", country: int = -1) -> None:
+        self.id: int = id
+        self.name: str = name
+        self.phone: str = phone
+        self.openingHours: str = openingHours # might change to dae
+        self.country: int = country
 
 
-    def addContractor(self, employee: 'Contractor') -> bool:
-        # call data layer here
-        return True
+    def __repr__(self) -> str:
+        return f"Contractor(id={self.id}, name={self.name}, phone={self.phone}, openingHours={self.openingHours}, country={self.country})"
+
+
+    def normalize(self, jsonStringList: list[str]) -> list['Contractor']:
+        contractors: list['Contractor'] = []
+        for jsonString in jsonStringList:
+            data = json.loads(jsonString)
+
+            contractor: 'Contractor' = Contractor(**data)
+
+            contractors.append(contractor)
+
+        return contractors
+
+
+    def toJSON(self, contractor: 'Contractor') -> str:
+        return json.dumps(contractor.__dict__)
