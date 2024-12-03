@@ -3,7 +3,7 @@ import json
 class Property:
     def __init__(self, id: int = -1, location: int = -1, address: str = "", condition: int = -1, facilities: list[str] = []) -> None:
         self.id: int = id
-        self.location: int = country
+        self.location: int = location
         self.address: str = address
         self.condition: int = condition # 0 to 10 average calculation
         self.facilities: list[str] = facilities
