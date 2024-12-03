@@ -1,4 +1,3 @@
-import time
 import os
 
 class BaseUI:
@@ -43,13 +42,16 @@ class BaseUI:
 
 
 
-    def printBaseMenu(self, name: str, options: list, inputOption: str) -> None:
+    def printBaseMenu(self, name: str, options: list, inputOption: str, error_message = '') -> None:
         baseMenu = ''
         baseMenu += self.getHeader()
         baseMenu += f'''   {name}
        -----------------'''
         baseMenu += self.getOptions(options)
         baseMenu += self.getFooter(inputOption)
+
+        if error_message:
+            baseMenu += error_message
 
         clearTerminal()
         print(baseMenu.strip(), end='')
@@ -78,9 +80,9 @@ class BaseUI:
         
 
     @staticmethod
-    def printMainMenu():
+    def printMainMenu(errorMessage=''):
         clearTerminal()
-        print('''
+        print(f'''
 --------------------------------------------------------------------------------
    _  __     _  __    ___   _           
   / |/ /__ _/ |/ /   / _ | (_)___        __|__   
@@ -95,6 +97,7 @@ class BaseUI:
 	[S]earh (Front desk)	
 	[Q]uit
 -------------------------------------------------------------------------------
+{errorMessage}
 Choose a option:''', end='')
 
 
