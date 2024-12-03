@@ -13,10 +13,9 @@ class Contractor:
         return f"Contractor(id={self.id}, name={self.name}, phone={self.phone}, openingHours={self.openingHours}, country={self.country})"
 
 
-    def normalize(self, jsonStringList: list[str]) -> list['Contractor']:
+    def normalize(self, jsonData: list[str]) -> list['Contractor']:
         contractors: list['Contractor'] = []
-        for jsonString in jsonStringList:
-            data = json.loads(jsonString)
+        for data in jsonData:
 
             contractor: 'Contractor' = Contractor(**data)
 

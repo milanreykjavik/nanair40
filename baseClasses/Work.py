@@ -13,11 +13,9 @@ class WorkReport:
         return f"WorkReport(id={self.id}, description={self.description}, date={self.date}, cost={self.cost}, comment={self.comment})"
 
 
-    def normalize(self, jsonStringList: list[str]) -> list['WorkReport']:
+    def normalize(self, jsonData: list[str]) -> list['WorkReport']:
         workreports: list['WorkReport'] = []
-        for jsonString in jsonStringList:
-            data = json.loads(jsonString)
-
+        for data in jsonData:
             workreport: 'WorkReport' = WorkReport(**data)
 
             workreports.append(workreport)
@@ -46,10 +44,9 @@ class WorkOrder:
         return f"WorkOrder(id={self.id}, date={self.date}, description={self.description}, propertyNumber={self.propertyNumber}, userID={self.userID}, priority={self.priority}, workReport={self.workReport}, contractorID={self.contractorID}, isCompleted={self.isCompleted})"
 
 
-    def normalize(self, jsonStringList: list[str]) -> list['WorkOrder']:
+    def normalize(self, jsonData: list[str]) -> list['WorkOrder']:
         workorders: list['WorkOrder'] = []
-        for jsonString in jsonStringList:
-            data = json.loads(jsonString)
+        for data in jsonData:
 
             workorder: 'WorkOrder' = WorkOrder(**data)
 

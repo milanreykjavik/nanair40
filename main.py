@@ -7,6 +7,7 @@ r =x.searchEmployees()
 
 y = EmployeeHandler()
 
+print(r[0])
 print(y.addEmployee(r[0]))
 
 
