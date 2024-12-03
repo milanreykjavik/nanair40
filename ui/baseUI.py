@@ -1,3 +1,6 @@
+import time
+import os
+
 class BaseUI:
     @staticmethod
     def getOptions(options: list) -> str:
@@ -23,19 +26,19 @@ class BaseUI:
     @staticmethod
     def getHeader()->str:
         return f'''
-    ===============================================================================
+===============================================================================
                                     NaN Air
-    ===============================================================================
+===============================================================================
           
     '''
 
     @staticmethod
     def getFooter(inputOption: str)->str:
         return (f'''
-    -------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
         [Q]uit   [B]ack
 
-    {inputOption}:
+{inputOption}:
     ''')
 
 
@@ -48,6 +51,7 @@ class BaseUI:
         baseMenu += self.getOptions(options)
         baseMenu += self.getFooter(inputOption)
 
+        clearTerminal()
         print(baseMenu.strip(), end='')
 
 
@@ -67,7 +71,7 @@ class BaseUI:
             return 'b'
         
         elif user_option.lower() == 'q':
-            return 'q' # quit program instead?
+            return 'q' 
         
         raise InvalidInputError("smuuuu")
 
@@ -75,6 +79,7 @@ class BaseUI:
 
     @staticmethod
     def printMainMenu():
+        clearTerminal()
         print('''
 --------------------------------------------------------------------------------
    _  __     _  __    ___   _           
@@ -90,4 +95,15 @@ class BaseUI:
 	[S]earh (Front desk)	
 	[Q]uit
 -------------------------------------------------------------------------------
-Choose a option: ''', end='')
+Choose a option:''', end='')
+
+
+
+def clearTerminal():
+    """Clear the terminal screen based on the operating system."""
+    if os.name == 'nt':  # For Windows
+        os.system('cls')
+    else:  # For Unix/Linux/Mac
+        os.system('clear')
+
+    

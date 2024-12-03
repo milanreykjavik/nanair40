@@ -1,10 +1,13 @@
 from baseUI import BaseUI
-
+baseUI = BaseUI()
 
 
 class EmployeeUI:
     def addEmployee():
-        pass
+        userInput = ''
+        while userInput.lower() != 'q':
+            baseUI
+
 
     def editEmployee():
         pass

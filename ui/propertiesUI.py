@@ -1,6 +1,7 @@
 class PropertiesUI:
-    def addProperty():
+    def addProperty(self):
         pass
+        
 
 
     def editProperty():
