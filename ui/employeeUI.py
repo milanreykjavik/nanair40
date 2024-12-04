@@ -17,9 +17,6 @@ class EmployeeUI(BaseUI):
             'Address': ''
         }
 
-        userClass = Employee()
-        
-
         fields = [
             ('Kennitala', "Enter a kennitala: ", validation.validateKennitala),  # These are all of the keys, prompts, and values that we need to ask the user
             ('Name', "Enter your name: ", validation.validateName),
@@ -38,16 +35,15 @@ class EmployeeUI(BaseUI):
                         return 'q' # quit the whole program
                     case 'b':
                         return False # Go back one page
-            userClass.__dict__[key] = value
-            print(userClass.kennitala)
+            userDict[key] = value
 
 
-        # 
-        #new_employee = Employee(userDict['Kennitala'], userDict['Name'], userDict['Phone'], userDict['Homephone'], userDict['Country'], userDict['Email'], userDict['Address'])
-    
+        # Here a instance would get created in order to send to data layer
+        new_employee = Employee(userDict['Kennitala'], userDict['Name'], userDict['Phone'], userDict['Homephone'], userDict['Country'], userDict['Email'], userDict['Address'])
+
 
         while True:
-            self.printBaseMenu('Add employee', [f'{key}: {value}' for key, value in userClass.__dict__.items()], 'Choose an option: ') # if the user finished entering all the information needed then he gets to choose either to quit or go back
+            self.printBaseMenu('Add employee', [f'{key}: {value}' for key, value in userDict.items()], 'Choose an option: ') # if the user finished entering all the information needed then he gets to choose either to quit or go back
             optionInput, isValid = self.takeInput(['[B]ack', '[Q]uit'])
 
             if isValid:
