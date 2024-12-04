@@ -10,6 +10,7 @@ y = EmployeeHandler()
 #print(r[0])
 #print(y.addEmployee(r[0]))
 print(y.editEmployee(r[0].kennitala, kennitala="32"))
+print(y.listEmployess(location=1))
 
 """
 from baseClasses.Work import WorkOrder, WorkReport

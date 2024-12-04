@@ -11,10 +11,6 @@ class EmployeeController:
         currentData.append(json.loads(data))
         with open(self.filePath, "w") as f:
             json.dump(currentData, f, indent=4)
-
-
-
-
         return True
 
     def changeOneEntry(self, targetKennitala: str, **kwargs) -> bool:
@@ -32,11 +28,7 @@ class EmployeeController:
 
         with open(self.filePath, "w") as f:
             json.dump(currentData, f, indent=4)
-
         return True
-
-    #def changeEntireEntry(self, kennitala: str, **kwargs) -> bool:
-    #    return True
 
 
     def readFile(self) -> list[dict]:
