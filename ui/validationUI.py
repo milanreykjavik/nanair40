@@ -35,8 +35,8 @@ class ValidationUI:
             return False 
                
     @staticmethod
-    def validateAddress(address):
-        if address == "Reykjavík" or "Nuuk" or "Kulusuk" or "Tórshavn" or "Tingwall" or "Longyearbyen":
+    def validateLocation(Location):
+        if Location == "Reykjavík" or "Nuuk" or "Kulusuk" or "Tórshavn" or "Tingwall" or "Longyearbyen":
             return True
         else:
             return False
@@ -47,3 +47,14 @@ class ValidationUI:
             return True
         else:
             return False
+        
+    def validateAddress(address):
+        if address:
+            return True
+        else:
+            return False
+        
+    @staticmethod    
+    def validatepropertyID(propertyID):
+        pass
+
