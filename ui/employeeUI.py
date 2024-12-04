@@ -1,42 +1,26 @@
-import sys
-sys.path.insert(0, '.')
-
-
-from baseUI import BaseUI
-from validationUI import ValidationUI
+from ui.baseUI import BaseUI
+from ui.validationUI import ValidationUI
 from baseClasses.Employee import Employee
-
 
 
 validation = ValidationUI() 
 
 class EmployeeUI(BaseUI):
     def addEmployee(self): # use employee base class
-        userDict = {
-            'Kennitala': '',
-            'Name': '',
-            'Phone': '',
-            'Homephone': '',
-            'Country': '',
-            'Email': '',
-            'Address': ''
-        }
-
         userClass = Employee()
-        
 
         fields = [
-            ('Kennitala', "Enter a kennitala: ", validation.validateKennitala),  # These are all of the keys, prompts, and values that we need to ask the user
-            ('Name', "Enter your name: ", validation.validateName),
-            ('Phone', "Enter a phonenumber: ", validation.validatePhone),
-            ('Homephone', "Enter a homephone: ", validation.validatePhone),
-            ('Country', "Enter a country: ", validation.validateCountry),
-            ('Email', "Enter your email: ", validation.validateEmail),
-            ('Address', "Enter your address: ", validation.validateAddress),
+            ('kennitala', "Enter a kennitala: ", validation.validateKennitala),  # These are all of the keys, prompts, and values that we need to ask the user
+            ('name', "Enter your name: ", validation.validateName),
+            ('phone', "Enter a phonenumber: ", validation.validatePhone),
+            ('homephone', "Enter a homephone: ", validation.validatePhone),
+            ('country', "Enter a country: ", validation.validateCountry),
+            ('email', "Enter your email: ", validation.validateEmail),
+            ('address', "Enter your address: ", validation.validateAddress),
         ]
 
         for key, prompt, validationFunc in fields: # This loops for all keys, prompts and functions the user needs to be askes
-            value = self.getValidInput('Add employee',prompt, validationFunc, userDict)
+            value = self.getValidInput('Add employee',prompt, validationFunc, userClass.__dict__)
             if value.lower() in ('q', 'b'): # If the user entered q or b, then we go back one page or quit
                 match value.lower():
                     case 'q':
@@ -44,12 +28,11 @@ class EmployeeUI(BaseUI):
                     case 'b':
                         return False # Go back one page
             userClass.__dict__[key] = value
-            print(userClass.kennitala)
 
 
-        # 
-        #new_employee = Employee(userDict['Kennitala'], userDict['Name'], userDict['Phone'], userDict['Homephone'], userDict['Country'], userDict['Email'], userDict['Address'])
-    
+        # Here a instance would get created in order to send to data layer
+        new_employee = Employee(userClass.__dict__['kennitala'], userClass.__dict__['name'], userClass.__dict__['phone'], userClass.__dict__['homephone'], userClass.__dict__['location'], userClass.__dict__['email'], userClass.__dict__['address'])
+
 
         while True:
             self.printBaseMenu('Add employee', [f'{key}: {value}' for key, value in userClass.__dict__.items()], 'Choose an option: ') # if the user finished entering all the information needed then he gets to choose either to quit or go back

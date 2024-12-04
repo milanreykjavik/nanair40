@@ -1,7 +1,7 @@
 import json
 
 class Employee:
-    def __init__(self,kennitala: str = "", name: str = "", phone: str = "", homePhone: str = "", address: str = "", email: str = "", location: int = -1) -> None:
+    def __init__(self,kennitala: str = "", name: str = "", phone: str = "", homePhone: str = "", address: str = "", email: str = "", location: int = 0) -> None:
         self.kennitala: str = kennitala
         self.name: str = name
         self.phone: str = phone

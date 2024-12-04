@@ -1,7 +1,7 @@
 import json
 
 class WorkReport:
-    def __init__(self, id: int = -1, description: str = "", date: str = "", cost: int = 0, comment: str = ""):
+    def __init__(self, id: int = 0, description: str = "", date: str = "", cost: int = 0, comment: str = ""):
         self.id: int = id
         self.description: str = description
         self.date: str = date
@@ -28,7 +28,7 @@ class WorkReport:
 
 
 class WorkOrder:
-    def __init__(self, id: int = -1, date: str = "", description: str = "", propertyNumber: int = -1, userID: int = -1, priority: int = -1, workReport: 'WorkReport' = WorkReport(), contractorID: int = -1, isCompleted: bool = False):
+    def __init__(self, id: int = 0, date: str = "", description: str = "", propertyNumber: int = 0, userID: int = 0, priority: int = 0, workReport: 'WorkReport' = WorkReport(), contractorID: int = 0, isCompleted: bool = False):
         self.id: int = id
         self.date: str = date
         self.description: str = description
