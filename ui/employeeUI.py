@@ -19,6 +19,11 @@ class EmployeeUI(SearchUI):
 
         
 
+
+
+
+        
+
         fields = [
             ('kennitala', "Enter a kennitala: ", validation.validateKennitala),  # These are all of the keys, prompts, and values that we need to ask the user
             ('name', "Enter your name: ", validation.validateName),
@@ -94,23 +99,16 @@ class EmployeeUI(SearchUI):
         # talk to wrapper with the kennitala entered 
 
 
-        # Here a instance would get created in order to send to data layer
-
-
-        while True:
-            self.printBaseMenu('Add employee', [f'{key}: {value}' for key, value in user_dict.items()], 'Choose an option: ') # if the user finished entering all the information needed then he gets to choose either to quit or go back
-            optionInput = self.takeInput(['Back', 'Quit'])
-
-            match optionInput.lower():
-                case 'b':
-                    return False
-                case 'q':
-                    return 'q'
-
-
-
-    def editEmployee(self):
+        # 
+        #new_employee = Employee(userDict['Kennitala'], userDict['Name'], userDict['Phone'], userDict['Homephone'], userDict['Country'], userDict['Email'], userDict['Address'])
     
+
+
+
+
+    def showEmployee(self):
+    
+        # use Search class there is Employee Search class there that can search by any param in this case kennitala
         lookUpKennitala = self.getValidInput( 'View/edit employee',"Look up employee by kennitala: ", validation.validateKennitala)
 
         match lookUpKennitala.lower():
@@ -119,14 +117,18 @@ class EmployeeUI(SearchUI):
             case 'b':
                 return False
 
-        # talk to wrapper with the kennitala entered
+        # talk to wrapper with the kennitala entered 
+
+
+    def editEmployee():
+        pass
         
 
 
 
        
         
-    def listEmployess(self):
+    def showEmployees(self):
         pass
         
 
