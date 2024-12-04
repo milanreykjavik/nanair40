@@ -2,11 +2,7 @@ from logic.employeeHandler import EmployeeHandler
 
 x = EmployeeHandler()
 r =x.listEmployess()
-#print(r[0])
 
-
-#print(r[0])
-#print(y.addEmployee(r[0]))
 print(x.editEmployee(r[0].kennitala, kennitala="32"))
 print(x.listEmployess(location=1))
 
