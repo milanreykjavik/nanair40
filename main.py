@@ -1,16 +1,14 @@
-from logic.Search import Search
 from logic.employeeHandler import EmployeeHandler
 
-x = Search()
-r =x.searchEmployees()
+x = EmployeeHandler()
+r =x.listEmployess()
 #print(r[0])
 
-y = EmployeeHandler()
 
 #print(r[0])
 #print(y.addEmployee(r[0]))
-print(y.editEmployee(r[0].kennitala, kennitala="32"))
-print(y.listEmployess(location=1))
+print(x.editEmployee(r[0].kennitala, kennitala="32"))
+print(x.listEmployess(location=1))
 
 """
 from baseClasses.Work import WorkOrder, WorkReport

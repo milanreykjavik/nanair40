@@ -13,8 +13,5 @@ class Logic_Wrapper:
     def editEmployee(self, target_kennitala: str, **kwargs) -> bool:
         return self.employee_handler.editEmployee(target_kennitala, **kwargs)
     
-    def listEmployees(self, **kwargs) -> list[dict]:
+    def listEmployees(self, **kwargs) -> list['Employee']:
         return self.employee_handler.listEmployess(**kwargs)
-    
-    def searchEmployees(self, query: dict) -> list[dict]:
-        return self.employee_handler.listEmployess(**query)

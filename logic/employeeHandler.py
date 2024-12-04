@@ -22,13 +22,13 @@ class EmployeeHandler:
         return True
 
 
-    def listEmployess(self, **kwargs) -> list[dict]:
+    def listEmployess(self, **kwargs) -> list['Employee']:
         if any(kwarg not in vars(self.employee) for kwarg in kwargs):
             return []
 
         employees: list[dict] = self.employeeControl.readFile()
         if not len(kwargs):
-            return employees
+            return self.employee.normalize(employees)
 
         for k, v in kwargs.items():
             # Top to bottom if we go bottom to top we get index out of range
@@ -39,4 +39,4 @@ class EmployeeHandler:
                     del employees[i]
 
 
-        return employees
+        return self.employee.normalize(employees)
