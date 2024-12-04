@@ -128,7 +128,11 @@ class EmployeeUI(SearchUI):
 
        
         
-    def showEmployees(self):
+    def listEmployees(self):
+
+        allEmployees = getEmployees()
+
+        self.printBaseMenu('List employees', [f'{name}, {phone}, {location}' for name, phone, location in allEmployees ], 'Choose a option')
         pass
         
 
