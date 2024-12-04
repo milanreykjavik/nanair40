@@ -1,4 +1,4 @@
-from baseUI import BaseUI
+from ui.baseUI import BaseUI
 
 
 class JanitorUI:

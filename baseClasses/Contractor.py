@@ -1,7 +1,7 @@
 import json
 
 class Contractor:
-    def __init__(self, id: int = -1, name: str = "", phone: str = "", openingHours: str = "", location: int = -1) -> None:
+    def __init__(self, id: int = 0, name: str = "", phone: str = "", openingHours: str = "", location: int = 0) -> None:
         self.id: int = id
         self.name: str = name
         self.phone: str = phone

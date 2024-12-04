@@ -1,20 +1,12 @@
-import time
 import os
-
-
-class InvalidInputError(Exception):
-    def __init__(self, message: str = "") -> None:
-        self.message: str = message
-    pass
 
 class BaseUI:
     @staticmethod
     def getOptions(options: list) -> str:
-        '''Returns a string that represents the options the user can do, first letter of every option is inside a []'''
+        '''Returns a string that represents the options the user can do'''
         returnStr = '\n'
         for option in options:
-            firstLetter = option[0] # Get the first letter
-            returnStr += f'{"":<7}[{firstLetter}]{option[1:]}\n' # Formats the options so that the first letter is inside a []
+            returnStr += f'       {option}\n'# Formats the options 
 
         return returnStr
     
@@ -24,13 +16,14 @@ class BaseUI:
         options = []
 
         for word in possibilites:
-            options.append(word[0])
+            options.append(word[1])
 
         return options
 
 
     @staticmethod
     def getHeader()->str:
+        '''Returns the standard header'''
         return f'''
 ===============================================================================
                                     NaN Air
@@ -39,16 +32,18 @@ class BaseUI:
     '''
 
     @staticmethod
-    def getFooter(inputOption: str)->str:
+    def getFooter(inputOption: str = '')->str:
+        '''Returns the standard footer'''
         return (f'''
 -------------------------------------------------------------------------------
         [Q]uit   [B]ack
 
-{inputOption}:
+{inputOption}
     ''')
 
 
-    def printBaseMenu(self, name: str, options: list, inputOption: str) -> None:
+    def printBaseMenu(self, name: str, options: list = [], inputOption: str = '') -> None:
+        '''Prints the menu based on the arguments given'''
         baseMenu = ''
         baseMenu += self.getHeader()
         baseMenu += f'''   {name}
@@ -56,31 +51,36 @@ class BaseUI:
         baseMenu += self.getOptions(options)
         baseMenu += self.getFooter(inputOption)
 
+
         clearTerminal()
         print(baseMenu.strip(), end='')
 
 
+
+
     def takeInput(self, possibilites: list) -> str:
+        '''Takes input and checks whether the input is valid based on the options given, if not a error will be raised'''
         user_option = input(' ') 
 
         options_list = self.available_options(possibilites) 
 
         if user_option.upper() in options_list:
-            return user_option
+            return user_option, True
         
         elif user_option.lower() == 'b':
-            return 'b'
+            return user_option, True
         
         elif user_option.lower() == 'q':
-            return 'q' 
+            return user_option, True 
         
-        raise InvalidInputError("smuuuu")
+        return '_', False
 
+        
 
     @staticmethod
-    def printMainMenu():
+    def printMainMenu(errorMessage=''):
         clearTerminal()
-        print(r"""
+        print(f'''
 --------------------------------------------------------------------------------
    _  __     _  __    ___   _           
   / |/ /__ _/ |/ /   / _ | (_)___        __|__   
@@ -95,12 +95,16 @@ class BaseUI:
 	[S]earh (Front desk)	
 	[Q]uit
 -------------------------------------------------------------------------------
-Choose a option:""", end='')
+Choose a option:''', end='')
+
 
 
 def clearTerminal():
-    """Clear the terminal screen based on the operating system."""
+    """Clear the terminal screen before a new menu is printed"""
     if os.name == 'nt':  # For Windows
         os.system('cls')
     else:  # For Unix/Linux/Mac
         os.system('clear')
+
+
+

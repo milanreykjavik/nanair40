@@ -1,10 +1,10 @@
-from propertiesUI import PropertiesUI
-from baseUI import BaseUI
-from employeeUI import EmployeeUI
-from contractorsUI import ContractorsUI
-from workUI import WorkUI
-from janitorUI import JanitorUI
-from searchUI import SearchUI
+from ui.propertiesUI import PropertiesUI
+from ui.baseUI import BaseUI
+from ui.employeeUI import EmployeeUI
+from ui.contractorsUI import ContractorsUI
+from ui.workUI import WorkUI
+from ui.janitorUI import JanitorUI
+from ui.searchUI import SearchUI
 
 class mainUI(BaseUI):
     def __init__(self):
@@ -15,6 +15,9 @@ class mainUI(BaseUI):
         self.workUI = WorkUI()
         self.janitorUI = JanitorUI()
         self.searchUI = SearchUI()
+
+
+
 
 
     def mainMenu(self) -> None:
@@ -39,6 +42,9 @@ class mainUI(BaseUI):
                 
             if returnValue == 'q': # if the user entered q then we go back until the program ends
                return 'q'
+
+
+
 
 
     def ShowManagerMenu(self) -> None:
@@ -70,6 +76,8 @@ class mainUI(BaseUI):
                 return 'q'
 
 
+
+
     def employeeMenu(self) -> None:
         optionInput = ''
         while optionInput.lower() != 'q':
@@ -79,6 +87,7 @@ class mainUI(BaseUI):
             optionInput, isValid = self.takeInput(options)
             if not isValid:
                 continue
+
 
             match optionInput.lower():
                 case 'a':
@@ -98,6 +107,11 @@ class mainUI(BaseUI):
 
             if returnValue == 'q': # if the user entered q then we go back until the program ends
                 return 'q'
+
+
+
+
+
 
 
     def propertiesMenu(self) -> None:
@@ -128,6 +142,7 @@ class mainUI(BaseUI):
             if returnValue == 'q':
                return 'q'
 
+
            
     def workOrderMenu(self) -> None:
         optionInput = ''
@@ -151,8 +166,15 @@ class mainUI(BaseUI):
                 case 'q':  # Matching case for comparison
                     return 'q'
 
+
             if returnValue == 'q':
                return 'q'
+
+
+        
+
+
+
 
 
     def ShowMaintenanceMenu(self) -> None:
@@ -178,6 +200,9 @@ class mainUI(BaseUI):
 
             if returnValue == 'q':
                return 'q'
+
+
+                    
 
 
     def ShowSearchMenu(self) -> None:
@@ -213,5 +238,9 @@ class mainUI(BaseUI):
 
 
 
+
 mainUI = mainUI()
 mainUI.mainMenu()
+
+
+

@@ -1,7 +1,7 @@
 import json
 
 class Property:
-    def __init__(self, id: int = -1, location: int = -1, address: str = "", condition: int = -1, facilities: list[str] = []) -> None:
+    def __init__(self, id: int = 0, location: int = 0, address: str = "", condition: int = 0, facilities: list[str] = []) -> None:
         self.id: int = id
         self.location: int = location
         self.address: str = address
