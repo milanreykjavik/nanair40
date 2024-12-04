@@ -103,28 +103,18 @@ class EmployeeUI(BaseUI):
 
        
         
-    def showEmployees(self):
+    def listEmployees(self):
+
+        allEmployees = getEmployees()
+
+        self.printBaseMenu('List employees', [f'{name}, {phone}, {location}' for name, phone, location in allEmployees ], 'Choose a option')
         pass
         
 
 
 
        
-        
-    def showEmployees(self):
-        pass
-        # Here we need to call showEmployees in the wrapper to get all of the employees in the system
 
-
-        
-
-    def getValidInput(self, name, prompt, validationFunc, userDict: dict = {}) -> str:
-        while True:
-            self.printBaseMenu(name, [f'{key}: {value}' for key, value in userDict.items()], prompt)
-            user_input = input(' ')
-        
-            if validationFunc(user_input):
-                return user_input
         
 
 
