@@ -17,4 +17,4 @@ class Logic_Wrapper:
         return self.employee_handler.listEmployess(**kwargs)
     
     def searchEmployees(self, query: dict) -> list[dict]:
-        return self.search.searchEmployees(query)
+        return self.employee_handler.listEmployess(**query)
