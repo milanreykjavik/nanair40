@@ -48,6 +48,11 @@ class PropertiesUI(BaseUI):
         
 
 
+    def showProperty():
+        pass
+
+
+
     def editProperty():
         pass
 

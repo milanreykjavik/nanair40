@@ -6,7 +6,7 @@ class Employee:
         self.name: str = name
         self.phone: str = phone
         self.homePhone: str = homePhone
-        self.country: str = country
+        self.address: str = address
         self.email: str = email
         self.location: int = location
 

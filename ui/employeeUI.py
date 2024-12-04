@@ -73,7 +73,7 @@ class EmployeeUI(SearchUI):
 
 
         while True:
-            self.printBaseMenu('Add employee', [f'{key}: {value}' for key, value in userDict.items()], 'Choose an option: ') # if the user finished entering all the information needed then he gets to choose either to quit or go back
+            self.printBaseMenu('Add employee', [f'{key}: {value}' for key, value in userClass.__dict__.items()], 'Choose an option: ') # if the user finished entering all the information needed then he gets to choose either to quit or go back
             optionInput, isValid = self.takeInput(['[B]ack', '[Q]uit'])
 
             if isValid:
