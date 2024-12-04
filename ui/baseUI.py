@@ -51,8 +51,6 @@ class BaseUI:
         baseMenu += self.getOptions(options)
         baseMenu += self.getFooter(inputOption)
 
-        if error_message:
-            baseMenu += error_message
 
         clearTerminal()
         print(baseMenu.strip(), end='')
