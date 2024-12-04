@@ -7,9 +7,9 @@ r =x.searchEmployees()
 
 y = EmployeeHandler()
 
-print(r[0])
-print(y.addEmployee(r[0]))
-print(y.editEmployee(r[0].kennitala))
+#print(r[0])
+#print(y.addEmployee(r[0]))
+print(y.editEmployee(r[0].kennitala, kennitala="32"))
 
 """
 from baseClasses.Work import WorkOrder, WorkReport

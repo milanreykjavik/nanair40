@@ -1,6 +1,12 @@
 import time
 import os
 
+
+class InvalidInputError(Exception):
+    def __init__(self, message: str = "") -> None:
+        self.message: str = message
+    pass
+
 class BaseUI:
     @staticmethod
     def getOptions(options: list) -> str:
@@ -74,7 +80,7 @@ class BaseUI:
     @staticmethod
     def printMainMenu():
         clearTerminal()
-        print('''
+        print(r"""
 --------------------------------------------------------------------------------
    _  __     _  __    ___   _           
   / |/ /__ _/ |/ /   / _ | (_)___        __|__   
@@ -89,7 +95,7 @@ class BaseUI:
 	[S]earh (Front desk)	
 	[Q]uit
 -------------------------------------------------------------------------------
-Choose a option:''', end='')
+Choose a option:""", end='')
 
 
 def clearTerminal():

@@ -14,10 +14,10 @@ class EmployeeHandler:
         return True
 
 
-    def editEmployee(self, kennitala: str, **kwargs) -> bool:
+    def editEmployee(self, targetKennitala: str, **kwargs) -> bool:
         if any(kwarg not in vars(self.employee) for kwarg in kwargs):
             return False
-        self.employeeControl.changeOneEntry(kennitala, **kwargs)
+        self.employeeControl.changeOneEntry(targetKennitala, **kwargs)
         return True
 
 
