@@ -3,7 +3,7 @@ from dataControl.employeeController import EmployeeController
 
 
 class EmployeeHandler:
-    def __init__(self):
+    def __init__(self) -> None:
         self.employeeControl = EmployeeController()
         self.employee = Employee()
 
@@ -26,7 +26,7 @@ class EmployeeHandler:
         if any(kwarg not in vars(self.employee) for kwarg in kwargs):
             return []
 
-        employees = self.employeeControl.readFile()
+        employees: list[dict] = self.employeeControl.readFile()
         if not len(kwargs):
             return employees
 
