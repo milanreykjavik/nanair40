@@ -1,10 +1,10 @@
-from baseUI import BaseUI
+from ui.baseUI import BaseUI
 
 class SearchUI(BaseUI):
     def employeeSearch(self):
-
-        self.printBaseMenu('Seacrh employee','', 'Enter personal ID or property number: ')
-        personID = input()
+        while True:
+            self.printBaseMenu('Seacrh employee',['[K]ennitala search', '[P]roperty number search'], 'Choose a option:  ')
+            userOption = self.takeInput(['[K]ennitala search', '[P]roperty number search'])
 
     def propertySearch():
         pass

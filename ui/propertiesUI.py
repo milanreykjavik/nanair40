@@ -1,5 +1,5 @@
-from baseUI import BaseUI
-from validationUI import ValidationUI
+from ui.baseUI import BaseUI
+from ui.validationUI import ValidationUI
 
 
 validation = ValidationUI()

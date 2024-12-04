@@ -66,7 +66,7 @@ class ValidationUI:
         if country.lower() in ('q', 'b'):
             return country
 
-        if country.lower() in ["iceland", "faeroe islands", "greenland", "shetland islands" , "svalbard"]:
+        if country.lower() in ["iceland", "faeroe islands", "greenland", "tingwall" , "svalbard"]:
             return True
         else:
             return False

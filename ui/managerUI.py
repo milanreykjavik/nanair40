@@ -1,4 +1,4 @@
-from baseUI import BaseUI
+from ui.baseUI import BaseUI
 
 def printManagerMenu(name: str, options: list) -> None:
     baseUI = BaseUI()

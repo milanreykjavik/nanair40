@@ -60,8 +60,6 @@ class BaseUI:
 
 
 
-
-
     def takeInput(self, possibilites: list) -> str:
         '''Takes input and checks whether the input is valid based on the options given, if not a error will be raised'''
         user_option = input(' ') 
@@ -69,15 +67,15 @@ class BaseUI:
         options_list = self.available_options(possibilites) 
 
         if user_option.upper() in options_list:
-            return user_option
+            return user_option, True
         
         elif user_option.lower() == 'b':
-            return 'b'
+            return user_option, True
         
         elif user_option.lower() == 'q':
-            return 'q' 
+            return user_option, True 
         
-        raise InvalidInputError("smuuuu")
+        return '_', False
 
         
 
@@ -110,4 +108,5 @@ def clearTerminal():
     else:  # For Unix/Linux/Mac
         os.system('clear')
 
-    
+
+

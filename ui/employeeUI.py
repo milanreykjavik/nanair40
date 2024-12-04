@@ -1,12 +1,13 @@
-from baseUI import BaseUI
-baseUI = BaseUI()
+from ui.baseUI import BaseUI
+from ui.validationUI import ValidationUI
+from baseClasses.Employee import Employee
 
 
 validation = ValidationUI() 
 
 class EmployeeUI(BaseUI):
-    def addEmployee(self):
-        user_dict = {
+    def addEmployee(self): # use employee base class
+        userDict = {
             'Kennitala': '',
             'Name': '',
             'Phone': '',
@@ -15,6 +16,9 @@ class EmployeeUI(BaseUI):
             'Email': '',
             'Address': ''
         }
+
+        userClass = Employee()
+        
 
         fields = [
             ('Kennitala', "Enter a kennitala: ", validation.validateKennitala),  # These are all of the keys, prompts, and values that we need to ask the user
@@ -27,33 +31,37 @@ class EmployeeUI(BaseUI):
         ]
 
         for key, prompt, validationFunc in fields: # This loops for all keys, prompts and functions the user needs to be askes
-            value = self.getValidInput('Add employee',prompt, validationFunc, user_dict)
+            value = self.getValidInput('Add employee',prompt, validationFunc, userDict)
             if value.lower() in ('q', 'b'): # If the user entered q or b, then we go back one page or quit
                 match value.lower():
                     case 'q':
                         return 'q' # quit the whole program
                     case 'b':
                         return False # Go back one page
-            user_dict[key] = value
+            userClass.__dict__[key] = value
+            print(userClass.kennitala)
 
 
-        # Here a instance would get created in order to send to data layer
-
+        # 
+        #new_employee = Employee(userDict['Kennitala'], userDict['Name'], userDict['Phone'], userDict['Homephone'], userDict['Country'], userDict['Email'], userDict['Address'])
+    
 
         while True:
-            self.printBaseMenu('Add employee', [f'{key}: {value}' for key, value in user_dict.items()], 'Choose an option: ') # if the user finished entering all the information needed then he gets to choose either to quit or go back
-            optionInput = self.takeInput(['Back', 'Quit'])
+            self.printBaseMenu('Add employee', [f'{key}: {value}' for key, value in userClass.__dict__.items()], 'Choose an option: ') # if the user finished entering all the information needed then he gets to choose either to quit or go back
+            optionInput, isValid = self.takeInput(['[B]ack', '[Q]uit'])
 
-            match optionInput.lower():
-                case 'b':
-                    return False
-                case 'q':
-                    return 'q'
+            if isValid:
+                match optionInput.lower():
+                    case 'b':
+                        return False
+                    case 'q':
+                        return 'q'
 
 
 
-    def editEmployee(self):
+    def showEmployee(self):
     
+        # use Search class there is Employee Search class there that can search by any param in this case kennitala
         lookUpKennitala = self.getValidInput( 'View/edit employee',"Look up employee by kennitala: ", validation.validateKennitala)
 
         match lookUpKennitala.lower():
@@ -62,23 +70,27 @@ class EmployeeUI(BaseUI):
             case 'b':
                 return False
 
-        # talk to wrapper with the kennitala entered
+        # talk to wrapper with the kennitala entered 
+
+
+    def editEmployee():
+        pass
         
 
 
 
        
         
-    def listEmployess(self):
+    def showEmployees(self):
         pass
         # Here we need to call showEmployees in the wrapper to get all of the employees in the system
 
 
         
 
-    def getValidInput(self, name, prompt, validationFunc, user_dict: dict = {}) -> str:
+    def getValidInput(self, name, prompt, validationFunc, userDict: dict = {}) -> str:
         while True:
-            self.printBaseMenu(name, [f'{key}: {value}' for key, value in user_dict.items()], prompt)
+            self.printBaseMenu(name, [f'{key}: {value}' for key, value in userDict.items()], prompt)
             user_input = input(' ')
         
             if validationFunc(user_input):

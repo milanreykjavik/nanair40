@@ -1,10 +1,10 @@
-from propertiesUI import PropertiesUI
-from baseUI import BaseUI
-from employeeUI import EmployeeUI
-from contractorsUI import ContractorsUI
-from workUI import WorkUI
-from janitorUI import JanitorUI
-from searchUI import SearchUI
+from ui.propertiesUI import PropertiesUI
+from ui.baseUI import BaseUI
+from ui.employeeUI import EmployeeUI
+from ui.contractorsUI import ContractorsUI
+from ui.workUI import WorkUI
+from ui.janitorUI import JanitorUI
+from ui.searchUI import SearchUI
 
 class mainUI(BaseUI):
     def __init__(self):
@@ -25,7 +25,7 @@ class mainUI(BaseUI):
             self.printMainMenu() 
             options = ['[M]anager', '[J]anitor', '[S]earch'] # each option the user gets to pick from
 
-            optionInput, isValid = self.userInput(options)
+            optionInput, isValid = self.takeInput(options)
             if not isValid:
                 continue
 
@@ -53,7 +53,7 @@ class mainUI(BaseUI):
             self.printBaseMenu('Manager', options, 'Choose a option: ')
 
 
-            optionInput, isValid = self.userInput(options)
+            optionInput, isValid = self.takeInput(options)
             if not isValid:
                 continue
             
@@ -83,7 +83,7 @@ class mainUI(BaseUI):
             options = ['[A]dd employee', '[E]dit employee', '[L]ist employees']
             self.printBaseMenu('Employee menu', options, 'Choose a option: ') # Prints base menu
 
-            optionInput, isValid = self.userInput(options)
+            optionInput, isValid = self.takeInput(options)
             if not isValid:
                 continue
 
@@ -93,10 +93,10 @@ class mainUI(BaseUI):
                     returnValue = self.employeeUI.addEmployee() # Go to the employeeUI class and add a new employee
                     
                 case 'e':
-                    returnValue = self.employeeUI.editEmployee() # Go to the employeeUI class and add edit a employee
+                    returnValue = self.employeeUI.showEmployee() # Go to the employeeUI class and add edit a employee
                     
                 case 'l':
-                    returnValue = self.employeeUI.listEmployess() # Go to the employeeUI class and list all employees
+                    returnValue = self.employeeUI.showEmployees() # Go to the employeeUI class and list all employees
 
                 case 'b':
                     return False
@@ -120,7 +120,7 @@ class mainUI(BaseUI):
             self.printBaseMenu('Properties menu', options, 'Choose a option')
 
 
-            optionInput, isValid = self.userInput(options)
+            optionInput, isValid = self.takeInput(options)
             if not isValid:
                 continue
 
@@ -149,7 +149,7 @@ class mainUI(BaseUI):
             options = ['[A]dd work order', '[C]ompleted work reports', '[E]dit/view work orders']
             self.printBaseMenu('Work order menu', options, 'Choose a option')
 
-            optionInput, isValid = self.userInput(options)
+            optionInput, isValid = self.takeInput(options)
             if not isValid:
                 continue
                     
@@ -162,7 +162,6 @@ class mainUI(BaseUI):
                     returnValue = self.workUI.completedWorkOrder()
                 case 'b':
                     return False
-                
                 case 'q':  # Matching case for comparison
                     return 'q'
 
@@ -183,7 +182,7 @@ class mainUI(BaseUI):
             options = ['[W]ork orders', '[C]reate work report']
             self.printBaseMenu('Janitor menu', options, 'Choose a option')
 
-            optionInput, isValid = self.userInput(options)
+            optionInput, isValid = self.takeInput(options)
             if not isValid:
                 continue
 
@@ -211,7 +210,7 @@ class mainUI(BaseUI):
             options = ['[E]mployee Search', '[P]roperty search', '[W]ork order search', '[R]eport search', '[C]ontractors']
             self.printBaseMenu('Search menu', options, 'Choose a option')
 
-            optionInput, isValid = self.userInput(options)
+            optionInput, isValid = self.takeInput(options)
             if not isValid:
                 continue
 
@@ -236,16 +235,6 @@ class mainUI(BaseUI):
 
 
 
-
-
-
-    def userInput(self, options) -> tuple[str, bool]:
-        try:
-            input = self.baseUI.takeInput(options) # try to tak
-        except Exception as e:
-            return '_', False
-
-        return input, True
 
 
 
