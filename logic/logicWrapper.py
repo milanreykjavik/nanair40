@@ -1,5 +1,8 @@
+"""
+fix to camelCase not python_case
+"""
+
 from employeeHandler import EmployeeHandler
-from Search import Search
 from baseClasses.Employee import Employee
 
 class Logic_Wrapper:
