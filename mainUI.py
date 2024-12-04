@@ -15,7 +15,6 @@ class mainUI(BaseUI):
         self.workUI = WorkUI()
         self.janitorUI = JanitorUI()
         self.searchUI = SearchUI()
-        self.llw = 
 
 
 
