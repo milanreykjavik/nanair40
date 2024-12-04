@@ -17,10 +17,22 @@ class EmployeeController:
 
         return True
 
-    def changeOneEntry(self, kennitala: str, **kwargs) -> bool:
-        print(kennitala)
-        print(kwargs.items())
-        # do the search and change
+    def changeOneEntry(self, targetKennitala: str, **kwargs) -> bool:
+        with open(self.filePath) as f:
+            currentData = json.load(f)
+
+        for employee in currentData:
+            if employee.get('kennitala') == targetKennitala:
+                for key, value in kwargs.items():
+                    if key in employee:
+                        employee[key] = value
+                break
+        else:
+            return False
+
+        with open(self.filePath, "w") as f:
+            json.dump(currentData, f, indent=4)
+
         return True
 
     #def changeEntireEntry(self, kennitala: str, **kwargs) -> bool:

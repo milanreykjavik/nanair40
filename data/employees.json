@@ -1,6 +1,6 @@
 [
     {
-        "kennitala": "5678901234",
+        "kennitala": "32",
         "name": "Sven Jonsson",
         "phone": "+3545678901",
         "homePhone": "+3545432109",
@@ -25,6 +25,69 @@
         "address": "135 Maple Rd, Isafjordur",
         "email": "bjorn.rognvaldsson@example.com",
         "location": 1
+    },
+    {
+        "kennitala": "5678901234",
+        "name": "Sven Jonsson",
+        "phone": "+3545678901",
+        "homePhone": "+3545432109",
+        "address": "654 Pine Ave, Kopavogur",
+        "email": "sven.jonsson@example.com",
+        "location": 3
+    },
+    {
+        "kennitala": "5678901234",
+        "name": "Sven Jonsson",
+        "phone": "+3545678901",
+        "homePhone": "+3545432109",
+        "address": "654 Pine Ave, Kopavogur",
+        "email": "sven.jonsson@example.com",
+        "location": 3
+    },
+    {
+        "kennitala": "5678901234",
+        "name": "Sven Jonsson",
+        "phone": "+3545678901",
+        "homePhone": "+3545432109",
+        "address": "654 Pine Ave, Kopavogur",
+        "email": "sven.jonsson@example.com",
+        "location": 3
+    },
+    {
+        "kennitala": "5678901234",
+        "name": "Sven Jonsson",
+        "phone": "+3545678901",
+        "homePhone": "+3545432109",
+        "address": "654 Pine Ave, Kopavogur",
+        "email": "sven.jonsson@example.com",
+        "location": 3
+    },
+    {
+        "kennitala": "5678901234",
+        "name": "Sven Jonsson",
+        "phone": "+3545678901",
+        "homePhone": "+3545432109",
+        "address": "654 Pine Ave, Kopavogur",
+        "email": "sven.jonsson@example.com",
+        "location": 3
+    },
+    {
+        "kennitala": "5678901234",
+        "name": "Sven Jonsson",
+        "phone": "+3545678901",
+        "homePhone": "+3545432109",
+        "address": "654 Pine Ave, Kopavogur",
+        "email": "sven.jonsson@example.com",
+        "location": 3
+    },
+    {
+        "kennitala": "5678901234",
+        "name": "Sven Jonsson",
+        "phone": "+3545678901",
+        "homePhone": "+3545432109",
+        "address": "654 Pine Ave, Kopavogur",
+        "email": "sven.jonsson@example.com",
+        "location": 3
     },
     {
         "kennitala": "5678901234",

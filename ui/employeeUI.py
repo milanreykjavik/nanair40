@@ -1,50 +1,106 @@
+import sys
+sys.path.insert(0, '.')
+
+
 from baseUI import BaseUI
 from validationUI import ValidationUI
+from baseClasses.Employee import Employee
+
 
 
 validation = ValidationUI() 
 
 class EmployeeUI(BaseUI):
-    def addEmployee(self):
-        validkennitala = False
-        while not validkennitala:
-            kennitala = input("Enter youre kennitala: ")
-            validkennitala = validation.validateKennitala(kennitala)
+    def addEmployee(self): # use employee base class
+        userDict = {
+            'Kennitala': '',
+            'Name': '',
+            'Phone': '',
+            'Homephone': '',
+            'Country': '',
+            'Email': '',
+            'Address': ''
+        }
 
-        validname = False
-        while not validname:
-            name = input("Enter youre name: ")
-            validname = validation.validateName(name)
+        userClass = Employee()
         
-        validphone = False
-        while not validphone:
-            phone = input("Enter a phonenumber: ")
-            validphone = validation.validatePhone(phone)
-        
-        validhomephone = False
-        while not validhomephone:
-            homephone = input("Enter a homephone: ")
-            validhomephone = validation.validatePhone(homephone)
 
-        validaddress = False
-        while not validaddress:
-            address = input("Enter youre address: ")
-            validaddress = validation.validateAddress(address)
+        fields = [
+            ('Kennitala', "Enter a kennitala: ", validation.validateKennitala),  # These are all of the keys, prompts, and values that we need to ask the user
+            ('Name', "Enter your name: ", validation.validateName),
+            ('Phone', "Enter a phonenumber: ", validation.validatePhone),
+            ('Homephone', "Enter a homephone: ", validation.validatePhone),
+            ('Country', "Enter a country: ", validation.validateCountry),
+            ('Email', "Enter your email: ", validation.validateEmail),
+            ('Address', "Enter your address: ", validation.validateAddress),
+        ]
 
-        validateemail = False
-        while not validateemail:
-            email = input("Enter youre email: ")
-            validateemail = validation.validateEmail(email)
+        for key, prompt, validationFunc in fields: # This loops for all keys, prompts and functions the user needs to be askes
+            value = self.getValidInput('Add employee',prompt, validationFunc, userDict)
+            if value.lower() in ('q', 'b'): # If the user entered q or b, then we go back one page or quit
+                match value.lower():
+                    case 'q':
+                        return 'q' # quit the whole program
+                    case 'b':
+                        return False # Go back one page
+            userClass.__dict__[key] = value
+            print(userClass.kennitala)
 
-        validcountry = False
-        while not validcountry:
-            country = input("Enter a country: ")
-            validcountry = validation.validateCountry(country)
+
+        # 
+        #new_employee = Employee(userDict['Kennitala'], userDict['Name'], userDict['Phone'], userDict['Homephone'], userDict['Country'], userDict['Email'], userDict['Address'])
+    
+
+        while True:
+            self.printBaseMenu('Add employee', [f'{key}: {value}' for key, value in userClass.__dict__.items()], 'Choose an option: ') # if the user finished entering all the information needed then he gets to choose either to quit or go back
+            optionInput, isValid = self.takeInput(['[B]ack', '[Q]uit'])
+
+            if isValid:
+                match optionInput.lower():
+                    case 'b':
+                        return False
+                    case 'q':
+                        return 'q'
+
+
+
+    def showEmployee(self):
+    
+        # use Search class there is Employee Search class there that can search by any param in this case kennitala
+        lookUpKennitala = self.getValidInput( 'View/edit employee',"Look up employee by kennitala: ", validation.validateKennitala)
+
+        match lookUpKennitala.lower():
+            case 'q':
+                return 'q'
+            case 'b':
+                return False
+
+        # talk to wrapper with the kennitala entered 
 
 
     def editEmployee():
         pass
+        
 
 
-    def listEmployess():
+
+       
+        
+    def showEmployees(self):
         pass
+        # Here we need to call showEmployees in the wrapper to get all of the employees in the system
+
+
+        
+
+    def getValidInput(self, name, prompt, validationFunc, userDict: dict = {}) -> str:
+        while True:
+            self.printBaseMenu(name, [f'{key}: {value}' for key, value in userDict.items()], prompt)
+            user_input = input(' ')
+        
+            if validationFunc(user_input):
+                return user_input
+        
+
+
+
