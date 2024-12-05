@@ -54,15 +54,6 @@ class EmployeeUI(SearchUI):
 
 
 
-    def showEmployee(self):
-    
-        # use Search class there is Employee Search class there that can search by any param in this case kennitala
-        employeeInfo = self.showEmployeeID()
-
-
-        # talk to wrapper with the kennitala entered 
-
-
     def editEmployee():
         pass
         
