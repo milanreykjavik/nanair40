@@ -1,6 +1,7 @@
 from baseClasses.Property import Property
 from logic.logicWrapper import Logic_Wrapper
 from ui.searchUI import SearchUI
+from ui.validationUI import ValidationUI
 
 validation = ValidationUI()
 
