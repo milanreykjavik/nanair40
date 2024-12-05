@@ -12,10 +12,10 @@ class mainUI(BaseUI):
         self.logicWrapper = Logic_Wrapper()
         self.baseUI = BaseUI()
         self.employeeUI = EmployeeUI(self.logicWrapper)
-        self.contractorsIU = ContractorsUI(self.logicWrapper)
+        #self.contractorsIU = ContractorsUI(self.logicWrapper)
         self.propertiesUI = PropertiesUI(self.logicWrapper)
-        self.workUI = WorkUI(self.logicWrapper)
-        self.janitorUI = JanitorUI(self.logicWrapper)
+        #self.workUI = WorkUI(self.logicWrapper)
+        #self.janitorUI = JanitorUI(self.logicWrapper)
         self.searchUI = SearchUI(self.logicWrapper)
     
 
@@ -89,7 +89,7 @@ class mainUI(BaseUI):
                     returnValue = self.employeeUI.addEmployee() # Go to the employeeUI class and add a new employee
                     
                 case 'e':
-                    returnValue = self.employeeUI.showEmployee() # Go to the employeeUI class and add edit a employee
+                    returnValue = self.employeeUI.showEmployees() # Go to the employeeUI class and add edit a employee
                     
                 case 'l':
                     returnValue = self.employeeUI.showEmployees() # Go to the employeeUI class and list all employees
@@ -204,7 +204,7 @@ class mainUI(BaseUI):
                 case 'w':
                     returnValue = self.searchUI.workOrderSearch()
                 case 'r':
-                    returnValue = self.searchUI.workReportSearch
+                    returnValue = self.searchUI.workReportSearch()
                 case 'c':
                     returnValue = self.searchUI.contractors()
                 case 'b':

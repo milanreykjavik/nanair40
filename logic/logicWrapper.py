@@ -2,12 +2,15 @@
 fix to camelCase not python_case
 """
 
-from employeeHandler import EmployeeHandler
+from logic.employeeHandler import EmployeeHandler
 from baseClasses.Employee import Employee
+from logic.PropertyHandler import PropertyHandler
+from baseClasses.Property import Property
 
 class Logic_Wrapper:
-    def __init__(self, employee_handler: EmployeeHandler) -> None:
-        self.employee_handler = employee_handler
+    def __init__(self) -> None:
+        self.employee_handler = EmployeeHandler()
+        self.Property_handler = PropertyHandler()
 
     def addEmployee(self, employee: Employee) -> bool:
         return self.employee_handler.addEmployee(employee)
@@ -17,3 +20,6 @@ class Logic_Wrapper:
     
     def listEmployees(self, **kwargs) -> list['Employee']:
         return self.employee_handler.listEmployess(**kwargs)
+
+    def addProperty(self, property: Property) -> bool:
+        return self.Property_handler.addProperty(property)
