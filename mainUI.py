@@ -44,9 +44,6 @@ class mainUI(BaseUI):
                return 'q'
 
 
-
-
-
     def ShowManagerMenu(self) -> str | bool:
         optionInput = ''
         while optionInput.lower() != 'q':

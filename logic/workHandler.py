@@ -4,6 +4,7 @@ from typing import Any
 
 
 class WorkHandler:
+
     def __init__(self) -> None:
         self.workControl = WorkController()
         self.work = WorkOrder()

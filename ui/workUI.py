@@ -1,12 +1,14 @@
 from logic.logicWrapper import Logic_Wrapper
 from baseClasses.Work import WorkOrder
 from ui.validationUI import ValidationUI
+from ui.baseUI import BaseUI
 validation = ValidationUI()
 
-class WorkUI:
+class WorkUI(BaseUI):
     def __init__(self, logicWrapper: Logic_Wrapper):
         self.logicWrapper = logicWrapper
 
+    
 
 
             
@@ -32,10 +34,6 @@ class WorkUI:
                 userClass.__dict__[key] = value
 
                 newWorkOrder = self.logicWrapper.addWorkOrder()
-
-
-
-
 
 
     def addWorkOrder():
