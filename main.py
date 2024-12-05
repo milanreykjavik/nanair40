@@ -10,7 +10,7 @@ print(r)
 y = EmployeeController()
 for i in range(0, 10000):
     new_employee = Employee(
-        kennitala="12345"+str(i),
+        kennitala=int("12345"+str(i)),
         name="John Doe",
         phone="123-456-7890",
         homePhone="098-765-4321",
