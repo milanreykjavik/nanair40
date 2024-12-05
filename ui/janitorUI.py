@@ -5,7 +5,8 @@ from logic.logicWrapper import Logic_Wrapper
 import os
 
 class JanitorUI(BaseUI):
-    def __init__(self):
+    def __init__(self, logicWrapper):
+        self.logicWrapper = logicWrapper
         
         # Im just using sample data that i made for now :)
         

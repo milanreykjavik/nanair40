@@ -156,9 +156,9 @@ class EmployeeUI(SearchUI):
         headers = ['Name', 'Address', 'Phone number']
 
         # Calculate the maximum width for each column
-        max_name_length = max(len(employee['name']) for employee in employeesFile)
-        max_address_length = max(len(employee['address']) for employee in employeesFile)
-        max_phone_length = max(len(employee['phone']) for employee in employeesFile)
+        max_name_length = max(len(employee.name) for employee in employeesFile)
+        max_address_length = max(len(employee.address) for employee in employeesFile)
+        max_phone_length = max(len(employee.phone) for employee in employeesFile)
 
 
         # Build the line separator based on the column widths
@@ -174,15 +174,14 @@ class EmployeeUI(SearchUI):
 
         # Build each employee row
         for dict in employeesFile:
-            line_content = f"| {dict['name']:<{max_name_length}} | {dict['address']:<{max_address_length}} | {dict['phone']:<{max_phone_length}} |"
+            line_content = f"| {dict.name:<{max_name_length}} | {dict.address:<{max_address_length}} | {dict.phone:<{max_phone_length}} |"
             body.append(line_content)
             body.append(line)
         
-        self.printBaseMenu('List employees', body, 'Choose a option')
 
     
 
-        return self.takeInputAndPrintMenu(['[Q]uit', '[B]ack'], ('Add employee', [f'{key}: {value}' for key, value in userClass.__dict__.items()], 'The employee has been succesfully created\nChoose a option: '))
+        return self.takeInputAndPrintMenu(['[Q]uit', '[B]ack'], ('List employees', body, 'Choose a option'))
     
 
 
