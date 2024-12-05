@@ -48,7 +48,6 @@ class EmployeeUI(SearchUI):
         return self.takeInputAndPrintMenu(['[Q]uit', '[B]ack'], ('Add employee', [f'{key}: {value}' for key, value in userClass.__dict__.items()], 'The employee has been succesfully created\nChoose a option: '))
 
 
-
     def showEmployees(self):
         employeesFile = self.logicWrapper.listEmployees()
         body = []
@@ -152,55 +151,25 @@ class EmployeeUI(SearchUI):
 
     
 
-        
 
-
-
-    
        
-            
-    def showEmployees(self):
-        employeesFile = self.logicWrapper.listEmployees()
-        body = []
-
-        # Initialize column names
-        headers = ['Name', 'Address', 'Phone number']
-
-        # Calculate the maximum width for each column
-        max_name_length = max(len(employee.name) for employee in employeesFile)
-        max_address_length = max(len(employee.address) for employee in employeesFile)
-        max_phone_length = max(len(employee.phone) for employee in employeesFile)
-
-
-        # Build the line separator based on the column widths
-        line = '+' + '-' * (max_name_length + 2) + '+' + '-' * (max_address_length + 2) + '+' + '-' * (max_phone_length + 2) + '+'
-
-        # Build the header row
-        header_row = f"| {headers[0]:<{max_name_length}} | {headers[1]:<{max_address_length}} | {headers[2]:<{max_phone_length}}|"
-
-        # Append the header and line to body
-        body.append(line)
-        body.append(header_row)
-        body.append(line)
-
-        # Build each employee row
-        for dict in employeesFile:
-            line_content = f"| {dict.name:<{max_name_length}} | {dict.address:<{max_address_length}} | {dict.phone:<{max_phone_length}} |"
-            body.append(line_content)
-            body.append(line)
         
-
-    
-
-        return self.takeInputAndPrintMenu(['[Q]uit', '[B]ack'], ('List employees', body, 'Choose a option'))
-    
-
-
-
-            
-
-
-
+    def showEmployee(self):
+        employee_list = []
+        while not employee_list:
+            check = self.getValidInput("look for employee","Enter ID", validation.validateKennitala)
+            if check.lower() in ('q', 'b'): # If the user entered q or b, then we go back one page or quit
+                match check.lower():
+                    case 'q':
+                        return 'q' # quit the whole program
+                    case 'b':
+                        return False # Go back one page
+            else:
+                # check_2 = self.logicWrapper.editEmployee(check)
+                # employee_list.append(check_2)
+                employee_list.append(check)
+                return
+                
 
         
 
