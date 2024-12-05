@@ -109,7 +109,7 @@ class ValidationUI:
         return True
     
     @staticmethod
-    def validatePropertyNumber(propertyNumber):
+    def validateID(propertyNumber):
         if propertyNumber.lower() in ('q', 'b'):
             return propertyNumber
         
