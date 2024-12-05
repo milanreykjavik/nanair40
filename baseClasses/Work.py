@@ -33,20 +33,20 @@ class WorkReport:
 
 
 class WorkOrder:
-    def __init__(self, id: int = 0, date: str = "", description: str = "", propertyNumber: int = 0, userID: int = 0, priority: int = 0, workReport: list['WorkReport'] = [], contractorID: int = 0, isCompleted: bool = False):
+    def __init__(self, id: int = 0, date: str = "", description: str = "", propertyNumber: int = 0, userID: int = 0, priority: int = 0, workReports: list['WorkReport'] = [], contractorID: int = 0, isCompleted: bool = False):
         self.id: int = id
         self.date: str = date
         self.description: str = description
         self.propertyNumber: int = propertyNumber
         self.userID: int = userID
         self.priority: int = priority # 0 1 2
-        self.workReport: list['WorkReport'] = workReport # class workReport
+        self.workReports: list['WorkReport'] = workReports # class workReport
         self.contractorID: int = contractorID # if it is -1 it is nobody if it is > -1 then it is an actual contrator
         self.isCompleted: bool = isCompleted
 
 
     def __repr__(self) -> str:
-        return f"WorkOrder(id={self.id}, date={self.date}, description={self.description}, propertyNumber={self.propertyNumber}, userID={self.userID}, priority={self.priority}, workReport={self.workReport}, contractorID={self.contractorID}, isCompleted={self.isCompleted})"
+        return f"WorkOrder(id={self.id}, date={self.date}, description={self.description}, propertyNumber={self.propertyNumber}, userID={self.userID}, priority={self.priority}, workReports={self.workReports}, contractorID={self.contractorID}, isCompleted={self.isCompleted})"
 
 
     def normalize(self, jsonData: list[str]) -> list['WorkOrder']:
@@ -61,6 +61,6 @@ class WorkOrder:
 
     def toJSON(self, workorder: 'WorkOrder') -> str:
         workorderDict = workorder.__dict__.copy()
-        workorderDict['workReport'] = json.loads(workorder.workReport.toJSON(workorder.workReport))
+        workorderDict['workReport'] = [json.loads(WorkReport().toJSON(report)) for report in workorder.workReports]
 
         return json.dumps(workorderDict)

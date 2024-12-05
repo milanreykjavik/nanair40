@@ -56,9 +56,9 @@ class EmployeeUI(SearchUI):
         headers = ['Name', 'Address', 'Phone number']
 
         # Calculate the maximum width for each column
-        max_name_length = max(len(employee['name']) for employee in employeesFile)
-        max_address_length = max(len(employee['address']) for employee in employeesFile)
-        max_phone_length = max(len(employee['phone']) for employee in employeesFile)
+        max_name_length = max(len(employee.name) for employee in employeesFile)
+        max_address_length = max(len(employee.address) for employee in employeesFile)
+        max_phone_length = max(len(employee.phone) for employee in employeesFile)
 
 
         # Build the line separator based on the column widths
