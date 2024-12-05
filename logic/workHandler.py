@@ -12,13 +12,40 @@ class WorkHandler:
         return self.workControl.appendIntoFile(work)
 
 
+    """
+    def editWork(self, entry: str, entryValue: Any, workReportIndex: int = 0, **kwargs) -> bool:
+        if not len(kwargs):
+            return False
+        if any(kwarg not in vars(self.work) for kwarg in kwargs):
+            return False
+
+        workOrders = self.workControl.readFile()
+        for workOrder in workOrders:
+            if getattr(workOrder, entry) == entryValue:
+                if workReportIndex > 0 and workReportIndex < len(workOrder.workReports):
+                    workReport = workOrder.workReports[workReportIndex]
+                    for key, value in kwargs.items():
+                        if key in vars(workReport):
+                            setattr(workReport, key, value)
+                        else:
+                            return False
+                else:
+                    for key, value in kwargs.items():
+                        if key in vars(workOrder):
+                            setattr(workOrder, key, value)
+                        else:
+                            return False
+                return self.workControl.editWork(workOrders, 'workReport',)
+        return False
+    """
+
     def editWork(self, entry: str, entryValue: Any, **kwargs) -> bool:
         if not len(kwargs):
             return False
         if any(kwarg not in vars(self.work) for kwarg in kwargs):
             return False
-        self.workControl.changeOneEntry(entry, entryValue, **kwargs)
-        return True
+        
+        return self.workControl.changeOneEntry(entry, entryValue, **kwargs)
 
 
     def listWorkOrders(self, **kwargs) -> list['WorkOrder']:

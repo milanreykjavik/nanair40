@@ -17,8 +17,7 @@ class ContractorHandler:
             return False
         if any(kwarg not in vars(self.contractor) for kwarg in kwargs):
             return False
-        self.contractorControl.changeOneEntry(entry, entryValue, **kwargs)
-        return True
+        return self.contractorControl.changeOneEntry(entry, entryValue, **kwargs)
 
 
     def listContractors(self, **kwargs) -> list['Contractor']:

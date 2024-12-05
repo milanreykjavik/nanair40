@@ -17,8 +17,7 @@ class PropertyHandler:
             return False
         if any(kwarg not in vars(self.property) for kwarg in kwargs):
             return False
-        self.propertyControl.changeOneEntry(entry, entryValue, **kwargs)
-        return True
+        return self.propertyControl.changeOneEntry(entry, entryValue, **kwargs)
 
 
     def listProperties(self, **kwargs) -> list['Property']:

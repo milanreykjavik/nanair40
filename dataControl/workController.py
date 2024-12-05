@@ -24,10 +24,13 @@ class WorkController:
 
 
     def appendIntoFile(self, data: 'WorkOrder') -> bool:
-        print(data)
         try:
             with open(self.filePath, "r") as f:
                 currentData = json.load(f)
+        except:
+            currentData = []
+
+        try:
             dataJSON = self.work.toJSON(data)
             currentData.append(json.loads(dataJSON))
 

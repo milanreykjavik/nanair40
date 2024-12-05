@@ -61,6 +61,6 @@ class WorkOrder:
 
     def toJSON(self, workorder: 'WorkOrder') -> str:
         workorderDict = workorder.__dict__.copy()
-        workorderDict['workReport'] = [json.loads(WorkReport().toJSON(report)) for report in workorder.workReports]
+        workorderDict['workReports'] = [json.loads(WorkReport().toJSON(report)) for report in workorder.workReports]
 
         return json.dumps(workorderDict)

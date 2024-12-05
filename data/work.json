@@ -1,0 +1,158 @@
+[
+    {
+        "id": 1,
+        "date": "2024",
+        "description": "testing",
+        "propertyNumber": 2,
+        "userID": 1,
+        "priority": 1,
+        "workReports": [
+            {
+                "id": 1,
+                "description": "abc",
+                "date": "2024",
+                "cost": 30,
+                "comment": "abccc"
+            },
+            {
+                "id": 2,
+                "description": "abc",
+                "date": "2024",
+                "cost": 30,
+                "comment": "abccc"
+            }
+        ],
+        "contractorID": 5,
+        "isCompleted": true
+    },
+    {
+        "id": 5,
+        "date": "2024",
+        "description": "testing",
+        "propertyNumber": 2,
+        "userID": 1,
+        "priority": 1,
+        "workReports": [
+            {
+                "id": 1,
+                "description": "abc",
+                "date": "2024",
+                "cost": 30,
+                "comment": "abccc"
+            },
+            {
+                "id": 1,
+                "description": "abc",
+                "date": "2024",
+                "cost": 30,
+                "comment": "abccc"
+            }
+        ],
+        "contractorID": 5,
+        "isCompleted": true
+    },
+    {
+        "id": 5,
+        "date": "2024",
+        "description": "testing",
+        "propertyNumber": 2,
+        "userID": 1,
+        "priority": 1,
+        "workReports": [
+            {
+                "id": 1,
+                "description": "abc",
+                "date": "2024",
+                "cost": 30,
+                "comment": "abccc"
+            },
+            {
+                "id": 1,
+                "description": "abc",
+                "date": "2024",
+                "cost": 30,
+                "comment": "abccc"
+            }
+        ],
+        "contractorID": 5,
+        "isCompleted": true
+    },
+    {
+        "id": 5,
+        "date": "2024",
+        "description": "testing",
+        "propertyNumber": 2,
+        "userID": 1,
+        "priority": 1,
+        "workReports": [
+            {
+                "id": 1,
+                "description": "abc",
+                "date": "2024",
+                "cost": 30,
+                "comment": "abccc"
+            },
+            {
+                "id": 1,
+                "description": "abc",
+                "date": "2024",
+                "cost": 30,
+                "comment": "abccc"
+            }
+        ],
+        "contractorID": 5,
+        "isCompleted": true
+    },
+    {
+        "id": 5,
+        "date": "2024",
+        "description": "testing",
+        "propertyNumber": 2,
+        "userID": 1,
+        "priority": 1,
+        "workReports": [
+            {
+                "id": 1,
+                "description": "abc",
+                "date": "2024",
+                "cost": 30,
+                "comment": "abccc"
+            },
+            {
+                "id": 1,
+                "description": "abc",
+                "date": "2024",
+                "cost": 30,
+                "comment": "abccc"
+            }
+        ],
+        "contractorID": 5,
+        "isCompleted": true
+    },
+    {
+        "id": 5,
+        "date": "2024",
+        "description": "testing",
+        "propertyNumber": 2,
+        "userID": 1,
+        "priority": 1,
+        "workReports": [
+            {
+                "id": 1,
+                "description": "abc",
+                "date": "2024",
+                "cost": 30,
+                "comment": "abccc"
+            },
+            {
+                "id": 1,
+                "description": "abc",
+                "date": "2024",
+                "cost": 30,
+                "comment": "abccc"
+            }
+        ],
+        "contractorID": 5,
+        "isCompleted": true
+    }
+]
