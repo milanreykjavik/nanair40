@@ -12,11 +12,29 @@ class WorkUI:
         
 
         fields = [
-            ('Description', "Enter the description of the work: ", validation.validateText),  # These are all of the keys, prompts, and values that we need to ask the user
+            ('description', "Enter the description of the work: ", validation.validateText),  # These are all of the keys, prompts, and values that we need to ask the user
             ('property Number', "Enter the property number: ", validation.validateText),
-            ('Contractors', "Enter a name of a contractor: ", validation.validateText),
-            ('Priority', "Enter your email: ", validation.validateText)
+            ('contractors', "Enter a name of a contractor: ", validation.validateText),
+            ('priority', "Enter your email: ", validation.validateText)
+            ('date', 'Enter a date', validation.validateText)
         ]
+
+
+        for key, prompt, validationFunc in fields: # This loops for all keys, prompts and functions the user needs to be askes
+            value = self.getValidInput('Add work order', prompt, validationFunc, userClass.__dict__)
+            if value.lower() in ('q', 'b'): # If the user entered q or b, then we go back one page or quit
+                match value.lower():
+                    case 'q':
+                        return 'q' # quit the whole program
+                    case 'b':
+                        return False # Go back one page
+            userClass.__dict__[key] = value
+
+            newWorkOrder = self.logicWrapper.addWorkOrder()
+
+
+
+
 
 
     def addWorkOrder():
