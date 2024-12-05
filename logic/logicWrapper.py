@@ -2,7 +2,7 @@
 fix to camelCase not python_case
 """
 
-from employeeHandler import EmployeeHandler
+from logic.employeeHandler import EmployeeHandler
 from baseClasses.Employee import Employee
 
 class Logic_Wrapper:
