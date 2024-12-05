@@ -3,6 +3,7 @@ from logic.logicWrapper import Logic_Wrapper
 from ui.searchUI import SearchUI
 from ui.validationUI import ValidationUI
 
+
 validation = ValidationUI()
 
 
@@ -39,9 +40,40 @@ class PropertiesUI(SearchUI):
         
 
 
-    def showProperty():
-        pass
+    def showProperty(self):
+        propertiesFile = self.logicWrapper.listProperties()
+        body = []
 
+        # Initialize column names
+        headers = ['ID', 'Location', 'Condition']
+
+        # Calculate the maximum width for each column
+        max_ID_length = max((property.id) for property in propertiesFile)
+        max_Location_length = max((property.location) for property in propertiesFile)
+        max_Condition_length = max((property.condition) for property in propertiesFile)
+
+
+        # Build the line separator based on the column widths
+        line = '+' + '-' * (max_ID_length + 2) + '+' + '-' * (max_Location_length + 2) + '+' + '-' * (max_Condition_length + 2) + '+'
+
+        # Build the header row
+        header_row = f"| {headers[0]:<{max_ID_length}} | {headers[1]:<{max_Location_length}} | {headers[2]:<{max_Condition_length}}|"
+
+        # Append the header and line to body
+        body.append(line)
+        body.append(header_row)
+        body.append(line)
+
+        # Build each employee row
+        for dict in propertiesFile:
+            line_content = f"| {dict.id:<{max_ID_length}} | {dict.location:<{max_Location_length}} | {dict.condition:<{max_Condition_length}} |"
+            body.append(line_content)
+            body.append(line)
+        
+
+    
+
+        return self.takeInputAndPrintMenu(['[Q]uit', '[B]ack'], ('List Properties', body, 'Choose a option'))
 
 
     def editProperty(self):
