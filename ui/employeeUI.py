@@ -47,15 +47,8 @@ class EmployeeUI(SearchUI):
     
         return self.takeInputAndPrintMenu(['[Q]uit', '[B]ack'], ('Add employee', [f'{key}: {value}' for key, value in userClass.__dict__.items()], 'The employee has been succesfully created\nChoose a option: '))
 
-    def editEmployee():
-        pass
-        
 
 
-
-    
-       
-            
     def showEmployees(self):
         employeesFile = self.logicWrapper.listEmployees()
         body = []
@@ -92,45 +85,7 @@ class EmployeeUI(SearchUI):
 
         return self.takeInputAndPrintMenu(['[Q]uit', '[B]ack'], ('Add employee', [f'{key}: {value}' for key, value in userClass.__dict__.items()], 'The employee has been succesfully created\nChoose a option: '))
     
-        # use Search class there is Employee Search class there that can search by any param in this case kennitala
-        employeeInfo = self.logicWrapper.showEmployeeID()
-
-        if not employeeInfo:
-            print("No employees found in the system")
-            return False
-        
-        print("\nList of Employees\n")
-        for index, employee in enumerate(employeeInfo, start=1):
-            print(f"Employee {index}:")
-            for key, value in employee.items():
-                print(f" {key.capitalize()}: {value}")
-            print("-"*40)
-
-        while True:
-            print("\nOptions:")
-            print("[B]ack")
-            print("[Q]uit")
-            print("[V]iew employee details")
-
-            option = input("Choose an option: ").strip().lower()
-
-            if option == 'b':
-                return False
-            elif option == 'q':
-                return 'q'
-            elif option.isdigit():
-                employee_index = int(option) - 1
-                if 0 < employee_index < len(employeeInfo):
-                    self.viewEmployeeDetails(employeeInfo[employee_index])
-                else:
-                    print("Invaild employee number. Try again.")
-            else:
-                print("Invalid option. Try again.")
-
-
-
-
-            
+ 
 
     def editEmployee(self):
     # Ask user to identify the employee to edit
