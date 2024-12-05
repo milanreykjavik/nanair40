@@ -9,9 +9,7 @@ class EmployeeHandler:
         self.employee = Employee()
 
     def addEmployee(self, employee: 'Employee') -> bool:
-        employeeJson = self.employee.toJSON(employee)
-        self.employeeControl.appendIntoFile(employeeJson)
-        return True
+        return self.employeeControl.appendIntoFile(employee)
 
 
     def editEmployee(self, entry: str, entryValue: Any, **kwargs) -> bool:
@@ -19,11 +17,10 @@ class EmployeeHandler:
             return False
         if any(kwarg not in vars(self.employee) for kwarg in kwargs):
             return False
-        self.employeeControl.changeOneEntry(entry, entryValue, **kwargs)
-        return True
+        return self.employeeControl.changeOneEntry(entry, entryValue, **kwargs)
 
 
-    def listEmployess(self, **kwargs) -> list['Employee']:
+    def listEmployes(self, **kwargs) -> list['Employee']:
         if any(kwarg not in vars(self.employee) for kwarg in kwargs):
             return []
 

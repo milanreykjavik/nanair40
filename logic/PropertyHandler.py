@@ -9,9 +9,7 @@ class PropertyHandler:
         self.property = Property()
 
     def addProperty(self, property: 'Property') -> bool:
-        propertyJson = self.property.toJSON(property)
-        self.propertyControl.appendIntoFile(propertyJson)
-        return True
+        return self.propertyControl.appendIntoFile(property)
 
 
     def editProperty(self, entry: str, entryValue: Any, **kwargs) -> bool:

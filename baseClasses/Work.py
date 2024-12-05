@@ -1,5 +1,10 @@
 import json
 
+
+"""
+ADD REPEATING WORK ORDERS
+"""
+
 class WorkReport:
     def __init__(self, id: int = 0, description: str = "", date: str = "", cost: int = 0, comment: str = ""):
         self.id: int = id
@@ -28,14 +33,14 @@ class WorkReport:
 
 
 class WorkOrder:
-    def __init__(self, id: int = 0, date: str = "", description: str = "", propertyNumber: int = 0, userID: int = 0, priority: int = 0, workReport: 'WorkReport' = WorkReport(), contractorID: int = 0, isCompleted: bool = False):
+    def __init__(self, id: int = 0, date: str = "", description: str = "", propertyNumber: int = 0, userID: int = 0, priority: int = 0, workReport: list['WorkReport'] = [], contractorID: int = 0, isCompleted: bool = False):
         self.id: int = id
         self.date: str = date
         self.description: str = description
         self.propertyNumber: int = propertyNumber
         self.userID: int = userID
         self.priority: int = priority # 0 1 2
-        self.workReport: 'WorkReport' = workReport # class workReport
+        self.workReport: list['WorkReport'] = workReport # class workReport
         self.contractorID: int = contractorID # if it is -1 it is nobody if it is > -1 then it is an actual contrator
         self.isCompleted: bool = isCompleted
 

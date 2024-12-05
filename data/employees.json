@@ -1,6 +1,6 @@
 [
     {
-        "kennitala": "32",
+        "kennitala": 32,
         "name": "Sven Jonsson",
         "phone": "+3545678901",
         "homePhone": "+3545432109",
@@ -9,7 +9,7 @@
         "location": 3
     },
     {
-        "kennitala": "6789012345",
+        "kennitala": 6789012345,
         "name": "Hanna Thoroddsen",
         "phone": "+3546789012",
         "homePhone": "+3544321098",
@@ -18,12 +18,12 @@
         "location": 1
     },
     {
-        "kennitala": "7890123456",
+        "kennitala": 7890123456,
         "name": "Bjorn Rognvaldsson",
         "phone": "+3547890123",
         "homePhone": "+3543210987",
         "address": "135 Maple Rd, Isafjordur",
         "email": "bjorn.rognvaldsson@example.com",
         "location": 1
-    }
+    } 
 ]

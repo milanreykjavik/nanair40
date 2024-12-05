@@ -3,7 +3,7 @@ import os
 import tempfile
 from typing import Any
 
-from baseClasses.Property import Property
+from baseClasses.Work import WorkOrder, WorkReport
 
 def atomicWrite(fp, data):
     dirName = os.path.dirname(fp)
@@ -17,17 +17,17 @@ def atomicWrite(fp, data):
 
 
 
-class PropertyController:
+class WorkController:
     def __init__(self):
-        self.property = Property()
-        self.filePath = "data/properties.json"
+        self.work = WorkOrder()
+        self.filePath = "data/work.json"
 
 
-    def appendIntoFile(self, data: 'Property') -> bool:
+    def appendIntoFile(self, data: 'WorkOrder') -> bool:
         try:
             with open(self.filePath, "r") as f:
                 currentData = json.load(f)
-            dataJSON = self.property.toJSON(data)
+            dataJSON = self.work.toJSON(data)
             currentData.append(json.loads(dataJSON))
 
             atomicWrite(self.filePath, currentData)
@@ -41,11 +41,11 @@ class PropertyController:
             with open(self.filePath, "r") as f:
                 currentData = json.load(f)
 
-            for property in currentData:
-                if property.get(entry) == entryValue:
+            for work in currentData:
+                if work.get(entry) == entryValue:
                     for key, value in kwargs.items():
-                        if key in property:
-                            property[key] = value
+                        if key in work:
+                            work[key] = value
                     break
             else:
                 return False
@@ -56,8 +56,8 @@ class PropertyController:
             return False
 
 
-    def readFile(self) -> list['Property']:
+    def readFile(self) -> list['WorkOrder']:
         data = []
         with open(self.filePath, "r") as f:
             data = json.load(f)
-        return self.property.normalize(data)
+        return self.work.normalize(data) 

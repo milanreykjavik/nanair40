@@ -1,3 +1,5 @@
 Add list of possible locations in BaseClasses prob for example 2 towns in Greenland
+Logic wrapper checks if kennitala already exists in the system
 When program closes in the middle of writing it should persist what was written
 For loop for first letter - Helgi next week as he says
+check if all chars user inputed are in whitelist!!!!
