@@ -1,5 +1,6 @@
 from baseClasses.Employee import Employee
 from dataControl.employeeController import EmployeeController
+from typing import Any
 
 
 class EmployeeHandler:
@@ -13,12 +14,12 @@ class EmployeeHandler:
         return True
 
 
-    def editEmployee(self, targetKennitala: str, **kwargs) -> bool:
+    def editEmployee(self, entry: str, entryValue: Any, **kwargs) -> bool:
         if not len(kwargs):
             return False
         if any(kwarg not in vars(self.employee) for kwarg in kwargs):
             return False
-        self.employeeControl.changeOneEntry(targetKennitala, **kwargs)
+        self.employeeControl.changeOneEntry(entry, entryValue, **kwargs)
         return True
 
 
