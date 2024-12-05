@@ -46,44 +46,6 @@ class EmployeeUI(SearchUI):
 
     
         return self.takeInputAndPrintMenu(['[Q]uit', '[B]ack'], ('Add employee', [f'{key}: {value}' for key, value in userClass.__dict__.items()], 'The employee has been succesfully created\nChoose a option: '))
-    
-    
-
-
-
-
-
-    def showEmployee(self):
-    
-        # use Search class there is Employee Search class there that can search by any param in this case kennitala
-        employeeInfo = self.showEmployeeID()
-
-
-        # talk to wrapper with the kennitala entered 
-
-
-        # Here a instance would get created in order to send to data layer
-        new_employee = Employee(userClass.__dict__['kennitala'], userClass.__dict__['name'], userClass.__dict__['phone'], userClass.__dict__['homePhone'], userClass.__dict__['location'], userClass.__dict__['email'], userClass.__dict__['address'])
-
-        self.logicWrapper.addEmployee(new_employee)
-
-    
-        return self.takeInputAndPrintMenu(['[Q]uit', '[B]ack'], ('Add employee', [f'{key}: {value}' for key, value in userClass.__dict__.items()], 'The employee has been succesfully created\nChoose a option: '))
-    
-    
-
-
-
-
-
-    def showEmployee(self):
-    
-        # use Search class there is Employee Search class there that can search by any param in this case kennitala
-        employeeInfo = self.showEmployeeID()
-
-
-        # talk to wrapper with the kennitala entered 
-
 
     def editEmployee():
         pass
