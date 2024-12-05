@@ -1,0 +1,12 @@
+[
+    {
+        "id": 45,
+        "date": "2024",
+        "description": "desc",
+        "propertyNumber": 1,
+        "userID": 1,
+        "priority": 1,
+        "contractorID": 1,
+        "isCompleted": true
+    }
+]

@@ -1,12 +1,20 @@
-from logic.employeeHandler import EmployeeHandler
-from baseClasses.Work import WorkOrder, WorkReport
-from logic.workHandler import WorkHandler
-x = WorkHandler()
+from baseClasses.WorkOrder import WorkOrder
+from logic.workOrderHandler import WorkOrderHandler
+from baseClasses.WorkReport import WorkReport
+from logic.workReportHandler import WorkReportHandler
 
-rep = WorkReport(1, "abc", "2024", 30, "abccc")
-wo = WorkOrder(5, "2024", "testing", 2, 1, 1, [rep, rep], 5, True)
+x = WorkOrderHandler()
+y = WorkReportHandler()
 
-print(x.addWork(wo))
-# TO BE FIXED
-wo.workReports[0].comment = "test"
-print(x.editWork("id", 1, workReports=wo))#workReports=newWorkReports))
+wo = WorkOrder(45, "2024", "desc", 1, 1, 1, 1, True)
+print(wo)
+
+rep = WorkReport(1, 45, "test", "2024", 10, "com")
+print(rep)
+
+
+print(x.addWorkOrder(wo))
+print(x.listWorkOrders())
+
+print(y.addWorkReport(rep))
+print(y.listWorkReports())

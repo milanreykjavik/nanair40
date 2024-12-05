@@ -3,7 +3,7 @@ import os
 import tempfile
 from typing import Any
 
-from baseClasses.Work import WorkOrder, WorkReport
+from baseClasses.WorkOrder import WorkOrder
 
 def atomicWrite(fp, data):
     dirName = os.path.dirname(fp)
@@ -19,8 +19,8 @@ def atomicWrite(fp, data):
 
 class WorkController:
     def __init__(self):
-        self.work = WorkOrder()
-        self.filePath = "data/work.json"
+        self.workOrder = WorkOrder()
+        self.filePath = "data/workOrders.json"
 
 
     def appendIntoFile(self, data: 'WorkOrder') -> bool:
@@ -31,7 +31,7 @@ class WorkController:
             currentData = []
 
         try:
-            dataJSON = self.work.toJSON(data)
+            dataJSON = self.workOrder.toJSON(data)
             currentData.append(json.loads(dataJSON))
 
             atomicWrite(self.filePath, currentData)
@@ -45,11 +45,11 @@ class WorkController:
             with open(self.filePath, "r") as f:
                 currentData = json.load(f)
 
-            for work in currentData:
-                if work.get(entry) == entryValue:
+            for workOrder in currentData:
+                if workOrder.get(entry) == entryValue:
                     for key, value in kwargs.items():
-                        if key in work:
-                            work[key] = value
+                        if key in workOrder:
+                            workOrder[key] = value
                     break
             else:
                 return False
@@ -64,4 +64,4 @@ class WorkController:
         data = []
         with open(self.filePath, "r") as f:
             data = json.load(f)
-        return self.work.normalize(data) 
+        return self.workOrder.normalize(data) 
