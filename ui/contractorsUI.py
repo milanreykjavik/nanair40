@@ -74,7 +74,7 @@ class ContractorsUI(SearchUI):
         return self.takeInputAndPrintMenu(['[Q]uit', '[B]ack'], ('List Contractors', body, 'Choose a option'))
 
 
-    def editProperty():
+    def editContractor():
         pass
         
 

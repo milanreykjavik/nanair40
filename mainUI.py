@@ -63,7 +63,7 @@ class mainUI(BaseUI):
                 case 'w':  # Matching case for comparison
                     returnValue = self.workOrderMenu()
                 case 'c':  # Matching case for comparison
-                    returnValue = self.contractorsUI.addContractor()
+                    returnValue = self.contractorMenu()
                 case 'b':  # Matching case for comparison
                     return False
                 case 'q':  # Matching case for comparison
@@ -89,7 +89,7 @@ class mainUI(BaseUI):
                     returnValue = self.employeeUI.addEmployee() # Go to the employeeUI class and add a new employee
                     
                 case 'e':
-                    returnValue = self.employeeUI.showEmployee() # Go to the employeeUI class and add edit a employee
+                    returnValue = self.employeeUI.showEmployees() # Go to the employeeUI class and add edit a employee
                     
                 case 'l':
                     returnValue = self.employeeUI.showEmployees() # Go to the employeeUI class and list all employees
@@ -156,8 +156,56 @@ class mainUI(BaseUI):
             if returnValue == 'q':
                return 'q'
 
+    def contractorMenu(self):
+        optionInput = ''
+        while optionInput.lower() != 'q':
+            options = ['[A]dd Contractor', '[E]dit Contractor', '[L]ist Contractors']
 
-        
+
+            optionInput = self.takeInputAndPrintMenu(options, ('Contractors Menu', options, 'Choose a option'))
+
+
+            match optionInput.lower():
+                case 'a':
+                    returnValue = self.contractorsUI.addContractor()    
+                case 'e':
+                    returnValue = self.contractorsUI.editContractor()
+                case 'l':
+                    returnValue = self.contractorsUI.showContractor()
+                case 'b':
+                    return False
+
+                case 'q':  # Matching case for comparison
+                    return 'q'
+
+
+            if returnValue == 'q':
+               return 'q'
+
+
+           
+    def workOrderMenu(self) -> str | bool:
+        optionInput = ''
+        while optionInput.lower() != 'q':
+            options = ['[A]dd work order', '[C]ompleted work reports', '[E]dit/view work orders']
+
+            optionInput = self.takeInputAndPrintMenu(options, ('Work order menu', options, 'Choose a option'))
+
+            match optionInput.lower():
+                case 'a':
+                    returnValue = self.workUI.addWorkOrder()
+                case 'c':
+                    returnValue = self.workUI.editWorkOrder()
+                case 'e':
+                    returnValue = self.workUI.completedWorkOrder()
+                case 'b':
+                    return False
+                case 'q':  # Matching case for comparison
+                    return 'q'
+
+
+            if returnValue == 'q':
+               return 'q'
 
 
 
