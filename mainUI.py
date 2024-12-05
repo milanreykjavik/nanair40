@@ -5,30 +5,30 @@ from ui.contractorsUI import ContractorsUI
 from ui.workUI import WorkUI
 from ui.janitorUI import JanitorUI
 from ui.searchUI import SearchUI
+from logic.logicWrapper import Logic_Wrapper
 
 class mainUI(BaseUI):
     def __init__(self):
+        self.logicWrapper = Logic_Wrapper()
         self.baseUI = BaseUI()
-        self.employeeUI = EmployeeUI()
-        self.contractorsIU = ContractorsUI()
-        self.propertiesUI = PropertiesUI()
-        self.workUI = WorkUI()
-        self.janitorUI = JanitorUI()
-        self.searchUI = SearchUI()
+        self.employeeUI = EmployeeUI(self.logicWrapper)
+        self.contractorsIU = ContractorsUI(self.logicWrapper)
+        self.propertiesUI = PropertiesUI(self.logicWrapper)
+        self.workUI = WorkUI(self.logicWrapper)
+        self.janitorUI = JanitorUI(self.logicWrapper)
+        self.searchUI = SearchUI(self.logicWrapper)
+    
 
 
 
 
-
-    def mainMenu(self) -> None:
+    def mainMenu(self) -> str:
         optionInput = ''
         while optionInput.lower() != 'q':
             self.printMainMenu() 
-            options = ['[M]anager', '[J]anitor', '[S]earch'] # each option the user gets to pick from
 
-            optionInput, isValid = self.takeInput(options)
-            if not isValid:
-                continue
+            optionInput = input(' ')
+ 
 
             match optionInput.lower():  
                 case 'm':  
@@ -47,16 +47,13 @@ class mainUI(BaseUI):
 
 
 
-    def ShowManagerMenu(self) -> None:
+    def ShowManagerMenu(self) -> str | bool:
         optionInput = ''
         while optionInput.lower() != 'q':
             options = ['[E]mployee menu', '[P]roperties menu', '[W]ork orders menu', '[C]onstructors']
-            self.printBaseMenu('Manager', options, 'Choose a option: ')
 
+            optionInput = self.takeInputAndPrintMenu(options, ('Manager', options, 'Choose a option: '))
 
-            optionInput, isValid = self.takeInput(options)
-            if not isValid:
-                continue
             
             match optionInput.lower():  
                 case 'e':  # Matching case for comparison
@@ -78,15 +75,13 @@ class mainUI(BaseUI):
 
 
 
-    def employeeMenu(self) -> None:
+    def employeeMenu(self) -> str | bool:
         optionInput = ''
         while optionInput.lower() != 'q':
             options = ['[A]dd employee', '[E]dit employee', '[L]ist employees']
-            self.printBaseMenu('Employee menu', options, 'Choose a option: ') # Prints base menu
 
-            optionInput, isValid = self.takeInput(options)
-            if not isValid:
-                continue
+            optionInput = self.takeInputAndPrintMenu(options, ('Employee menu', ['[A]dd employee', '[E]dit employee', '[L]ist employees'], 'Choose a option'))
+
 
 
             match optionInput.lower():
@@ -110,20 +105,14 @@ class mainUI(BaseUI):
 
 
 
-
-
-
-
-    def propertiesMenu(self) -> None:
+    def propertiesMenu(self) -> str | bool:
         optionInput = ''
         while optionInput.lower() != 'q':
             options = ['[A]dd property', '[E]dit property', '[L]ist properties']
-            self.printBaseMenu('Properties menu', options, 'Choose a option')
 
 
-            optionInput, isValid = self.takeInput(options)
-            if not isValid:
-                continue
+            optionInput = self.takeInputAndPrintMenu(options, ('Properties menu', options, 'Choose a option'))
+
 
             match optionInput.lower():
                 case 'a':
@@ -144,16 +133,13 @@ class mainUI(BaseUI):
 
 
            
-    def workOrderMenu(self) -> None:
+    def workOrderMenu(self) -> str | bool:
         optionInput = ''
         while optionInput.lower() != 'q':
             options = ['[A]dd work order', '[C]ompleted work reports', '[E]dit/view work orders']
-            self.printBaseMenu('Work order menu', options, 'Choose a option')
 
-            optionInput, isValid = self.takeInput(options)
-            if not isValid:
-                continue
-                    
+            optionInput = self.takeInputAndPrintMenu(options, ('Work order menu', options, 'Choose a option'))
+
             match optionInput.lower():
                 case 'a':
                     returnValue = self.workUI.addWorkOrder()
@@ -177,15 +163,12 @@ class mainUI(BaseUI):
 
 
 
-    def ShowMaintenanceMenu(self) -> None:
+    def ShowMaintenanceMenu(self) -> str | bool:
         optionInput = ''
         while optionInput.lower() != 'q':
             options = ['[W]ork orders', '[C]reate work report']
-            self.printBaseMenu('Janitor menu', options, 'Choose a option')
 
-            optionInput, isValid = self.takeInput(options)
-            if not isValid:
-                continue
+            optionInput  = self.takeInputAndPrintMenu(options, ('Janitor Menu', options, 'Choose a option'))
 
             match optionInput.lower():
                 case 'w':
@@ -205,15 +188,13 @@ class mainUI(BaseUI):
                     
 
 
-    def ShowSearchMenu(self) -> None:
+    def ShowSearchMenu(self) -> str | bool:
         optionInput = ''
         while optionInput.lower() != 'q':
             options = ['[E]mployee Search', '[P]roperty search', '[W]ork order search', '[R]eport search', '[C]ontractors']
-            self.printBaseMenu('Search menu', options, 'Choose a option')
 
-            optionInput, isValid = self.takeInput(options)
-            if not isValid:
-                continue
+            optionInput = self.takeInputAndPrintMenu(options, ('Search menu', options, 'Choose a option'))
+ 
 
             match optionInput.lower():
                 case 'e':
@@ -241,6 +222,4 @@ class mainUI(BaseUI):
 
 mainUI = mainUI()
 mainUI.mainMenu()
-
-
 

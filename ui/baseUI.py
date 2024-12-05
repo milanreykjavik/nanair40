@@ -13,7 +13,7 @@ class BaseUI:
     @staticmethod
     def available_options(possibilites) -> list:
         '''Returns a list of letters, with every single letter the user can choose from'''
-        options = []
+        options = ['Q', 'B']
 
         for word in possibilites:
             options.append(word[1])
@@ -58,27 +58,24 @@ class BaseUI:
 
 
 
-    def takeInput(self, possibilites: list) -> str:
-        '''Takes input and checks whether the input is valid based on the options given, if not a error will be raised'''
-        user_option = input(' ') 
-
+    def takeInputAndPrintMenu(self, possibilites: list, menuInformation: tuple) -> str:
+        '''Asks the user a option based on the option list entered, it prints the baseMenuScreen after every one guess, the menu screen is determained by the second argument, when the user enters a available option, then that option is returned'''
         options_list = self.available_options(possibilites) 
 
-        if user_option.upper() in options_list:
-            return user_option, True
-        
-        elif user_option.lower() == 'b':
-            return user_option, True
-        
-        elif user_option.lower() == 'q':
-            return user_option, True 
-        
-        return '_', False
+        while True:
+            self.printBaseMenu(menuInformation[0], menuInformation[1], menuInformation[2])
+            user_option = input(' ') 
 
         
+            if user_option.upper() in options_list or not possibilites:
+                return user_option
+            
+
+
+
 
     @staticmethod
-    def printMainMenu(errorMessage=''):
+    def printMainMenu(errorMessage='') -> None:
         clearTerminal()
         print(f'''
 --------------------------------------------------------------------------------
@@ -96,6 +93,8 @@ class BaseUI:
 	[Q]uit
 -------------------------------------------------------------------------------
 Choose a option:''', end='')
+        
+        
 
 
 
@@ -105,6 +104,3 @@ def clearTerminal():
         os.system('cls')
     else:  # For Unix/Linux/Mac
         os.system('clear')
-
-
-

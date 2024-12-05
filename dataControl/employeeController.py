@@ -1,6 +1,8 @@
 import json
 import os
 import tempfile
+from typing import Any
+
 from baseClasses.Employee import Employee
 
 def atomicWrite(fp, data):
@@ -8,7 +10,12 @@ def atomicWrite(fp, data):
     with tempfile.NamedTemporaryFile("w", delete=False, dir=dirName) as tmpFile:
         json.dump(data, tmpFile, indent=4)
         tmpFileName = tmpFile.name
+        tmpFile.flush()
+        os.fsync(tmpFile.fileno()) # if you cut off the power of kernel panics
+
     os.replace(tmpFileName, fp)
+
+
 
 class EmployeeController:
     def __init__(self):
@@ -28,13 +35,14 @@ class EmployeeController:
         except:
             return False
 
-    def changeOneEntry(self, targetKennitala: str, **kwargs) -> bool:
+    # We typehint any for value cuz some of them are str, some int, some bool
+    def changeOneEntry(self, entry: str, entryValue: Any, **kwargs) -> bool:
         try:
             with open(self.filePath, "r") as f:
                 currentData = json.load(f)
 
             for employee in currentData:
-                if employee.get('kennitala') == targetKennitala:
+                if employee.get(entry) == entryValue:
                     for key, value in kwargs.items():
                         if key in employee:
                             employee[key] = value
