@@ -1,4 +1,3 @@
-
 class ValidationUI:
     @staticmethod
     def validateName(name) -> str | bool:
@@ -9,8 +8,10 @@ class ValidationUI:
 
         if not name:
             return False
-        if not name.isalpha():
+        
+        if not all(c.isalpha() or c == ' ' for c in name):
             return False
+
         
         return True
     
@@ -55,7 +56,7 @@ class ValidationUI:
         """Checks if the location is valid, if the parameter is in a list of available locations True is returned, if [b]ack or [q]uit were entered we return the letter"""
         if Location.lower() in ('q', 'b'):
             return Location
-        if Location.lower() in ["reykjavík", "nuuk", "kulusuk", "tórshavn", "tingwall" , "longyearbyen"]:
+        if Location:
             return True
         else:
             return False
@@ -66,10 +67,10 @@ class ValidationUI:
         if country.lower() in ('q', 'b'):
             return country
 
-        if country.lower() in ["iceland", "faeroe islands", "greenland", "tingwall" , "svalbard"]:
-            return True
-        else:
+        if not country:
             return False
+        else:
+            return True
         
 
     @staticmethod
@@ -100,8 +101,20 @@ class ValidationUI:
         
         return True
     
+    @staticmethod
     def validateAdditionalInfo(additionalInfo):
         if additionalInfo.lower() in ('q', 'b'):
             return additionalInfo
         
         return True
+    
+    @staticmethod
+    def validatePropertyNumber(propertyNumber):
+        if propertyNumber.lower() in ('q', 'b'):
+            return propertyNumber
+        
+        if not propertyNumber:
+            return False
+        
+        return True
+

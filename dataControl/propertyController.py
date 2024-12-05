@@ -3,7 +3,7 @@ import os
 import tempfile
 from typing import Any
 
-from baseClasses.Employee import Employee
+from baseClasses.Property import Property
 
 def atomicWrite(fp, data):
     dirName = os.path.dirname(fp)
@@ -17,10 +17,10 @@ def atomicWrite(fp, data):
 
 
 
-class EmployeeController:
+class PropertyController:
     def __init__(self):
-        self.employee = Employee()
-        self.filePath = "data/employees.json"
+        self.property = Property()
+        self.filePath = "data/properties.json.json"
 
 
     def appendIntoFile(self, data) -> bool:
@@ -41,11 +41,11 @@ class EmployeeController:
             with open(self.filePath, "r") as f:
                 currentData = json.load(f)
 
-            for employee in currentData:
-                if employee.get(entry) == entryValue:
+            for property in currentData:
+                if property.get(entry) == entryValue:
                     for key, value in kwargs.items():
-                        if key in employee:
-                            employee[key] = value
+                        if key in property:
+                            property[key] = value
                     break
             else:
                 return False
@@ -56,8 +56,8 @@ class EmployeeController:
             return False
 
 
-    def readFile(self) -> list['Employee']:
+    def readFile(self) -> list['Property']:
         data = []
         with open(self.filePath, "r") as f:
             data = json.load(f)
-        return self.employee.normalize(data)
+        return self.property.normalize(data) 

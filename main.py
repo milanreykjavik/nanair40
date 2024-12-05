@@ -27,7 +27,10 @@ for i in range(0, 10000):
 
 
 exit()
-print(x.editEmployee(r[0].kennitala, kennitala="32"))
+
+
+
+print(x.editEmployee('kennitala', r[0].kennitala, kennitala="32"))
 print(x.listEmployess(location=1))
 
 """
