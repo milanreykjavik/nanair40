@@ -45,19 +45,20 @@ class PropertiesUI(SearchUI):
         body = []
 
         # Initialize column names
-        headers = ['ID', 'Location', 'Condition']
+        headers = ['ID', 'Location', 'Address', 'Condition']
 
         # Calculate the maximum width for each column
         max_ID_length = max(len(property.id) for property in propertiesFile)
-        max_Location_length = max(len(property.location) for property in propertiesFile)
-        max_Condition_length = max(len(property.condition) for property in propertiesFile)
+        max_Location_length = 12
+        max_address_length = max(len(property.address) for property in propertiesFile)
+        max_Condition_length = 12
 
 
         # Build the line separator based on the column widths
-        line = '+' + '-' * (max_ID_length + 2) + '+' + '-' * (max_Location_length + 2) + '+' + '-' * (max_Condition_length + 2) + '+'
+        line = '+' + '-' * (max_ID_length + 2) + '+' + '-' * (max_Location_length + 2) + '+' + '-' * (max_address_length + 2) + '+' + '-' * (max_Condition_length + 2) + '+'
 
         # Build the header row
-        header_row = f"| {headers[0]:<{max_ID_length}} | {headers[1]:<{max_Location_length}} | {headers[2]:<{max_Condition_length}}|"
+        header_row = f"| {headers[0]:<{max_ID_length}} | {headers[1]:<{max_Location_length}} | {headers[2]:<{max_address_length}} | {headers[3]:<{max_Condition_length}} |"
 
         # Append the header and line to body
         body.append(line)
@@ -66,7 +67,7 @@ class PropertiesUI(SearchUI):
 
         # Build each employee row
         for dict in propertiesFile:
-            line_content = f"| {dict.id:<{max_ID_length}} | {dict.location:<{max_Location_length}} | {dict.condition:<{max_Condition_length}} |"
+            line_content = f"| {dict.id:<{max_ID_length}} | {dict.location:<{max_Location_length}} | {dict.address:<{max_address_length}} | {dict.condition:<{max_Condition_length}} |"
             body.append(line_content)
             body.append(line)
         

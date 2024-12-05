@@ -9,10 +9,12 @@ AVAILABLE_EDIT_OPTIONS_FUNCTIONS = {'name': validation.validateName, 'phone:': v
 
 class EmployeeUI(SearchUI):
     def __init__(self, logicWrapper: Logic_Wrapper):
-        self.logicWrapper = logicWrapper
+        self.logicWrapper = logicWrapper # initialize the logic wrapper
 
     def addEmployee(self): # use employee base class
+        '''A new employee is created and sent to the json file that stores all employees'''
         userClass = Employee()
+
         fields = [
             ('kennitala', "Enter a kennitala: ", validation.validateKennitala),  # These are all of the keys, prompts, and values that we need to ask the user
             ('name', "Enter your name: ", validation.validateName),
@@ -31,45 +33,47 @@ class EmployeeUI(SearchUI):
                         return 'q' # quit the whole program
                     case 'b':
                         return False # Go back one page
-            userClass.__dict__[key] = value
+            userClass.__dict__[key] = value # add the key value pair to the instance
 
 
         # Here a instance would get created in order to send to data layer
         new_employee = Employee(userClass.__dict__['kennitala'], userClass.__dict__['name'], userClass.__dict__['phone'], userClass.__dict__['homePhone'], userClass.__dict__['location'], userClass.__dict__['email'], userClass.__dict__['address'])
 
-        self.logicWrapper.addEmployee(new_employee)
+        self.logicWrapper.addEmployee(new_employee) # ask the logic wrapper to create the new employee the user entered
 
-    
-        return self.takeInputAndPrintMenu(['[Q]uit', '[B]ack'], ('Add employee', [f'{key}: {value}' for key, value in userClass.__dict__.items()], 'The employee has been succesfully created\nChoose a option: '))
+        # User can then only choose from two options either quit or back
+        return self.takeInputAndPrintMenu(['[Q]uit', '[B]ack'], ('Add employee', [f'{key}: {value}' for key, value in userClass.__dict__.items()], 'The employee has been succesfully created\nChoose a option: ')) #
 
-    def editEmployee():
-        pass
-        
 
 
     def showEmployee(self):
         employee = []
-        while not employee:
-            lookUpKennitala = self.getValidInput("look for employee","Enter ID: ", validation.validateKennitala)
+        while not employee: # whilee loop keeps going until the wrapper sends a instance to the list
+            lookUpKennitala = self.getValidInput("look for employee","Enter ID: ", validation.validateKennitala) # asks the user for a kennital until he enters a valid kennitala, or presses back/quit
             match lookUpKennitala.lower():
                 case 'q':
                     return 'q' # quit the whole program
                 case 'b':
                     return False # Go back one page
     
-            employee = self.logicWrapper.listEmployees(kennitala=lookUpKennitala)  # Call the wrapper that is 
+            employee = self.logicWrapper.listEmployees(kennitala=lookUpKennitala)  # Call the wrapper and check if a employee exists with the kennitala the user entered
 
-        employee_list = [f'{key}: {value}' for key, value in list(employee[0].__dict__.items())[1:]]
+        employee_list = [f'{key}: {value}' for key, value in list(employee[0].__dict__.items())[1:]] # create a list of key, value pairs from the employee the user asked for, we skip the first iteration that is kennitala
 
         userInput = ''
 
-        while userInput not in AVAILABLE_EDIT_OPTIONS_FUNCTIONS:
+        while userInput not in AVAILABLE_EDIT_OPTIONS_FUNCTIONS: # here we allow the user to choose what he wants to change, the option he enters needs to be in the global dictionary that stores all options and their validation funcition
             self.printBaseMenu('look for employee', employee_list, 'Enter the number of what you would like to change: ')
             userInput = input(' ').lower()
-
+            match lookUpKennitala.lower():
+                case 'q':
+                    return 'q' # quit the whole program
+                case 'b':
+                    return False # Go back one page
+                
         newValue = self.getValidInput('look for employee',  'Enter the new value: ', AVAILABLE_EDIT_OPTIONS_FUNCTIONS[userInput], employee[0].__dict__)
 
-        self.logicWrapper.editEmployee(lookUpKennitala, userInput, newValue)
+        self.logicWrapper.editEmployee(lookUpKennitala, userInput, newValue) #needs to be implemented,....
 
 
 

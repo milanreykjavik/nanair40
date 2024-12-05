@@ -229,27 +229,28 @@ class SearchUI(BaseUI):
     def workReportSearch(self) -> str | bool:
         pass
 
-    def contractors(self) -> str | bool:
+    def showContractorsInfo(self) -> str | bool:
         contractors = self.logicWrapper.listContractors()
 
         body = []
 
         # Initialize column names
-        headers = ['Company name', 'Phone', 'Hours', 'Location']
+        headers = ['Company name', 'Phone', 'Hours', 'Location', 'id']
 
         # Calculate the maximum width for each column
         max_name_length = max(len(contractor.name) for contractor in contractors)
         max_phone_length = 7
         max_openingHours_length = 5
         max_location_length = 12
+        max_id_length = 5
 
 
 
         # Build the line separator based on the column widths
-        line = '+' + '-' * (max_name_length + 2) + '+' + '-' * (max_phone_length + 2) + '+' + '-' * (max_openingHours_length + 2) + '+' + '-' * (max_location_length) + '+'
+        line = '+' + '-' * (max_name_length + 2) + '+' + '-' * (max_phone_length + 2) + '+' + '-' * (max_openingHours_length + 2) + '+' + '-' * (max_location_length) + '+' + '-' * (max_id_length) + '--+'
 
         # Build the header row
-        header_row = f"| {headers[0]:<{max_name_length}} | {headers[1]:<{max_phone_length}} | {headers[2]:<{max_openingHours_length}} | {headers[3]:<{max_location_length}} |"
+        header_row = f"| {headers[0]:<{max_name_length}} | {headers[1]:<{max_phone_length}} | {headers[2]:<{max_openingHours_length}} | {headers[3]:<{max_location_length - 2}} | {headers[4]:<{max_id_length}} |"
 
         # Append the header and line to body
         body.append(line)
@@ -258,7 +259,7 @@ class SearchUI(BaseUI):
 
         # Build each employee row
         for instance in contractors:
-            line_content = f"| {instance.name:<{max_name_length}} | {instance.phone:<{max_phone_length}} | {instance.openingHours:<{max_openingHours_length}} | {instance.location:<{max_location_length}} |"
+            line_content = f"| {instance.name:<{max_name_length}} | {instance.phone:<{max_phone_length}} | {instance.openingHours:<{max_openingHours_length}} | {instance.location:<{max_location_length - 2}} | {instance.id:<{max_id_length}} |"
             body.append(line_content)
             body.append(line)
     

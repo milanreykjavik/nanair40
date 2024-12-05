@@ -60,7 +60,7 @@ class mainUI(BaseUI):
                 case 'w':  # Matching case for comparison
                     returnValue = self.workOrderMenu()
                 case 'c':  # Matching case for comparison
-                    returnValue = self.contractorsUI.addContractor()
+                    returnValue = self.contractorsIU.showContractor()
                 case 'b':  # Matching case for comparison
                     return False
                 case 'q':  # Matching case for comparison
@@ -203,7 +203,7 @@ class mainUI(BaseUI):
                 case 'r':
                     returnValue = self.searchUI.workReportSearch()
                 case 'c':
-                    returnValue = self.searchUI.contractors()
+                    returnValue = self.searchUI.showContractorsInfo()
                 case 'b':
                     return False
                 case 'q':  # Matching case for comparison
