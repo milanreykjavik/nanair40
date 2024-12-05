@@ -3,7 +3,7 @@ from baseClasses.Employee import Employee
 from dataControl.employeeController import EmployeeController
 
 x = EmployeeHandler()
-r = x.listEmployess()
+r = x.listEmployes()
 print(r)
 
 
@@ -19,9 +19,8 @@ for i in range(0, 10000):
         location=101
     )
     print(i)
-    employee_json = new_employee.toJSON(new_employee)
 
-    y.appendIntoFile(employee_json)
+    x.addEmployee(new_employee)
 
 
 
