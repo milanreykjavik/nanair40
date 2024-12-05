@@ -57,7 +57,40 @@ class EmployeeUI(SearchUI):
     def showEmployee(self):
     
         # use Search class there is Employee Search class there that can search by any param in this case kennitala
-        employeeInfo = self.showEmployeeID()
+        employeeInfo = self.logicWrapper.showEmployeeID()
+
+        if not employeeInfo:
+            print("No employees found in the system")
+            return False
+        
+        print("\nList of Employees\n")
+        for index, employee in enumerate(employeeInfo, start=1):
+            print(f"Employee {index}:")
+            for key, value in employee.items():
+                print(f" {key.capitalize()}: {value}")
+            print("-"*40)
+
+        while True:
+            print("\nOptions:")
+            print("[B]ack")
+            print("[Q]uit")
+            print("[V]iew employee details")
+
+            option = input("Choose an option: ").strip().lower()
+
+            if option == 'b':
+                return False
+            elif option == 'q':
+                return 'q'
+            elif option.isdigit():
+                employee_index = int(option) - 1
+                if 0 < employee_index < len(employeeInfo):
+                    self.viewEmployeeDetails(employeeInfo[employee_index])
+                else:
+                    print("Invaild employee number. Try again.")
+            else:
+                print("Invalid option. Try again.")
+
 
 
         # talk to wrapper with the kennitala entered 
