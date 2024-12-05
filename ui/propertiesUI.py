@@ -48,9 +48,9 @@ class PropertiesUI(SearchUI):
         headers = ['ID', 'Location', 'Condition']
 
         # Calculate the maximum width for each column
-        max_ID_length = max((property.id) for property in propertiesFile)
-        max_Location_length = max((property.location) for property in propertiesFile)
-        max_Condition_length = max((property.condition) for property in propertiesFile)
+        max_ID_length = max(len(property.id) for property in propertiesFile)
+        max_Location_length = max(len(property.location) for property in propertiesFile)
+        max_Condition_length = max(len(property.condition) for property in propertiesFile)
 
 
         # Build the line separator based on the column widths
