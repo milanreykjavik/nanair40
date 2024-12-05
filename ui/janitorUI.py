@@ -24,11 +24,11 @@ class JanitorUI(BaseUI):
         """Displays the work orders using WorkOrder objects."""
         while True:
             clearTerminal()
-            wo_header = "+-------------------------+---------------+------------------+-------------+\n"
-            wo_header += "| Work               | Location      | How important    | Identifier  |\n"
-            wo_header += "+-------------------------+---------------+------------------+-------------+" # combining to make a uniqe header for this UI
-            table_rows = "\n".join(f"| {order.description:<20} | Property {order.propertyNumber:<6} | {order.priority:<16} | {order.id:<11} |" for order in self.work_orders) # a for loop to create a table from the work orders
-            wo_footer = "+-------------------------+---------------+------------------+-------------+"
+            wo_header = "+-----------------------+----------------+------------------+--------------+\n"+(" ")*7
+            wo_header += "| Work                  | Location       | How important    | Identifier   |\n"+(" ")*7
+            wo_header += "+-----------------------+----------------+------------------+--------------+" # combining to make a uniqe header for this UI
+            table_rows = "\n".join((" ")*7+f"| {order.description:<21} | Property {order.propertyNumber:<5} | {order.priority:<16} | {order.id:<12} |" for order in self.work_orders) # a for loop to create a table from the work orders
+            wo_footer = (" ")*7+"+-----------------------+----------------+------------------+--------------+"
 
             menu_content = f"{wo_header}\n{table_rows}\n{wo_footer}" # combine everything above into one table
 
@@ -48,11 +48,11 @@ class JanitorUI(BaseUI):
         """Displays the work reports using WorkReport objects."""
         while True:
             clearTerminal()
-            wr_header = "+---------------------------------+-------------------------+-------------+\n"
-            wr_header += "| TASK                           | PERSON                  | ID          |\n"
+            wr_header = "+---------------------------------+-------------------------+-------------+\n"+(" ")*7
+            wr_header += "| TASK                            | PERSON                  | ID          |\n"+(" ")*7
             wr_header += "+---------------------------------+-------------------------+-------------+" # creating a header for this ui
-            wr_rows = "\n".join(f"| {report.description:<31} | {report.comment:<23} | {report.id:<11} |" for report in self.work_reports) # a for loop to add all of the reports
-            wr_footer = "+---------------------------------+-------------------------+-------------+"
+            wr_rows = "\n".join((" ")*7+f"| {report.description:<31} | {report.comment:<23} | {report.id:<11} |" for report in self.work_reports) # a for loop to add all of the reports
+            wr_footer = (" ")*7+"+---------------------------------+-------------------------+-------------+"
 
             menu_content = f"{wr_header}\n{wr_rows}\n{wr_footer}" # combine everything into one
 
