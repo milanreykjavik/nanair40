@@ -123,11 +123,16 @@ class ValidationUI:
         
         return True
     
+    @staticmethod 
+    def validateID(propertyNumber):
+        if propertyNumber.lower() in ('q', 'b'):
+            return propertyNumber
+        
+
     @staticmethod
     def validatePriority(priority):
         if priority.lower() in ('q', 'b'):
             return priority
-        
         if priority.lower() in ("emergency", "now", "as soon as possible"):
             return True
         return False

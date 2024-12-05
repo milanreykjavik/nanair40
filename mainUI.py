@@ -12,9 +12,9 @@ class mainUI(BaseUI):
         self.logicWrapper = Logic_Wrapper()
         self.baseUI = BaseUI()
         self.employeeUI = EmployeeUI(self.logicWrapper)
-        #self.contractorsIU = ContractorsUI(self.logicWrapper)
+        self.contractorsUI = ContractorsUI(self.logicWrapper)
         self.propertiesUI = PropertiesUI(self.logicWrapper)
-        #self.workUI = WorkUI(self.logicWrapper)
+        self.workUI = WorkUI(self.logicWrapper)
         #self.janitorUI = JanitorUI(self.logicWrapper)
         self.searchUI = SearchUI(self.logicWrapper)
     
@@ -63,7 +63,7 @@ class mainUI(BaseUI):
                 case 'w':  # Matching case for comparison
                     returnValue = self.workOrderMenu()
                 case 'c':  # Matching case for comparison
-                    returnValue = self.contractorsIU()
+                    returnValue = self.contractorsUI.addContractor()
                 case 'b':  # Matching case for comparison
                     return False
                 case 'q':  # Matching case for comparison
