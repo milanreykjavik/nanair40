@@ -3,9 +3,9 @@ from ui.validationUI import ValidationUI
 from baseClasses.Employee import Employee
 from logic.logicWrapper import Logic_Wrapper
 from ui.searchUI import SearchUI
-
 validation = ValidationUI() 
 
+AVAILABLE_EDIT_OPTIONS_FUNCTIONS = {'name': validation.validateName, 'phone:': validation.validatePhone, 'homephone': validation.validatePhone, 'address': validation.validateText , 'email':  validation.validateEmail, 'location': validation.validateText}
 
 class EmployeeUI(SearchUI):
     def __init__(self, logicWrapper: Logic_Wrapper):
@@ -13,11 +13,6 @@ class EmployeeUI(SearchUI):
 
     def addEmployee(self): # use employee base class
         userClass = Employee()
-
-
-
-        
-
         fields = [
             ('kennitala', "Enter a kennitala: ", validation.validateKennitala),  # These are all of the keys, prompts, and values that we need to ask the user
             ('name', "Enter your name: ", validation.validateName),
@@ -47,56 +42,42 @@ class EmployeeUI(SearchUI):
     
         return self.takeInputAndPrintMenu(['[Q]uit', '[B]ack'], ('Add employee', [f'{key}: {value}' for key, value in userClass.__dict__.items()], 'The employee has been succesfully created\nChoose a option: '))
 
-    def editEmployee(self):
-    # Ask user to identify the employee to edit
-        identifier = self.getValidInput('Edit employee', "Enter the kennitala of the employee to edit: ", validation.validateKennitala, {})
-        existing_employee = self.findEmployeeByKennitala(identifier)  # Implement this function to find the employee by kennitala
-    
-       
-            
-    def showEmployees(self):
-        employeesFile = self.logicWrapper.listEmployees()
-        body = []
-
-        # Initialize column names
-        headers = ['Name', 'Address', 'Phone number']
-
-        # Calculate the maximum width for each column
-        max_name_length = max(len(employee['name']) for employee in employeesFile)
-        max_address_length = max(len(employee['address']) for employee in employeesFile)
-        max_phone_length = max(len(employee['phone']) for employee in employeesFile)
-
-
-        # Build the line separator based on the column widths
-        line = '+' + '-' * (max_name_length + 2) + '+' + '-' * (max_address_length + 2) + '+' + '-' * (max_phone_length + 2) + '+'
-
-        # Build the header row
-        header_row = f"| {headers[0]:<{max_name_length}} | {headers[1]:<{max_address_length}} | {headers[2]:<{max_phone_length}}|"
-
-        # Append the header and line to body
-        body.append(line)
-        body.append(header_row)
-        body.append(line)
-
-        # Build each employee row
-        for dict in employeesFile:
-            line_content = f"| {dict['name']:<{max_name_length}} | {dict['address']:<{max_address_length}} | {dict['phone']:<{max_phone_length}} |"
-            body.append(line_content)
-            body.append(line)
+    def editEmployee():
+        pass
         
-        self.printBaseMenu('List employees', body, 'Choose a option')
 
-    
 
-        return self.takeInputAndPrintMenu(['[Q]uit', '[B]ack'], ('Add employee', [f'{key}: {value}' for key, value in userClass.__dict__.items()], 'The employee has been succesfully created\nChoose a option: '))
+    def showEmployee(self):
+        employee = []
+        while not employee:
+            lookUpKennitala = self.getValidInput("look for employee","Enter ID: ", validation.validateKennitala)
+            match lookUpKennitala.lower():
+                case 'q':
+                    return 'q' # quit the whole program
+                case 'b':
+                    return False # Go back one page
     
+            employee = self.logicWrapper.listEmployees(kennitala=lookUpKennitala)  # Call the wrapper that is 
+
+        employee_list = [f'{key}: {value}' for key, value in list(employee[0].__dict__.items())[1:]]
+
+        userInput = ''
+
+        while userInput not in AVAILABLE_EDIT_OPTIONS_FUNCTIONS:
+            self.printBaseMenu('look for employee', employee_list, 'Enter the number of what you would like to change: ')
+            userInput = input(' ').lower()
+
+        newValue = self.getValidInput('look for employee',  'Enter the new value: ', AVAILABLE_EDIT_OPTIONS_FUNCTIONS[userInput], employee[0].__dict__)
+
+        self.logicWrapper.editEmployee(lookUpKennitala, userInput, newValue)
+
+
 
 
 
             
+            
 
-    
-       
             
     def showEmployees(self):
         employeesFile = self.logicWrapper.listEmployees()
@@ -107,7 +88,6 @@ class EmployeeUI(SearchUI):
 
         # Calculate the maximum width for each column
         max_name_length = max(len(employee.name) for employee in employeesFile)
-
         max_address_length = max(len(employee.address) for employee in employeesFile)
         max_phone_length = max(len(employee.phone) for employee in employeesFile)
 
@@ -128,31 +108,19 @@ class EmployeeUI(SearchUI):
             line_content = f"| {dict.name:<{max_name_length}} | {dict.address:<{max_address_length}} | {dict.phone:<{max_phone_length}} |"
             body.append(line_content)
             body.append(line)
-        
-
-
+    
     
 
         return self.takeInputAndPrintMenu(['[Q]uit', '[B]ack'], ('List employees', body, 'Choose a option'))
     
 
-
-
             
 
-
-
-       
-        
-    def showEmployee(self):
-        pass
-        
-
-
+ 
+    
 
     
-       
-            
+
 
 
             

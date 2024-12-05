@@ -8,50 +8,91 @@ class SearchUI(BaseUI):
     def __init__(self, logicWrapper: Logic_Wrapper):
         self.logicWrapper = logicWrapper
 
-    def employeeSearch(self):
-        options = ['[K]ennitala search', '[P]roperty number search']
+    def employeeSearch(self) -> str | bool:
+        options = ['[K]ennitala search', '[L]ocation search']
         userOption = self.takeInputAndPrintMenu(options, ('Employee search', options, 'Choose a option'))
 
 
         if userOption.lower() == 'k':
-            self.showEmployeeID()
+            returnValue = self.showEmployeeID()
         else:
-            self.showEmployeesLocation()
+            returnValue = self.showEmployeesLocation()
+
+        return returnValue
 
 
 
 
-    def showEmployeeID(self):
+    def showEmployeeID(self) -> str | bool:
         # use Search class there is Employee Search class there that can search by any param in this case kennitala
-        lookUpKennitala = self.getValidInput( 'View employee',"Look up employee by kennitala: ", validation.validateKennitala)
+        employee = []
+        while not employee:
+            lookUpKennitala = self.getValidInput("look for employee","Enter ID: ", validation.validateKennitala)
+            match lookUpKennitala.lower():
+                case 'q':
+                    return 'q' # quit the whole program
+                case 'b':
+                    return False # Go back one page
+    
+            employee = self.logicWrapper.listEmployees(kennitala=lookUpKennitala)  # Call the wrapper that is 
 
-        match lookUpKennitala.lower():
-            case 'q':
-                return 'q'
-            case 'b':
-                return False
+        employee_list = [f'{key}: {value}' for key, value in list(employee[0].__dict__.items())[1:]]
 
-        # talk to wrapper with the kennitala entered THIS NEEDS TO GET SORTED :)
-        userInformation = self.logicWrapper.listEmployees(lookUpKennitala)
-        
+        return self.takeInputAndPrintMenu(['[Q]'], ('look for employee', employee_list, 'Choose a option: '))
+
 
 
 
     
-    def showEmployeesLocation(self):
+    def showEmployeesLocation(self) -> str | bool:
         # use Search class there is Employee Search class there that can search by any param in this case kennitala
-        lookUpEmployeeLocation = self.getValidInput( 'View employee',"Look up employee by location: ", validation.validatePropertyNumber)
+        employee_list = []
+        while not employee_list:
+            lookUpLocation = self.getValidInput("look for employee","Enter Location: ", validation.validateText)
+            match lookUpLocation.lower():
+                case 'q':
+                    return 'q' # quit the whole program
+                case 'b':
+                    return False # Go back one page
+    
+            employee_list = self.logicWrapper.listEmployees(location=lookUpLocation)  
 
-        match lookUpEmployeeLocation.lower():
-            case 'q':
-                return 'q'
-            case 'b':
-                return False
+        body = []
 
-        # talk to wrapper with the kennitala entered THIS NEEDS TO GET SORTED :)
-        userInformation = self.logicWrapper.searchEmployees(lookUpEmployeeLocation)
+        # Initialize column names
+        headers = ['Name', 'Address', 'Phone number']
 
-    def propertySearch(self):
+        # Calculate the maximum width for each column
+        max_name_length = max(len(employee.name) for employee in employee_list)
+        max_address_length = max(len(employee.address) for employee in employee_list)
+        max_phone_length = max(len(employee.phone) for employee in employee_list)
+
+
+        # Build the line separator based on the column widths
+        line = '+' + '-' * (max_name_length + 2) + '+' + '-' * (max_address_length + 2) + '+' + '-' * (max_phone_length + 2) + '+'
+
+        # Build the header row
+        header_row = f"| {headers[0]:<{max_name_length}} | {headers[1]:<{max_address_length}} | {headers[2]:<{max_phone_length}}|"
+
+        # Append the header and line to body
+        body.append(line)
+        body.append(header_row)
+        body.append(line)
+
+        # Build each employee row
+        for dict in employee_list:
+            line_content = f"| {dict.name:<{max_name_length}} | {dict.address:<{max_address_length}} | {dict.phone:<{max_phone_length}} |"
+            body.append(line_content)
+            body.append(line)
+    
+    
+
+        return self.takeInputAndPrintMenu(['[Q]uit', '[B]ack'], (f'List employees for location {lookUpLocation}', body, 'Choose a option'))
+    
+
+
+
+    def propertySearch(self) -> str | bool:
                 # use Search class there is Employee Search class there that can search by any param in this case kennitala
         userOption = self.takeInputAndPrintMenu( ['[L]ocation search', '[P]roperty number search'], ('View property', ['[L]ocation search', '[P]roperty number search'], "Choose a option: "))
 
@@ -61,24 +102,84 @@ class SearchUI(BaseUI):
             case 'b':
                 return False
             case 'l':
-                self.propertyLocationSearch()
+                returnValue = self.showPropertyLocationSearch()
             case 'p':
-                self.propertyNumberSearch
+                returnValue =self.showropertyNumberSearch()
+            
+        if returnValue == 'q':
+            return 'q'
 
 
 
         # talk to wrapper with the kennitala entered THIS NEEDS TO GET SORTED :)
 
 
-    def propertyLocationSearch(self):
+    def showPropertyLocationSearch(self) -> str | bool:
 
-        lookUpPropertiesOnLocation = self.getValidInput('View property', 'Enter a location: ', validation.validateLocation)
-        propertyInformation = self.logicWrapper.searchProperties(Location = lookUpPropertiesOnLocation)
+        # use Search class there is Employee Search class there that can search by any param in this case kennitala
+        propertyList = []
+        while not propertyList:
+            lookUpLocation = self.getValidInput("look for property","Enter Location: ", validation.validateText)
+            match lookUpLocation.lower():
+                case 'q':
+                    return 'q' # quit the whole program
+                case 'b':
+                    return False # Go back one page
+    
+            propertyList = self.logicWrapper.listProperties(location=lookUpLocation)  
 
-  
-    def propertyNumberSearch(self):
-        lookUpPropertyNumber = self.getValidInput('View property', 'Enter a location', validation.validatePropertyNumber)
-        propertyInfromation = self.logicWrapper.searchProperties(propertyNumber = lookUpPropertyNumber)
+        body = []
+
+        # Initialize column names
+        headers = ['Property ID', 'address', 'condition',]
+
+        # Calculate the maximum width for each column
+        max_id_length = len('Property ID')
+        max_address_length = max(len(employee.address) for employee in propertyList)
+        max_condition_length = 10
+
+
+        # Build the line separator based on the column widths
+        line = '+' + '-' * (max_id_length + 2) + '+' + '-' * (max_address_length + 2) + '+' + '-' * (max_condition_length + 2) + '+'
+
+        # Build the header row
+        header_row = f"| {headers[0]:<{max_id_length}} | {headers[1]:<{max_address_length}} | {headers[2]:<{max_condition_length}} |"
+
+        # Append the header and line to body
+        body.append(line)
+        body.append(header_row)
+        body.append(line)
+
+        # Build each employee row
+        for dict in propertyList:
+            line_content = f"| {dict.id:<{max_id_length}} | {dict.address:<{max_address_length}} | {dict.condition:<{max_condition_length}} |"
+            body.append(line_content)
+            body.append(line)
+    
+    
+
+        return self.takeInputAndPrintMenu(['[Q]uit', '[B]ack'], (f'List properties for location {lookUpLocation}', body, 'Choose a option'))
+    
+
+
+
+
+
+    def showropertyNumberSearch(self) -> str | bool:
+        property = []
+        while not property:
+            lookUpLocation = self.getValidInput("look for property","Enter property number: ", validation.validateText)
+            match lookUpLocation.lower():
+                case 'q':
+                    return 'q' # quit the whole program
+                case 'b':
+                    return False # Go back one page
+    
+            property = self.logicWrapper.listProperties(id = lookUpLocation)  
+
+        propertyList = [f'{key}: {value}' for key, value in list(property[0].__dict__.items())]
+
+        return self.takeInputAndPrintMenu(['[Q]'], ('look for property', propertyList, 'Choose a option: '))
 
 
 
@@ -86,8 +187,7 @@ class SearchUI(BaseUI):
 
 
 
-
-    def workOrderSearch(self):
+    def workOrderSearch(self) -> str | bool:
         options = ['[I]D search', '[P]roperty number search', '[K]ennitala search']
         userOption = self.takeInputAndPrintMenu(options, ('Search work order', options, 'Choose a option:  '))
         work_orders = []
@@ -105,7 +205,7 @@ class SearchUI(BaseUI):
             
                 
 
-    def workReportSearch(self):
+    def workReportSearch(self) -> str | bool:
         options = ['[I]D search', '[P]roperty number search', '[K]ennitala search']
         userOption = self.takeInputAndPrintMenu(options, ('Search work report', options, 'Choose a option:  '))
         work_orders = []
@@ -126,14 +226,53 @@ class SearchUI(BaseUI):
 
   
 
-    def workReportSearch():
+    def workReportSearch(self) -> str | bool:
         pass
 
-    def contractors():
-        pass
+    def contractors(self) -> str | bool:
+        contractors = self.logicWrapper.listContractors()
+
+        body = []
+
+        # Initialize column names
+        headers = ['Company name', 'Phone', 'Hours', 'Location']
+
+        # Calculate the maximum width for each column
+        max_name_length = max(len(contractor.name) for contractor in contractors)
+        max_phone_length = 7
+        max_openingHours_length = 5
+        max_location_length = 12
 
 
-    def getValidInput(self, name, prompt, validationFunc, userDict: dict = {}) -> str:
+
+        # Build the line separator based on the column widths
+        line = '+' + '-' * (max_name_length + 2) + '+' + '-' * (max_phone_length + 2) + '+' + '-' * (max_openingHours_length + 2) + '+' + '-' * (max_location_length) + '+'
+
+        # Build the header row
+        header_row = f"| {headers[0]:<{max_name_length}} | {headers[1]:<{max_phone_length}} | {headers[2]:<{max_openingHours_length}} | {headers[3]:<{max_location_length}} |"
+
+        # Append the header and line to body
+        body.append(line)
+        body.append(header_row)
+        body.append(line)
+
+        # Build each employee row
+        for instance in contractors:
+            line_content = f"| {instance.name:<{max_name_length}} | {instance.phone:<{max_phone_length}} | {instance.openingHours:<{max_openingHours_length}} | {instance.location:<{max_location_length}} |"
+            body.append(line_content)
+            body.append(line)
+    
+    
+
+        return self.takeInputAndPrintMenu(['[Q]uit', '[B]ack'], (f'List contractors', body, 'Choose a option'))
+
+
+ 
+
+
+
+
+    def getValidInput(self, name, prompt, validationFunc, userDict: dict = {}) -> str | bool:
         '''Validates the input based on the validation function given, prints baseMenu every time the user enters unvalid info. menu is based on the arguments given '''
         while True:
             self.printBaseMenu(name, [f'{key}: {value}' for key, value in userDict.items()], prompt)

@@ -3,3 +3,4 @@ Logic wrapper checks if kennitala already exists in the system
 When program closes in the middle of writing it should persist what was written
 For loop for first letter - Helgi next week as he says
 check if all chars user inputed are in whitelist!!!!
+ADD MORE VALIDATION TO LOGIC LAYER, EXAMPLE WHEN CREATING A EMPLOYEE IF THE KENNITALA IS ALREADY IN USE OR THAT THE LOCATION ENTERED EXISTS AND SO ON

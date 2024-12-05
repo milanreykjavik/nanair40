@@ -86,7 +86,7 @@ class mainUI(BaseUI):
                     returnValue = self.employeeUI.addEmployee() # Go to the employeeUI class and add a new employee
                     
                 case 'e':
-                    returnValue = self.employeeUI.showEmployees() # Go to the employeeUI class and add edit a employee
+                    returnValue = self.employeeUI.showEmployee() # Go to the employeeUI class and add edit a employee
                     
                 case 'l':
                     returnValue = self.employeeUI.showEmployees() # Go to the employeeUI class and list all employees

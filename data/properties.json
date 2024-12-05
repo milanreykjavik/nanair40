@@ -12,5 +12,13 @@
         "address": "bla",
         "condition": "Poor",
         "facilities": "gugu"
+    },
+
+    {
+        "id": "9",
+        "location": "2",
+        "address": "coool",
+        "condition": "GREAT",
+        "facilities": "BABA"
     }
 ]

@@ -1,16 +1,44 @@
 [
     {
         "id": 1,
-        "name": "lalli",
+        "name": "Chucks Toiler Fixer",
         "phone": "5129250",
         "openingHours": "9-5",
         "location": 3
     },
     {
-        "id": "1",
-        "name": "lalli",
-        "phone": "7129340",
-        "openingHours": "name",
-        "location": "3"
+        "id": 2,
+        "name": "Benny's Plumbing",
+        "phone": "5238471",
+        "openingHours": "8-4",
+        "location": 5
+    },
+    {
+        "id": 3,
+        "name": "Fix-It Fred's Repair",
+        "phone": "5347892",
+        "openingHours": "10-6",
+        "location": 7
+    },
+    {
+        "id": 4,
+        "name": "Handy Joe's Service",
+        "phone": "5412323",
+        "openingHours": "9-6",
+        "location": 2
+    },
+    {
+        "id": 5,
+        "name": "Reliable Repairs",
+        "phone": "5489102",
+        "openingHours": "7-3",
+        "location": 8
+    },
+    {
+        "id": 6,
+        "name": "Quick Fix Solutions",
+        "phone": "5567800",
+        "openingHours": "9-5",
+        "location": 4
     }
 ]
