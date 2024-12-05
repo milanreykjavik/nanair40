@@ -111,8 +111,6 @@ class ValidationUI:
         
         return True
     
-
-
     @staticmethod
     def validateText(text):
         if text.lower() in ('q', 'b'):
