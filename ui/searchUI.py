@@ -9,46 +9,56 @@ class SearchUI(BaseUI):
         self.logicWrapper = logicWrapper
 
     def employeeSearch(self):
-        options = ['[K]ennitala search', '[P]roperty number search']
+        options = ['[K]ennitala search', '[L]ocation search']
         userOption = self.takeInputAndPrintMenu(options, ('Employee search', options, 'Choose a option'))
 
 
         if userOption.lower() == 'k':
-            self.showEmployeeID()
+            returnValue = self.showEmployeeID()
         else:
-            self.showEmployeesLocation()
+            returnValue = self.showEmployeesLocation()
+
+        return returnValue
 
 
 
 
     def showEmployeeID(self):
         # use Search class there is Employee Search class there that can search by any param in this case kennitala
-        lookUpKennitala = self.getValidInput( 'View employee',"Look up employee by kennitala: ", validation.validateKennitala)
+        employee = []
+        while not employee:
+            lookUpKennitala = self.getValidInput("look for employee","Enter ID: ", validation.validateKennitala)
+            match lookUpKennitala.lower():
+                case 'q':
+                    return 'q' # quit the whole program
+                case 'b':
+                    return False # Go back one page
+    
+            employee = self.logicWrapper.listEmployees(kennitala=lookUpKennitala)  # Call the wrapper that is 
 
-        match lookUpKennitala.lower():
-            case 'q':
-                return 'q'
-            case 'b':
-                return False
+        employee_list = [f'{key}: {value}' for key, value in list(employee[0].__dict__.items())[1:]]
 
-        # talk to wrapper with the kennitala entered THIS NEEDS TO GET SORTED :)
-        userInformation = self.logicWrapper.searchEmployees(lookUpKennitala)
+        return self.takeInputAndPrintMenu(['[Q]'], ('look for employee', employee_list, 'Choose a option: '))
+
 
 
 
     
     def showEmployeesLocation(self):
         # use Search class there is Employee Search class there that can search by any param in this case kennitala
-        lookUpEmployeeLocation = self.getValidInput( 'View employee',"Look up employee by location: ", validation.validatePropertyNumber)
+        employee = []
+        while not employee:
+            lookUpLocation = self.getValidInput("look for employee","Enter Location: ", validation.validateText)
+            match lookUpLocation.lower():
+                case 'q':
+                    return 'q' # quit the whole program
+                case 'b':
+                    return False # Go back one page
+    
+            employees = self.logicWrapper.listEmployees(location=lookUpLocation)  
 
-        match lookUpEmployeeLocation.lower():
-            case 'q':
-                return 'q'
-            case 'b':
-                return False
 
-        # talk to wrapper with the kennitala entered THIS NEEDS TO GET SORTED :)
-        userInformation = self.logicWrapper.searchEmployees(lookUpEmployeeLocation)
+
 
     def propertySearch(self):
                 # use Search class there is Employee Search class there that can search by any param in this case kennitala
@@ -60,22 +70,22 @@ class SearchUI(BaseUI):
             case 'b':
                 return False
             case 'l':
-                self.propertyLocationSearch()
+                self.showEmployeesLocation()
             case 'p':
-                self.propertyNumberSearch
+                self.showropertyNumberSearch()
 
 
 
         # talk to wrapper with the kennitala entered THIS NEEDS TO GET SORTED :)
 
 
-    def propertyLocationSearch(self):
+    def showPropertyLocationSearch(self):
 
         lookUpPropertiesOnLocation = self.getValidInput('View property', 'Enter a location: ', validation.validateLocation)
         propertyInformation = self.logicWrapper.searchProperties(Location = lookUpPropertiesOnLocation)
 
   
-    def propertyNumberSearch(self):
+    def showropertyNumberSearch(self):
         lookUpPropertyNumber = self.getValidInput('View property', 'Enter a location', validation.validatePropertyNumber)
         propertyInfromation = self.logicWrapper.searchProperties(propertyNumber = lookUpPropertyNumber)
 
