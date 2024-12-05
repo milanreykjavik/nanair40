@@ -26,17 +26,17 @@ class EmployeeHandler:
         if any(kwarg not in vars(self.employee) for kwarg in kwargs):
             return []
 
-        employees: list[dict] = self.employeeControl.readFile()
+        employees: list['Employee'] = self.employeeControl.readFile()
         if not len(kwargs):
-            return self.employee.normalize(employees)
+            return employees
 
         for k, v in kwargs.items():
             # Top to bottom if we go bottom to top we get index out of range
             # Because things get deleted if they do not match the query before we loop through them if we go bottom to top
             for i in range(len(employees)-1, -1, -1):
                 # hack around to check if result that might be int or float partialy contains our target number
-                if str(v) not in str(employees[i][k]):
+                if str(v) not in str(employees[i].__dict__[k]):
                     del employees[i]
 
 
-        return self.employee.normalize(employees)
+        return employees

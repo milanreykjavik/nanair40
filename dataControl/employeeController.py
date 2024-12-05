@@ -1,6 +1,7 @@
 import json
 import os
 import tempfile
+from baseClasses.Employee import Employee
 
 def atomicWrite(fp, data):
     dirName = os.path.dirname(fp)
@@ -11,6 +12,7 @@ def atomicWrite(fp, data):
 
 class EmployeeController:
     def __init__(self):
+        self.employee = Employee()
         self.filePath = "data/employees.json"
 
 
@@ -23,8 +25,7 @@ class EmployeeController:
 
             atomicWrite(self.filePath, currentData)
             return True
-        except Exception as e:
-            print(f"Error while appending to file: {e}")
+        except:
             return False
 
     def changeOneEntry(self, targetKennitala: str, **kwargs) -> bool:
@@ -43,13 +44,12 @@ class EmployeeController:
 
             atomicWrite(self.filePath, currentData)
             return True
-        except Exception as e:
-            print(f"Error while updating file: {e}")
+        except:
             return False
 
 
-    def readFile(self) -> list[dict]:
+    def readFile(self) -> list['Employee']:
         data = []
         with open(self.filePath, "r") as f:
             data = json.load(f)
-        return data
+        return self.employee.normalize(data)
