@@ -117,4 +117,3 @@ class ValidationUI:
             return False
         
         return True
-

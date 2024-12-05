@@ -60,4 +60,4 @@ class PropertyController:
         data = []
         with open(self.filePath, "r") as f:
             data = json.load(f)
-        return self.property.normalize(data) 
+        return self.property.normalize(data)
