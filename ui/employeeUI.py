@@ -23,9 +23,9 @@ class EmployeeUI(SearchUI):
             ('name', "Enter your name: ", validation.validateName),
             ('phone', "Enter a phonenumber: ", validation.validatePhone),
             ('homePhone', "Enter a homephone: ", validation.validatePhone),
-            ('address', "Enter a country: ", validation.validateCountry),
+            ('address', "Enter a country: ", validation.validateText),
             ('email', "Enter your email: ", validation.validateEmail),
-            ('location', "Enter your address: ", validation.validateAddress),
+            ('location', "Enter your address: ", validation.validateText),
         ]
 
         for key, prompt, validationFunc in fields: # This loops for all keys, prompts and functions the user needs to be askes

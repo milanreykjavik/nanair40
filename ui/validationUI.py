@@ -50,40 +50,8 @@ class ValidationUI:
             return True
         else:
             return False 
-               
-    @staticmethod
-    def validateLocation(Location) -> str | bool:
-        """Checks if the location is valid, if the parameter is in a list of available locations True is returned, if [b]ack or [q]uit were entered we return the letter"""
-        if Location.lower() in ('q', 'b'):
-            return Location
-        if Location:
-            return True
-        else:
-            return False
-        
-    @staticmethod
-    def validateCountry(country) -> str | bool:
-        """Checks if the country is valid, if the parameter is in a list of available locations True is returned, if [b]ack or [q]uit were entered we return the letter"""
-        if country.lower() in ('q', 'b'):
-            return country
 
-        if not country:
-            return False
-        else:
-            return True
-        
 
-    @staticmethod
-    def validateAddress(address) -> str | bool:
-        """Checks if the address is valid, it is checked whether the user entered nothing, if [b]ack or [q]uit were entered we return the letter"""
-        if address.lower() in ('q', 'b'):
-            return address
-        
-        if not address:
-            return False
-        
-        return True
-    
     @staticmethod
     def validateCondition(condition):
         if condition.lower() in ('q', 'b'):
@@ -101,19 +69,13 @@ class ValidationUI:
         
         return True
     
+
     @staticmethod
-    def validateAdditionalInfo(additionalInfo):
-        if additionalInfo.lower() in ('q', 'b'):
-            return additionalInfo
+    def validateText(text):
+        if text.lower() in ('q', 'b'):
+            return text
         
-        return True
-    
-    @staticmethod
-    def validatePropertyNumber(propertyNumber):
-        if propertyNumber.lower() in ('q', 'b'):
-            return propertyNumber
-        
-        if not propertyNumber:
+        if not text:
             return False
         
         return True

@@ -12,10 +12,10 @@ class mainUI(BaseUI):
         self.logicWrapper = Logic_Wrapper()
         self.baseUI = BaseUI()
         self.employeeUI = EmployeeUI(self.logicWrapper)
-        #self.contractorsIU = ContractorsUI(self.logicWrapper)
+        self.contractorsIU = ContractorsUI(self.logicWrapper)
         self.propertiesUI = PropertiesUI(self.logicWrapper)
-        #self.workUI = WorkUI(self.logicWrapper)
-        #self.janitorUI = JanitorUI(self.logicWrapper)
+        self.workUI = WorkUI(self.logicWrapper)
+        self.janitorUI = JanitorUI(self.logicWrapper)
         self.searchUI = SearchUI(self.logicWrapper)
     
 
