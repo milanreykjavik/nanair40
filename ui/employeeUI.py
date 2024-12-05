@@ -63,7 +63,8 @@ class EmployeeUI(SearchUI):
         # talk to wrapper with the kennitala entered 
 
 
-    def editEmployee():
+    def editEmployee(self):
+        identifier = self.getValidInput('Edit Employee',prompt, )
         pass
         
 
