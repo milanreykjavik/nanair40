@@ -1,5 +1,5 @@
 from baseClasses.Property import Property
-from dataControl.PropertyController import PropertyController
+from dataControl.propertyController import PropertyController
 from typing import Any
 
 
