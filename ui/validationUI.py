@@ -102,18 +102,35 @@ class ValidationUI:
         return True
     
     @staticmethod
-    def validateAdditionalInfo(additionalInfo):
-        if additionalInfo.lower() in ('q', 'b'):
-            return additionalInfo
+    def validateContractor(contractor):
+        if contractor.lower() in ('q', 'b'):
+            return contractor
+        
+        if not contractor: 
+            return False
         
         return True
     
     @staticmethod
-    def validatePropertyNumber(propertyNumber):
-        if propertyNumber.lower() in ('q', 'b'):
-            return propertyNumber
+    def validateText(text):
+        if text.lower() in ('q', 'b'):
+            return text
         
-        if not propertyNumber:
+        if not text:
             return False
         
         return True
+    
+    @staticmethod 
+    def validateID(propertyNumber):
+        if propertyNumber.lower() in ('q', 'b'):
+            return propertyNumber
+        
+
+    @staticmethod
+    def validatePriority(priority):
+        if priority.lower() in ('q', 'b'):
+            return priority
+        if priority.lower() in ("emergency", "now", "as soon as possible"):
+            return True
+        return False

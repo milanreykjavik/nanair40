@@ -3,6 +3,7 @@ from logic.logicWrapper import Logic_Wrapper
 from ui.searchUI import SearchUI
 from ui.validationUI import ValidationUI
 
+
 validation = ValidationUI()
 
 
@@ -39,16 +40,104 @@ class PropertiesUI(SearchUI):
         
 
 
-    def showProperty():
-        pass
+    def showProperty(self):
+        propertiesFile = self.logicWrapper.listProperties()
+        body = []
 
+        # Initialize column names
+        headers = ['ID', 'Location', 'Condition']
+
+        # Calculate the maximum width for each column
+        max_ID_length = max(len(property.id) for property in propertiesFile)
+        max_Location_length = max(len(property.location) for property in propertiesFile)
+        max_Condition_length = max(len(property.condition) for property in propertiesFile)
+
+        
+    def editProperty(self):
+        # Step 1: Identify the property to edit
+        identifier = self.getValidInput('Edit property', "Enter the address or unique identifier of the property: ", validation.validateAddress, {})
+        existing_property = self.findPropertyByIdentifier(identifier)  # Implement this function to find the property by identifier
+
+        if not existing_property:
+            print("Property not found.")
+            return False
+
+    # Step 2: Load the existing property data
+        properties_dict = existing_property  # Assume this returns a dictionary of the existing property fields
+
+        fields = [
+            ('country', "Edit the country of the property: ", validation.validateCountry),
+            ('location', "Edit the location of the property: ", validation.validateLocation),
+            ('address', "Edit the address of the property: ", validation.validateAddress),
+            ('condition', "Edit the condition (Excellent, Good, Fair, Poor): ", validation.validateCondition),
+            ('Facilities requiring maintenance', "Edit facilities requiring maintenance: ", validation.validateMaintenance),
+            ('addition information', "Edit additional information: ", validation.validateAddress),
+        ]
+
+    # Step 3: Edit the fields
+        for key, prompt, validationFunc in fields:
+            current_value = properties_dict[key]
+            print(f"Current {key}: {current_value}")
+            value = self.getValidInput(
+                'Edit property',
+                f"{prompt} (Leave blank to keep current value): ",
+                validationFunc,
+                properties_dict,
+                allow_empty=True  # Enable skipping changes
+            )
+
+            if value.lower() in ('q', 'b'):
+                match value.lower():
+                    case 'q':
+                        return 'q'
+                    case 'b':
+                        return False
+
+        # Update the field only if a new value is provided
+            if value:
+                properties_dict[key] = value
+
+    # Step 4: Save the changes
+        self.updatePropertyInDataLayer(properties_dict)  # Implement this to update the property in your data storage
+
+    # Step 5: Show the updated data and offer options
+        while True:
+            self.printBaseMenu('Edit property', [f'{key}: {value}' for key, value in properties_dict.items()], 'Choose an option: ')
+            optionInput = self.takeInput(['Back', 'Quit'])
+
+            match optionInput.lower():
+                case 'b':
+                    return False
+                case 'q':
+                    return 'q'
+
+
+        # Build the line separator based on the column widths
+        line = '+' + '-' * (max_ID_length + 2) + '+' + '-' * (max_Location_length + 2) + '+' + '-' * (max_Condition_length + 2) + '+'
+
+        # Build the header row
+        header_row = f"| {headers[0]:<{max_ID_length}} | {headers[1]:<{max_Location_length}} | {headers[2]:<{max_Condition_length}}|"
+
+        # Append the header and line to body
+        body.append(line)
+        body.append(header_row)
+        body.append(line)
+
+        # Build each employee row
+        for dict in propertiesFile:
+            line_content = f"| {dict.id:<{max_ID_length}} | {dict.location:<{max_Location_length}} | {dict.condition:<{max_Condition_length}} |"
+            body.append(line_content)
+            body.append(line)
+        
+
+    
+
+        return self.takeInputAndPrintMenu(['[Q]uit', '[B]ack'], ('List Properties', body, 'Choose a option'))
 
 
     def editProperty():
         pass
-
-    def listProperties():
-        pass
+        
 
 
 
