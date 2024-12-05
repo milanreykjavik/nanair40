@@ -32,7 +32,8 @@ class SearchUI(BaseUI):
                 return False
 
         # talk to wrapper with the kennitala entered THIS NEEDS TO GET SORTED :)
-        userInformation = self.logicWrapper.searchEmployees(lookUpKennitala)
+        userInformation = self.logicWrapper.listEmployees(lookUpKennitala)
+        
 
 
 

@@ -25,5 +25,14 @@
         "address": "135 Maple Rd, Isafjordur",
         "email": "bjorn.rognvaldsson@example.com",
         "location": 1
-    } 
+    },
+    {
+        "kennitala": "3333333333",
+        "name": "Helgi \u00de\u00f3r",
+        "phone": "7768888",
+        "homePhone": "1223433",
+        "address": "Nuuk",
+        "email": "Helgi@gmail.com",
+        "location": "Loewl Road"
+    }
 ]
