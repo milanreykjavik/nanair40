@@ -1,0 +1,1 @@
+locations: dict = {'Iceland': ['Reykjavík']}

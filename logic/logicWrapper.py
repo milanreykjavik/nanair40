@@ -16,4 +16,4 @@ class Logic_Wrapper:
         return self.employee_handler.editEmployee(target_kennitala, **kwargs)
     
     def listEmployees(self, **kwargs) -> list['Employee']:
-        return self.employee_handler.listEmployess(**kwargs)
+        return self.employee_handler.listEmployes(**kwargs)
