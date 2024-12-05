@@ -23,3 +23,6 @@ class Logic_Wrapper:
 
     def addProperty(self, property: Property) -> bool:
         return self.Property_handler.addProperty(property)
+    
+    def listProperties(self, **kwargs) -> list['Property']:
+        return self.Property_handler.listProperties(**kwargs)

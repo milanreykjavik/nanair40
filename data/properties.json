@@ -1,0 +1,16 @@
+[
+    {
+        "id": "23",
+        "location": "2",
+        "address": "654 Pine Ave, Kopavogur",
+        "condition": "2",
+        "facilities": "bla"
+    },
+    {
+        "id": "2",
+        "location": "2",
+        "address": "bla",
+        "condition": "Poor",
+        "facilities": "gugu"
+    }
+]
