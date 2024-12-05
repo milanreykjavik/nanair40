@@ -1,5 +1,10 @@
 import json
 
+
+"""
+ADD REPEATING WORK ORDERS
+"""
+
 class WorkReport:
     def __init__(self, id: int = 0, description: str = "", date: str = "", cost: int = 0, comment: str = ""):
         self.id: int = id
