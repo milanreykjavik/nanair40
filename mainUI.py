@@ -120,7 +120,7 @@ class mainUI(BaseUI):
                 case 'e':
                     returnValue = self.propertiesUI.editProperty()
                 case 'l':
-                    returnValue = self.propertiesUI.listProperties()
+                    returnValue = self.propertiesUI.showProperty()
                 case 'b':
                     return False
 
