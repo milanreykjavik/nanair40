@@ -1,5 +1,3 @@
-from ui.baseUI import BaseUI
-from ui.validationUI import ValidationUI
 from baseClasses.Property import Property
 from logic.logicWrapper import Logic_Wrapper
 from ui.searchUI import SearchUI
@@ -38,6 +36,11 @@ class PropertiesUI(SearchUI):
 
         return self.takeInputAndPrintMenu(['[Q]uit', '[B]ack'], ('Add Property', [f'{key}: {value}' for key, value in propertyClass.__dict__.items()], 'The Property has been succesfully created\nChoose a option: '))
         
+
+
+    def showProperty():
+        pass
+
 
 
     def editProperty():

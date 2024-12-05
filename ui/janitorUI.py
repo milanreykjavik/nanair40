@@ -1,10 +1,12 @@
 from ui.baseUI import BaseUI
 from baseClasses.Work import WorkOrder  
 from baseClasses.Work import WorkReport
+from logic.logicWrapper import Logic_Wrapper
 import os
 
 class JanitorUI(BaseUI):
-    def __init__(self):
+    def __init__(self, logicWrapper):
+        self.logicWrapper = logicWrapper
         
         # Im just using sample data that i made for now :)
         
@@ -23,7 +25,6 @@ class JanitorUI(BaseUI):
     def workOrders(self):
         """Displays the work orders using WorkOrder objects."""
         while True:
-            clearTerminal()
             wo_header = "+-----------------------+----------------+------------------+--------------+\n"+(" ")*7
             wo_header += "| Work                  | Location       | How important    | Identifier   |\n"+(" ")*7
             wo_header += "+-----------------------+----------------+------------------+--------------+" # combining to make a uniqe header for this UI
@@ -47,7 +48,6 @@ class JanitorUI(BaseUI):
     def workReports(self):
         """Displays the work reports using WorkReport objects."""
         while True:
-            clearTerminal()
             wr_header = "+---------------------------------+-------------------------+-------------+\n"+(" ")*7
             wr_header += "| TASK                            | PERSON                  | ID          |\n"+(" ")*7
             wr_header += "+---------------------------------+-------------------------+-------------+" # creating a header for this ui
@@ -65,10 +65,3 @@ class JanitorUI(BaseUI):
                     return False # returns to the previous page
                 elif report_id.lower() == 'q':
                     return "q" # quits the whole program
-
-def clearTerminal():
-    """Clear the terminal screen before a new menu is printed"""
-    if os.name == 'nt':  # For Windows
-        os.system('cls')
-    else:  # For Unix/Linux/Mac
-        os.system('clear')

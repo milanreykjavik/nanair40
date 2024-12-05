@@ -52,7 +52,7 @@ class SearchUI(BaseUI):
 
     def propertySearch(self):
                 # use Search class there is Employee Search class there that can search by any param in this case kennitala
-        userOption = self.takeInputAndPrintMenu( 'View property', ['[L]ocation search', '[P]roperty number search'], "Choose a option: ", validation.validateLocation)
+        userOption = self.takeInputAndPrintMenu( ['[L]ocation search', '[P]roperty number search'], ('View property', ['[L]ocation search', '[P]roperty number search'], "Choose a option: "))
 
         match userOption.lower():
             case 'q':
@@ -78,6 +78,10 @@ class SearchUI(BaseUI):
     def propertyNumberSearch(self):
         lookUpPropertyNumber = self.getValidInput('View property', 'Enter a location', validation.validatePropertyNumber)
         propertyInfromation = self.logicWrapper.searchProperties(propertyNumber = lookUpPropertyNumber)
+
+
+
+
 
 
 
