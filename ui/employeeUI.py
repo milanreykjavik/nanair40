@@ -16,12 +16,6 @@ class EmployeeUI(SearchUI):
 
 
 
-
-        
-
-
-
-
         
 
         fields = [
@@ -69,39 +63,15 @@ class EmployeeUI(SearchUI):
 
 
         # Here a instance would get created in order to send to data layer
-        new_employee = Employee(userDict['Kennitala'], userDict['Name'], userDict['Phone'], userDict['Homephone'], userDict['Country'], userDict['Email'], userDict['Address'])
+        new_employee = Employee(userClass.__dict__['kennitala'], userClass.__dict__['name'], userClass.__dict__['phone'], userClass.__dict__['homePhone'], userClass.__dict__['location'], userClass.__dict__['email'], userClass.__dict__['address'])
 
+        self.logicWrapper.addEmployee(new_employee)
 
-        while True:
-            self.printBaseMenu('Add employee', [f'{key}: {value}' for key, value in userClass.__dict__.items()], 'Choose an option: ') # if the user finished entering all the information needed then he gets to choose either to quit or go back
-            optionInput, isValid = self.takeInput(['[B]ack', '[Q]uit'])
-
-            if isValid:
-                match optionInput.lower():
-                    case 'b':
-                        return False
-                    case 'q':
-                        return 'q'
-
-
-
-    def showEmployee(self):
     
-        # use Search class there is Employee Search class there that can search by any param in this case kennitala
-        lookUpKennitala = self.getValidInput( 'View/edit employee',"Look up employee by kennitala: ", validation.validateKennitala)
-
-        match lookUpKennitala.lower():
-            case 'q':
-                return 'q'
-            case 'b':
-                return False
-
-        # talk to wrapper with the kennitala entered 
-
-
-        # 
-        #new_employee = Employee(userDict['Kennitala'], userDict['Name'], userDict['Phone'], userDict['Homephone'], userDict['Country'], userDict['Email'], userDict['Address'])
+        return self.takeInputAndPrintMenu(['[Q]uit', '[B]ack'], ('Add employee', [f'{key}: {value}' for key, value in userClass.__dict__.items()], 'The employee has been succesfully created\nChoose a option: '))
     
+    
+
 
 
 
@@ -109,13 +79,8 @@ class EmployeeUI(SearchUI):
     def showEmployee(self):
     
         # use Search class there is Employee Search class there that can search by any param in this case kennitala
-        lookUpKennitala = self.getValidInput( 'View/edit employee',"Look up employee by kennitala: ", validation.validateKennitala)
+        employeeInfo = self.showEmployeeID()
 
-        match lookUpKennitala.lower():
-            case 'q':
-                return 'q'
-            case 'b':
-                return False
 
         # talk to wrapper with the kennitala entered 
 
@@ -126,15 +91,49 @@ class EmployeeUI(SearchUI):
 
 
 
+    
        
-        
-    def listEmployees(self):
+            
+    def showEmployees(self):
+        employeesFile = self.logicWrapper.listEmployees()
+        body = []
 
-        allEmployees = getEmployees()
+        # Initialize column names
+        headers = ['Name', 'Address', 'Phone number']
 
-        self.printBaseMenu('List employees', [f'{name}, {phone}, {location}' for name, phone, location in allEmployees ], 'Choose a option')
-        pass
+        # Calculate the maximum width for each column
+        max_name_length = max(len(employee['name']) for employee in employeesFile)
+        max_address_length = max(len(employee['address']) for employee in employeesFile)
+        max_phone_length = max(len(employee['phone']) for employee in employeesFile)
+
+
+        # Build the line separator based on the column widths
+        line = '+' + '-' * (max_name_length + 2) + '+' + '-' * (max_address_length + 2) + '+' + '-' * (max_phone_length + 2) + '+'
+
+        # Build the header row
+        header_row = f"| {headers[0]:<{max_name_length}} | {headers[1]:<{max_address_length}} | {headers[2]:<{max_phone_length}}|"
+
+        # Append the header and line to body
+        body.append(line)
+        body.append(header_row)
+        body.append(line)
+
+        # Build each employee row
+        for dict in employeesFile:
+            line_content = f"| {dict['name']:<{max_name_length}} | {dict['address']:<{max_address_length}} | {dict['phone']:<{max_phone_length}} |"
+            body.append(line_content)
+            body.append(line)
         
+        self.printBaseMenu('List employees', body, 'Choose a option')
+
+    
+
+        return self.takeInputAndPrintMenu(['[Q]uit', '[B]ack'], ('Add employee', [f'{key}: {value}' for key, value in userClass.__dict__.items()], 'The employee has been succesfully created\nChoose a option: '))
+    
+
+
+
+            
 
 
 

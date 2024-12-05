@@ -1,9 +1,12 @@
 from ui.baseUI import BaseUI
 from ui.validationUI import ValidationUI
-
+from logic.logicWrapper import Logic_Wrapper
 
 validation = ValidationUI()
 class PropertiesUI(BaseUI):
+    def __init__(self, logicWrapper: Logic_Wrapper):
+        self.logicWrapper = logicWrapper
+
     def addProperty(self):
         properties_dict = {
             'country': '',
