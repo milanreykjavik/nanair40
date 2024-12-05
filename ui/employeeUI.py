@@ -113,8 +113,11 @@ class EmployeeUI(SearchUI):
                     case 'b':
                         return False # Go back one page
             else:
+                # check_2 = self.logicWrapper.editEmployee(check)
+                # employee_list.append(check_2)
+                employee_list.append(check)
                 return
-                 # self.logicWrapper.editEmployee(check) setting up for the wrapper
+                
 
 
         
