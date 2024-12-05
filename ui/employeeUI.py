@@ -52,18 +52,48 @@ class EmployeeUI(SearchUI):
         identifier = self.getValidInput('Edit employee', "Enter the kennitala of the employee to edit: ", validation.validateKennitala, {})
         existing_employee = self.findEmployeeByKennitala(identifier)  # Implement this function to find the employee by kennitala
     
-        if not existing_employee:
-            print("Employee not found.")
-            return False
-
-
        
-        
+            
     def showEmployees(self):
-        pass
+        employeesFile = self.logicWrapper.listEmployees()
+        body = []
+
+        # Initialize column names
+        headers = ['Name', 'Address', 'Phone number']
+
+        # Calculate the maximum width for each column
+        max_name_length = max(len(employee['name']) for employee in employeesFile)
+        max_address_length = max(len(employee['address']) for employee in employeesFile)
+        max_phone_length = max(len(employee['phone']) for employee in employeesFile)
+
+
+        # Build the line separator based on the column widths
+        line = '+' + '-' * (max_name_length + 2) + '+' + '-' * (max_address_length + 2) + '+' + '-' * (max_phone_length + 2) + '+'
+
+        # Build the header row
+        header_row = f"| {headers[0]:<{max_name_length}} | {headers[1]:<{max_address_length}} | {headers[2]:<{max_phone_length}}|"
+
+        # Append the header and line to body
+        body.append(line)
+        body.append(header_row)
+        body.append(line)
+
+        # Build each employee row
+        for dict in employeesFile:
+            line_content = f"| {dict['name']:<{max_name_length}} | {dict['address']:<{max_address_length}} | {dict['phone']:<{max_phone_length}} |"
+            body.append(line_content)
+            body.append(line)
         
+        self.printBaseMenu('List employees', body, 'Choose a option')
+
+    
+
+        return self.takeInputAndPrintMenu(['[Q]uit', '[B]ack'], ('Add employee', [f'{key}: {value}' for key, value in userClass.__dict__.items()], 'The employee has been succesfully created\nChoose a option: '))
+    
 
 
+
+            
 
     
        

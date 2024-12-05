@@ -75,14 +75,7 @@ class ValidationUI:
         if text.lower() in ('q', 'b'):
             return text
         
-        return True
-    
-    @staticmethod
-    def validateID(propertyNumber):
-        if propertyNumber.lower() in ('q', 'b'):
-            return propertyNumber
-        
-        if not propertyNumber:
+        if not text:
             return False
         
         return True
