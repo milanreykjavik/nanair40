@@ -1,4 +1,6 @@
 class WorkUI:
+    def __init__(self, logicWrapper):
+        self.logicWrapper = logicWrapper
     def addWorkOrder():
         pass
 

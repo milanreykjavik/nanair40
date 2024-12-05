@@ -1,2 +1,3 @@
 class ContractorsUI:
-    pass
+    def __init__(slef, logicWrapper):
+        self
