@@ -23,12 +23,12 @@ class EmployeeController:
         self.filePath = "data/employees.json"
 
 
-    def appendIntoFile(self, data) -> bool:
+    def appendIntoFile(self, data: 'Employee') -> bool:
         try:
             with open(self.filePath, "r") as f:
                 currentData = json.load(f)
-
-            currentData.append(json.loads(data))
+            dataJSON = self.employee.toJSON(data)
+            currentData.append(json.loads(dataJSON))
 
             atomicWrite(self.filePath, currentData)
             return True
