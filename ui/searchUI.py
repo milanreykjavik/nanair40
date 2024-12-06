@@ -34,7 +34,10 @@ class SearchUI(BaseUI):
                 case 'b':
                     return False # Go back one page
     
-            employee = self.logicWrapper.listEmployees(kennitala=lookUpKennitala)  # Call the wrapper that is 
+            employee = self.logicWrapper.listEmployees(kennitala=lookUpKennitala)  # Call the wrapper that is
+
+
+
 
         employee_list = [f'{key}: {value}' for key, value in list(employee[0].__dict__.items())[1:]]
 

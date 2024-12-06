@@ -65,13 +65,12 @@ class EmployeeUI(SearchUI):
         while userInput not in AVAILABLE_EDIT_OPTIONS_FUNCTIONS: # here we allow the user to choose what he wants to change, the option he enters needs to be in the global dictionary that stores all options and their validation funcition
             self.printBaseMenu('look for employee', employee_list, 'Enter the number of what you would like to change: ')
             userInput = input(' ').lower()
-            match lookUpKennitala.lower():
+            match userInput.lower():
                 case 'q':
                     return 'q' # quit the whole program
                 case 'b':
                     return False # Go back one page
-                
-        newValue = self.getValidInput('look for employee',  'Enter the new value: ', AVAILABLE_EDIT_OPTIONS_FUNCTIONS[userInput], employee[0].__dict__)
+        newValue = self.getValidInput('look for employee',  'Enter the new value: ', AVAILABLE_EDIT_OPTIONS_FUNCTIONS[userInput], employee[0].__dict__[1:])
 
         self.logicWrapper.editEmployee(lookUpKennitala, userInput, newValue) #needs to be implemented,....
 
