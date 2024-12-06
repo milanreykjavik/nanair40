@@ -3,9 +3,10 @@ from ui.baseUI import BaseUI
 from ui.employeeUI import EmployeeUI
 from ui.contractorsUI import ContractorsUI
 from ui.workUI import WorkUI
-from ui.janitorUI import JanitorUI
+#from ui.janitorUI import JanitorUI
 from ui.searchUI import SearchUI
 from logic.logicWrapper import Logic_Wrapper
+
 
 class mainUI(BaseUI):
     def __init__(self):
@@ -22,27 +23,16 @@ class mainUI(BaseUI):
 
 
 
-    def mainMenu(self) -> str:
+    def mainMenu(self):
         optionInput = ''
         while optionInput.lower() != 'q':
-            self.printMainMenu() 
+            options = ["Manager", "Janitor (Front Desk)", "Search (Front Desk)"]
+            self.printMainMenu("MAIN MENU:", options)
 
             optionInput = input(' ')
- 
 
-            match optionInput.lower():  
-                case 'm':  
-                    returnValue = self.ShowManagerMenu() 
-                case 'j':  
-                    returnValue = self.ShowMaintenanceMenu() 
-                case 's':  
-                    returnValue = self.ShowSearchMenu()
-                case 'q':  # Matching case for comparison
-                    return 'q'
-                
-            if returnValue == 'q': # if the user entered q then we go back until the program ends
-               return 'q'
-
+            functions = [self.ShowManagerMenu, self.ShowMaintenanceMenu, self.ShowSearchMenu]
+            return self.baseUI.returnTable(functions, options, optionInput)
 
 
 
@@ -50,11 +40,10 @@ class mainUI(BaseUI):
     def ShowManagerMenu(self) -> str | bool:
         optionInput = ''
         while optionInput.lower() != 'q':
-            options = ['[E]mployee menu', '[P]roperties menu', '[W]ork orders menu', '[C]onstructors']
+            options = ['Employee menu', 'Properties menu', 'Work orders menu', 'Constructors']
 
             optionInput = self.takeInputAndPrintMenu(options, ('Manager', options, 'Choose a option: '))
 
-            
             match optionInput.lower():  
                 case 'e':  # Matching case for comparison
                     returnValue = self.employeeMenu()
@@ -80,7 +69,7 @@ class mainUI(BaseUI):
         while optionInput.lower() != 'q':
             options = ['[A]dd employee', '[E]dit employee', '[L]ist employees']
 
-            optionInput = self.takeInputAndPrintMenu(options, ('Employee menu', ['[A]dd employee', '[E]dit employee', '[L]ist employees'], 'Choose a option'))
+            optionInput = self.takeInputAndPrintMenu(options, ('Employee menu', ['Add employee', 'Edit employee', 'List employees'], 'Choose a option'))
 
 
 
@@ -108,7 +97,7 @@ class mainUI(BaseUI):
     def propertiesMenu(self) -> str | bool:
         optionInput = ''
         while optionInput.lower() != 'q':
-            options = ['[A]dd property', '[E]dit property', '[L]ist properties']
+            options = ['Add property', 'Edit property', 'List properties']
 
 
             optionInput = self.takeInputAndPrintMenu(options, ('Properties menu', options, 'Choose a option'))
@@ -136,7 +125,7 @@ class mainUI(BaseUI):
     def workOrderMenu(self) -> str | bool:
         optionInput = ''
         while optionInput.lower() != 'q':
-            options = ['[A]dd work order', '[C]ompleted work reports', '[E]dit/view work orders']
+            options = ['Add work order', 'Completed work reports', 'Edit/view work orders']
 
             optionInput = self.takeInputAndPrintMenu(options, ('Work order menu', options, 'Choose a option'))
 
@@ -159,7 +148,7 @@ class mainUI(BaseUI):
     def contractorMenu(self):
         optionInput = ''
         while optionInput.lower() != 'q':
-            options = ['[A]dd Contractor', '[E]dit Contractor', '[L]ist Contractors']
+            options = ['Add Contractor', 'Edit Contractor', 'List Contractors']
 
 
             optionInput = self.takeInputAndPrintMenu(options, ('Contractors Menu', options, 'Choose a option'))
@@ -187,7 +176,7 @@ class mainUI(BaseUI):
     def workOrderMenu(self) -> str | bool:
         optionInput = ''
         while optionInput.lower() != 'q':
-            options = ['[A]dd work order', '[C]ompleted work reports', '[E]dit/view work orders']
+            options = ['Add work order', 'Completed work reports', 'Edit/view work orders']
 
             optionInput = self.takeInputAndPrintMenu(options, ('Work order menu', options, 'Choose a option'))
 
@@ -214,7 +203,7 @@ class mainUI(BaseUI):
     def ShowMaintenanceMenu(self) -> str | bool:
         optionInput = ''
         while optionInput.lower() != 'q':
-            options = ['[W]ork orders', '[C]reate work report']
+            options = ['Work orders', 'Create work report']
 
             optionInput  = self.takeInputAndPrintMenu(options, ('Janitor Menu', options, 'Choose a option'))
 
@@ -239,7 +228,7 @@ class mainUI(BaseUI):
     def ShowSearchMenu(self) -> str | bool:
         optionInput = ''
         while optionInput.lower() != 'q':
-            options = ['[E]mployee Search', '[P]roperty search', '[W]ork order search', '[R]eport search', '[C]ontractors']
+            options = ['Employee Search', 'Property search', 'Work order search', 'Report search', 'Contractors']
 
             optionInput = self.takeInputAndPrintMenu(options, ('Search menu', options, 'Choose a option'))
  
