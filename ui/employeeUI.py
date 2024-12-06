@@ -70,7 +70,7 @@ class EmployeeUI(SearchUI):
                     return 'q' # quit the whole program
                 case 'b':
                     return False # Go back one page
-        newValue = self.getValidInput('look for employee',  'Enter the new value: ', AVAILABLE_EDIT_OPTIONS_FUNCTIONS[userInput], employee[0].__dict__[1:])
+        newValue = self.getValidInput('look for employee',  'Enter the new value: ', AVAILABLE_EDIT_OPTIONS_FUNCTIONS[userInput], employee[0].__dict__)
 
         self.logicWrapper.editEmployee(lookUpKennitala, userInput, newValue) #needs to be implemented,....
 

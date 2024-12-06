@@ -5,9 +5,9 @@ class Property:
         self.id: int = id
         self.location: int = location
         self.address: str = address
-        self.condition: int = condition # 0 to 10 average calculation
-        self.facilities: list[str] = facilities
-
+        self.size: int = condition # 0 to 10 average calculation
+        self.roomCount: list[int] = roomId
+        facilatiesId: dict = facilatiesId
 
     def __repr__(self) -> str:
         return f"Property(id={self.id}, location={self.location}, address={self.address}, condition={self.condition}, facilities={self.facilities})"

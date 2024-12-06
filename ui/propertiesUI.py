@@ -15,10 +15,12 @@ class PropertiesUI(SearchUI):
         propertyClass = Property()
 
         fields = [
-            ('id', "Enter a ID for the property: ", validation.validateText),  # These are all of the keys, prompts, and values that we need to ask the user
+            ('id', "Enter a a property numner: ", validation.validateText),  # These are all of the keys, prompts, and values that we need to ask the user
             ('location', "Enter the location of the property: ", validation.validateText),
+            ('Size', 'Enter the size of the property')
             ('address', "Enter the address of the property: : ", validation.validateText),
             ('condition', "Condition(Excellent, Good, Fair, Poor): ", validation.validateCondition),
+            ('Room ID range', 'How many): ', validation.validatePhone)
             ('facilities', "Facilities requiring maintenance: ", validation.validateText),
         ]
         
