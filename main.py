@@ -1,20 +1,45 @@
-from baseClasses.WorkOrder import WorkOrder
-from logic.workOrderHandler import WorkOrderHandler
-from baseClasses.WorkReport import WorkReport
-from logic.workReportHandler import WorkReportHandler
+from logic.employeeHandler import EmployeeHandler
+from baseClasses.Employee import Employee
+from dataControl.employeeController import EmployeeController
 
-x = WorkOrderHandler()
-y = WorkReportHandler()
-
-wo = WorkOrder(45, "2024", "desc", 1, 1, 1, 1, True)
-print(wo)
-
-rep = WorkReport(1, 45, "test", "2024", 10, "com")
-print(rep)
+x = EmployeeHandler()
+r = x.listEmployes()
+print(r)
 
 
-print(x.addWorkOrder(wo))
-print(x.listWorkOrders())
+y = EmployeeController()
+for i in range(0, 10000):
+    new_employee = Employee(
+        kennitala=int("12345"+str(i)),
+        name="John Doe",
+        phone="123-456-7890",
+        homePhone="098-765-4321",
+        address="123 Main Street",
+        email="john.doe@example.com",
+        location=101
+    )
+    print(i)
 
-print(y.addWorkReport(rep))
-print(y.listWorkReports())
+    x.addEmployee(new_employee)
+
+
+
+
+exit()
+
+
+
+print(x.editEmployee('kennitala', r[0].kennitala, kennitala="32"))
+print(x.listEmployess(location=1))
+
+"""
+from baseClasses.Work import WorkOrder, WorkReport
+
+rep = WorkReport(1, "abc", "2024", 30, "abccc")
+
+wo = WorkOrder(5, "2024", "testing", 2, 1, 1, rep, 5, True)
+
+x = WorkOrder().toJSON(wo)
+
+print(x)
+"""
