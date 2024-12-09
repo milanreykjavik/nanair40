@@ -1,12 +1,12 @@
 import json
 
 class Property:
-    def __init__(self, id: int = 0, location: int = 0, address: str = "", condition: str = '', facilitiesMaintenance: str = '', rooms: dict = '', facilities: dict = '') -> None:
+    def __init__(self, id: int = 0, location: int = 0, address: str = "", condition: int = 0, facilitiesMaintenance: str = '', rooms: dict = {}, facilities: dict = {}) -> None:
         self.id: int = id
         self.location: int = location
         self.address: str = address
         self.condition: int = condition # 0 to 10 average calculation
-        self.facilitiesMaintenance: list[str] = facilitiesMaintenance
+        self.facilitiesMaintenance: str = facilitiesMaintenance
         self.rooms: dict = rooms
         self.facilities: dict = facilities
 
