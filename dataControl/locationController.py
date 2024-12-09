@@ -3,7 +3,7 @@ import os
 import tempfile
 from typing import Any
 
-from baseClasses.workOrder import WorkOrder
+from baseClasses.Location import Location
 
 def atomicWrite(fp, data):
     dirName = os.path.dirname(fp)
@@ -17,21 +17,17 @@ def atomicWrite(fp, data):
 
 
 
-class WorkController:
+class LocationController:
     def __init__(self):
-        self.workOrder = WorkOrder()
-        self.filePath = "data/workOrders.json"
+        self.location = Location()
+        self.filePath = "data/locations.json"
 
 
-    def appendIntoFile(self, data: 'WorkOrder') -> bool:
+    def appendIntoFile(self, data: 'Location') -> bool:
         try:
             with open(self.filePath, "r") as f:
                 currentData = json.load(f)
-        except:
-            currentData = []
-
-        try:
-            dataJSON = self.workOrder.toJSON(data)
+            dataJSON = self.location.toJSON(data)
             currentData.append(json.loads(dataJSON))
 
             atomicWrite(self.filePath, currentData)
@@ -45,11 +41,11 @@ class WorkController:
             with open(self.filePath, "r") as f:
                 currentData = json.load(f)
 
-            for workOrder in currentData:
-                if workOrder.get(entry) == entryValue:
+            for location in currentData:
+                if location.get(entry) == entryValue:
                     for key, value in kwargs.items():
-                        if key in workOrder:
-                            workOrder[key] = value
+                        if key in location:
+                            location[key] = value
                     break
             else:
                 return False
@@ -60,8 +56,8 @@ class WorkController:
             return False
 
 
-    def readFile(self) -> list['WorkOrder']:
+    def readFile(self) -> list['Location']:
         data = []
         with open(self.filePath, "r") as f:
             data = json.load(f)
-        return self.workOrder.normalize(data) 
+        return self.location.normalize(data)

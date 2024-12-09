@@ -1,11 +1,15 @@
 from ui.baseUI import BaseUI
 from ui.validationUI import ValidationUI
 from logic.logicWrapper import Logic_Wrapper
+from baseClasses.workOrder import WorkOrder
+from baseClasses.Employee import Employee
+from baseClasses.Property import Property
 validation = ValidationUI()
+quitOrback = ['q', 'b']
 
 
 class SearchUI(BaseUI):
-    def __init__(self, logicWrapper: Logic_Wrapper):
+    def __init__(self, logicWrapper: Logic_Wrapper = None):
         self.logicWrapper = logicWrapper
 
     def employeeSearch(self) -> str | bool:
@@ -16,12 +20,18 @@ class SearchUI(BaseUI):
         if userOption.lower() == 'k':
             returnValue = self.showEmployeeID()
         else:
-            returnValue = self.showEmployeesLocation()
+            employee_list = []
+            while not employee_list:
+                lookUpLocation = self.getValidInput("look for employee","Enter Location: ", validation.validateText)
+                match lookUpLocation.lower():
+                    case 'q':
+                        return 'q' # quit the whole program
+                    case 'b':
+                        return False # Go back one page
+                employee_list = self.logicWrapper.listEmployees(location=lookUpLocation)  
+            returnValue = self.showEmployeesInfo(employee_list)
 
         return returnValue
-
-
-
 
     def showEmployeeID(self) -> str | bool:
         # use Search class there is Employee Search class there that can search by any param in this case kennitala
@@ -36,29 +46,13 @@ class SearchUI(BaseUI):
     
             employee = self.logicWrapper.listEmployees(kennitala=lookUpKennitala)  # Call the wrapper that is
 
-
-
-
         employee_list = [f'{key}: {value}' for key, value in list(employee[0].__dict__.items())[1:]]
 
         return self.takeInputAndPrintMenu(['[Q]'], ('look for employee', employee_list, 'Choose a option: '))
 
-
-
-
-    
-    def showEmployeesLocation(self) -> str | bool:
-        # use Search class there is Employee Search class there that can search by any param in this case kennitala
-        employee_list = []
-        while not employee_list:
-            lookUpLocation = self.getValidInput("look for employee","Enter Location: ", validation.validateText)
-            match lookUpLocation.lower():
-                case 'q':
-                    return 'q' # quit the whole program
-                case 'b':
-                    return False # Go back one page
-    
-            employee_list = self.logicWrapper.listEmployees(location=lookUpLocation)  
+    def showEmployeesInfo(self, employee_list: list[Employee]) -> str:
+        if not employee_list:
+            return self.takeInputAndPrintMenu(['[Q]uit', '[B]ack'], (f'List employees', '', 'No employees registered to this location\nChoose a option: '))
 
         body = []
 
@@ -66,6 +60,7 @@ class SearchUI(BaseUI):
         headers = ['Name', 'Address', 'Phone number']
 
         # Calculate the maximum width for each column
+
         max_name_length = max(len(employee.name) for employee in employee_list)
         max_address_length = max(len(employee.address) for employee in employee_list)
         max_phone_length = max(len(employee.phone) for employee in employee_list)
@@ -90,63 +85,55 @@ class SearchUI(BaseUI):
     
     
 
-        return self.takeInputAndPrintMenu(['[Q]uit', '[B]ack'], (f'List employees for location {lookUpLocation}', body, 'Choose a option'))
+        return self.takeInputAndPrintMenu(['[Q]uit', '[B]ack'], (f'List employees', body, 'Choose a option: '))
     
 
 
 
-    def propertySearch(self) -> str | bool:
+    def propertySearch(self) -> str:
                 # use Search class there is Employee Search class there that can search by any param in this case kennitala
         userOption = self.takeInputAndPrintMenu( ['[L]ocation search', '[P]roperty number search'], ('View property', ['[L]ocation search', '[P]roperty number search'], "Choose a option: "))
-
+        if userOption.lower() in quitOrback:
+            return userOption.lower()
         match userOption.lower():
-            case 'q':
-                return 'q'
-            case 'b':
-                return False
             case 'l':
-                returnValue = self.showPropertyLocationSearch()
+                propertyList = []
+                while not propertyList:
+                    lookUpLocation = self.getValidInput("look for property","Enter Location: ", validation.validateText)
+                    match lookUpLocation.lower():
+                        case 'q':
+                            return 'q' # quit the whole program
+                        case 'b':
+                            return False # Go back one page
+                    self.showPropertyInfo(self.logicWrapper.listProperties(location=lookUpLocation))
             case 'p':
-                returnValue =self.showropertyNumberSearch()
+                returnValue = self.showropertyNumberSearch()
             
         if returnValue == 'q':
             return 'q'
 
 
-
-        # talk to wrapper with the kennitala entered THIS NEEDS TO GET SORTED :)
-
-
-    def showPropertyLocationSearch(self) -> str | bool:
+    def showPropertyInfo(self, propertyList: list[Property]) -> str:
 
         # use Search class there is Employee Search class there that can search by any param in this case kennitala
-        propertyList = []
-        while not propertyList:
-            lookUpLocation = self.getValidInput("look for property","Enter Location: ", validation.validateText)
-            match lookUpLocation.lower():
-                case 'q':
-                    return 'q' # quit the whole program
-                case 'b':
-                    return False # Go back one page
-    
-            propertyList = self.logicWrapper.listProperties(location=lookUpLocation)  
 
         body = []
 
         # Initialize column names
-        headers = ['Property ID', 'address', 'condition',]
+        headers = ['Property ID', 'address', 'condition', 'Location']
 
         # Calculate the maximum width for each column
         max_id_length = len('Property ID')
         max_address_length = max(len(employee.address) for employee in propertyList)
         max_condition_length = 10
+        max_location_length = 13
 
 
         # Build the line separator based on the column widths
-        line = '+' + '-' * (max_id_length + 2) + '+' + '-' * (max_address_length + 2) + '+' + '-' * (max_condition_length + 2) + '+'
+        line = '+' + '-' * (max_id_length + 2) + '+' + '-' * (max_address_length + 2) + '+' + '-' * (max_condition_length + 2) + '+' + '-' * (max_location_length + 2) + '+'
 
         # Build the header row
-        header_row = f"| {headers[0]:<{max_id_length}} | {headers[1]:<{max_address_length}} | {headers[2]:<{max_condition_length}} |"
+        header_row = f"| {headers[0]:<{max_id_length}} | {headers[1]:<{max_address_length}} | {headers[2]:<{max_condition_length}} | {headers[3]:<{max_location_length}} |"
 
         # Append the header and line to body
         body.append(line)
@@ -155,18 +142,13 @@ class SearchUI(BaseUI):
 
         # Build each employee row
         for dict in propertyList:
-            line_content = f"| {dict.id:<{max_id_length}} | {dict.address:<{max_address_length}} | {dict.condition:<{max_condition_length}} |"
+            line_content = f"| {dict.id:<{max_id_length}} | {dict.address:<{max_address_length}} | {dict.condition:<{max_condition_length}} | {dict.location:<{max_condition_length}}    |"
             body.append(line_content)
             body.append(line)
+
+
+        return self.takeInputAndPrintMenu(['[Q]uit', '[B]ack'], (f'List properties', body, 'Choose a option'))
     
-    
-
-        return self.takeInputAndPrintMenu(['[Q]uit', '[B]ack'], (f'List properties for location {lookUpLocation}', body, 'Choose a option'))
-    
-
-
-
-
 
     def showropertyNumberSearch(self) -> str | bool:
         property = []
@@ -180,12 +162,9 @@ class SearchUI(BaseUI):
     
             property = self.logicWrapper.listProperties(id = lookUpLocation)  
 
-        propertyList = [f'{key}: {value}' for key, value in list(property[0].__dict__.items())]
+        propertyList = [f'{key}: {value}' for key, value in list(property[0].__dict__.items())[:-2]]
 
-        return self.takeInputAndPrintMenu(['[Q]'], ('look for property', propertyList, 'Choose a option: '))
-
-
-
+        return self.takeInputAndPrintMenu(['[Q]uit', '[B]ack'], ('look for property', propertyList, 'Choose a option: '))
 
 
 
@@ -197,42 +176,72 @@ class SearchUI(BaseUI):
 
         match userOption.lower():
             case 'i':
-                userId = self.takeInputAndPrintMenu([], ('Search Work orders','', 'Enter a work order ID: '))
-                workOrdersInfo = self.logicWrapper.searchWorkOrders(workOrderId = userId)
+                self.showWorkOrderbyId()
             case 'p':
-                propertyNumber = self.takeInputAndPrintMenu([], ('Search Work orders','', 'Enter a property Number: '))
-                workOrdersInfo = self.logicWrapper.searchWorkOrders(properyNum = propertyNumber)
+                userPropertyNumber = ''
+                while not userPropertyNumber:
+                    lookUpPropertyNumber = self.takeInputAndPrintMenu([], ('Search Work orders','', 'Enter a property Number: '))
+                    userPropertyNumber = self.logicWrapper.listWorkOrders(propertyNumber = userPropertyNumber)
+                workOrders = self.logicWrapper.listWorkOrders(propertyNumber = userPropertyNumber)
+                self.showWorkOrders(workOrders)
             case 'k':
-                kennitala = self.takeInputAndPrintMenu([], ('Search Work orders','', 'Enter a kennital: '))
-                workOrdersInfo = self.logicWrapper.searchWorkOrders(Kennitala = kennitala)
+                kennitala = self.getValidInput('Search work orders', 'Enter a kennitala', validation.validateKennitala)
+                workOrdersInfo = self.logicWrapper.listWorkOrders(employeeID = kennitala)
             
-                
-
-    def workReportSearch(self) -> str | bool:
-        options = ['[I]D search', '[P]roperty number search', '[K]ennitala search']
-        userOption = self.takeInputAndPrintMenu(options, ('Search work report', options, 'Choose a option:  '))
-        work_orders = []
-
-        match userOption.lower():
-            case 'i':
-                userId = self.takeInputAndPrintMenu([], ('Search Work reports','', 'Enter a work order ID: '))
-                workOrdersInfo = self.logicWrapper.searchWorkReports(workOrderId = userId)
-            case 'p':
-                propertyNumber = self.takeInputAndPrintMenu([], ('Search Work reports','', 'Enter a property Number: '))
-                workOrdersInfo = self.logicWrapper.searchWorkReports(properyNum = propertyNumber)
-            case 'k':
-                kennitala = self.takeInputAndPrintMenu([], ('Search Work reports','', 'Enter a kennital: '))
-                workOrdersInfo = self.logicWrapper.searchWorkReports(Kennitala = kennitala)
     
+    def showWorkOrders(self, workOrders: list[WorkOrder]) -> str:
+
+        if not workOrders:
+            return None
+
+        body = []
+        for instance in workOrders: # looping through every current work order
+            propertyForWorkOrder = self.logicWrapper.listProperties(id = instance.propertyNumber)
+            
+            body.append(f'WORK ORDER #{instance.id}, Location {propertyForWorkOrder[0].location}')
+            body.append(f'Priority: {instance.priority}')
+            body.append(f'Description: {instance.description}')
+            body.append(f'Property Number: {instance.propertyNumber}')
+            if int(instance.contractorID) > -1:
+                contractor = self.logicWrapper.listContractors(id = instance.contractorID)
+                body.append(f'Contractor: {contractor[0].name}')
+            else:
+                body.append(f'Contractor: No contractor is assigned to this work order')
+            body.append(f'Room/facility: {instance.roomFacilityId}')
+            body.append(f'Status: Not completed\n\n')
+
+ 
+        return body
 
 
 
-  
+    def showWorkOrderbyId(self): 
+        workOrder = ''
+        while not workOrder:
+            lookUpWorkOrder = self.takeInputAndPrintMenu([], ('Search Work report by id','', 'Enter a work work order ID: '))
+            workOrder = self.logicWrapper.listWorkOrders(id = lookUpWorkOrder)
+        
+        WorkOrderInstance = workOrder[0]
+        if int(WorkOrderInstance.contractorID) > -1:
+            contractor = self.logicWrapper.listContractors(id = WorkOrderInstance.contractorID)    
+            workOrderDict = {'description': WorkOrderInstance.description, 'property number': WorkOrderInstance.propertyNumber, 'priority': WorkOrderInstance.priority, 'contractor': contractor[0].name, 'room id': WorkOrderInstance.roomFacilityId, 'Status': f'{'completed' if WorkOrderInstance.isCompleted else 'Not completed'}'}
+        else:
+            workOrderDict = {'description': WorkOrderInstance.description, 'property number': WorkOrderInstance.propertyNumber, 'priority': WorkOrderInstance.priority, 'contractor': 'No contractor assigned to this work order', 'room id': WorkOrderInstance.roomFacilityId, 'Status': f'{'completed' if WorkOrderInstance.isCompleted else 'Not completed'}'}
+
+        
+        return self.takeInputAndPrintMenu(['[Q]uit', '[B]ack'], ('Search Work report by id', [f'{key}: {value}' for key, value in workOrderDict.items()], 'Choose a option: '))
+
+
 
     def workReportSearch(self) -> str | bool:
         pass
 
-    def showContractorsInfo(self) -> str | bool:
+    def workReportSearch(self) -> str | bool:
+        pass
+
+
+
+    def showContractorsInfo(self, options = 'choose a option', userOption = ['[Q]uit', '[B]ack']) -> str | bool:
         contractors = self.logicWrapper.listContractors()
 
         body = []
@@ -252,6 +261,7 @@ class SearchUI(BaseUI):
         # Build the line separator based on the column widths
         line = '+' + '-' * (max_name_length + 2) + '+' + '-' * (max_phone_length + 2) + '+' + '-' * (max_openingHours_length + 2) + '+' + '-' * (max_location_length) + '+' + '-' * (max_id_length) + '--+'
 
+
         # Build the header row
         header_row = f"| {headers[0]:<{max_name_length}} | {headers[1]:<{max_phone_length}} | {headers[2]:<{max_openingHours_length}} | {headers[3]:<{max_location_length - 2}} | {headers[4]:<{max_id_length}} |"
 
@@ -268,19 +278,9 @@ class SearchUI(BaseUI):
     
     
 
-        return self.takeInputAndPrintMenu(['[Q]uit', '[B]ack'], (f'List contractors', body, 'Choose a option'))
+        return self.takeInputAndPrintMenu(userOption, (f'List contractors', body, options))
 
 
  
 
 
-
-
-    def getValidInput(self, name, prompt, validationFunc, userDict: dict = {}) -> str | bool:
-        '''Validates the input based on the validation function given, prints baseMenu every time the user enters unvalid info. menu is based on the arguments given '''
-        while True:
-            self.printBaseMenu(name, [f'{key}: {value}' for key, value in userDict.items()], prompt)
-            user_input = input(' ')
-        
-            if validationFunc(user_input):
-                return user_input

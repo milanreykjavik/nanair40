@@ -1,12 +1,50 @@
 [
     {
-        "id": 45,
-        "date": "2024",
-        "description": "desc",
-        "propertyNumber": 1,
-        "userID": 1,
-        "priority": 1,
-        "contractorID": 1,
-        "isCompleted": true
+        "id": 10,
+        "date": "",
+        "description": "Walls need to be painted, preferably they need to be blue",
+        "propertyNumber": "F11100",
+        "userID": 0,
+        "priority": "now",
+        "workReport": [],
+        "contractorID": "2",
+        "isCompleted": false,
+        "roomFacilityId": "f1"
+    },
+    {
+        "id": 1,
+        "date": "",
+        "description": "Sink is broken in bathroom",
+        "propertyNumber": "F11100",
+        "userID": 0,
+        "priority": "emergency",
+        "workReport": [],
+        "contractorID": "9",
+        "isCompleted": false,
+        "roomFacilityId": "r103"
+    },
+    {
+        "id": 2,
+        "date": "",
+        "description": "Table in kitchen is broken",
+        "propertyNumber": "120000",
+        "userID": 0,
+        "priority": "now",
+        "workReport": [],
+        "contractorID": -1,
+        "isCompleted": false,
+        "roomFacilityId": "f-1"
+    },
+    {
+        "id": 0,
+        "date": "",
+        "description": "windows need cleaning",
+        "propertyNumber": "F11100",
+        "userID": "0511042930",
+        "priority": "now",
+        "workReport": [],
+        "contractorID": "2",
+        "isCompleted": false,
+        "roomFacilityId": "r103"
     }
 ]

@@ -6,23 +6,24 @@ from logic.employeeHandler import EmployeeHandler
 from baseClasses.Employee import Employee
 from logic.PropertyHandler import PropertyHandler
 from baseClasses.Property import Property
-from logic.workHandler import WorkHandler
-from baseClasses.Work import WorkOrder, WorkReport
+from logic.workOrderHandler import WorkOrderHandler
+from baseClasses.workOrder import WorkOrder
 from logic.contractorHandler import ContractorHandler
 from baseClasses.Contractor import Contractor
+from typing import Any
 
 class Logic_Wrapper:
     def __init__(self) -> None:
         self.employeeHandler = EmployeeHandler()
         self.propertyHandler = PropertyHandler()
-        self.workHandler = WorkHandler()
+        self.workHandler = WorkOrderHandler()
         self.contractorHandler = ContractorHandler()
 
     def addEmployee(self, employee: Employee) -> bool:
         return self.employeeHandler.addEmployee(employee)
     
-    def editEmployee(self, employeeID: str, **kwargs) -> bool:
-        return self.employeeHandler.editEmployee(employeeID, **kwargs)
+    def editEmployee(self, entry: str, entryValue: Any, **kwargs) -> bool:
+        return self.employeeHandler.editEmployee(entry, entryValue, **kwargs)
     
     def listEmployees(self, **kwargs) -> list['Employee']:
         return self.employeeHandler.listEmployes(**kwargs)
@@ -33,14 +34,14 @@ class Logic_Wrapper:
     def listProperties(self, **kwargs) -> list['Property']:
         return self.propertyHandler.listProperties(**kwargs)
     
-    def editProperty(self, propertyID: str, **kwargs) -> bool:
-        return self.propertyHandler.editProperty(propertyID, **kwargs)
+    def editProperty(self, entry: str, entryValue: Any, **kwargs) -> bool:
+        return self.propertyHandler.editProperty(entry, entryValue, **kwargs)
 
-    def addWork(self, work: 'WorkOrder') -> bool:
-        return self.workHandler.addWork(work)
+    def addWorkOrder(self, work: 'WorkOrder') -> bool:
+        return self.workHandler.addWorkOrder(work)
 
-    def editWork(self, workID: str, **kwargs) -> bool:
-        return self.workHandler.editWork(workID, **kwargs)
+    def editWorkOrder(self, entry: str, entryValue: Any, **kwargs) -> bool:
+        return self.workHandler.editWorkOrder(entry, entryValue, **kwargs)
 
     def listWorkOrders(self, **kwargs) -> list['WorkOrder']:
         return self.workHandler.listWorkOrders(**kwargs)
@@ -48,8 +49,14 @@ class Logic_Wrapper:
     def addContractor(self, contractor: 'Contractor') -> bool:
         return self.contractorHandler.addContractor(contractor)
 
-    def editContractor(self, contractorID: str, **kwargs) -> bool:
-        return self.contractorHandler.editContractor(contractorID, **kwargs)
+    def editContractor(self, entry: str, entryValue: Any, **kwargs) -> bool:
+        return self.contractorHandler.editContractor(entry, entryValue, **kwargs)
 
     def listContractors(self, **kwargs) -> list['Contractor']:
         return self.contractorHandler.listContractors(**kwargs)
+    
+    def listCurrentEmployeeWorkOrders(self, **kwargs) -> list['WorkOrder']:
+        return self.workHandler.listCurrentEmployeeWorkOrders(**kwargs)
+    
+    def listCurrentEmployeeWorkOrders(self, **kwargs) -> list['WorkOrder']:
+        return self.workHandler.listCurrentEmployeeWorkOrders(**kwargs)
