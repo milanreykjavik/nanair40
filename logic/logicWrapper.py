@@ -56,7 +56,7 @@ class Logic_Wrapper:
         return self.workReportHandler.editWorkReport(workReportID, **kwargs)
 
     def listWorkOrders(self, **kwargs) -> list['WorkReport']:
-        return self.workReportHandler.listWorkReports(**kwargs)
+        return self.workOrderHandler.listWorkOrders(**kwargs)
 
     def addContractor(self, contractor: 'Contractor') -> bool:
         return self.contractorHandler.addContractor(contractor)
