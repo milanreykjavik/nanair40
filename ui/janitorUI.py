@@ -100,6 +100,7 @@ class JanitorUI(SearchUI):
         workReportID: int = self.logicWrapper.currentWorkReportID(WorkOrderId)
         WorkReportInstance = WorkReport(workReportID, WorkOrderId, workReportDict['Description'], int(workOrder[0].contractorID), now, int(workReportDict['cost']))
         workReportDict['cost'] += 'Kr'
+        self.logicWrapper.addWorkReport(WorkReportInstance)
 
 
         self.logicWrapper.editWorkOrder(entry='id', entryValue=workOrder[0].id, workReport = [WorkReportInstance])

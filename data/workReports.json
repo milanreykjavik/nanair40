@@ -25,5 +25,14 @@
         "date": "12.10.2024",
         "cost": 50,
         "comment": ""
+    },
+    {
+        "id": 3,
+        "workOrderID": 3,
+        "description": "testingaaaa",
+        "contractorID": 5,
+        "date": "12.10.2024",
+        "cost": 5000000,
+        "comment": ""
     }
 ]
