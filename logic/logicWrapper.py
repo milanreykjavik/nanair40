@@ -28,12 +28,12 @@ class Logic_Wrapper:
         if len(self.currentContractors):
             self.currentContractorID: int = int(self.currentContractors[-1].id)
         else:
-            self.currentContractorID = 1
+            self.currentContractorID = 0
         self.currentWorkOrders: list['WorkOrder'] = self.workOrderHandler.listWorkOrders()
         if len(self.currentWorkOrders):
             self.currentWorkOrderID: int = int(self.currentWorkOrders[-1].id)
         else:
-            self.currentWorkOrderID = 1
+            self.currentWorkOrderID = 0
 
 
 

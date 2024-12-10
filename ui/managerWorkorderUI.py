@@ -84,6 +84,7 @@ class ManagerWorkOrder(SearchUI):
 
         ### Maybe add a date function??
 
+        self.logicWrapper.currentWorkOrderID+=1
         workOrderInstance = WorkOrder(id=self.logicWrapper.currentWorkOrderID, description=Userdescription, propertyNumber=lookUpPropertyNumber, priority=userPriority, contractorID=lookUpContractor , roomFacilityId= managerRoomFacilityId)
 
 
