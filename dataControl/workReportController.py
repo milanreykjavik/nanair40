@@ -3,7 +3,7 @@ import os
 import tempfile
 from typing import Any
 
-from baseClasses.WorkReport import WorkReport
+from baseClasses.workReport import WorkReport
 
 def atomicWrite(fp, data):
     dirName = os.path.dirname(fp)

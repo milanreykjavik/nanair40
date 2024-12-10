@@ -1,19 +1,22 @@
 import json
-
+from baseClasses.workReport import WorkReport
 
 """
 ADD REPEATING WORK ORDERS
 """
 class WorkOrder:
-    def __init__(self, id: int = 0, date: str = "", description: str = "", propertyNumber: int = 0, userID: int = 0, priority: int = 0, contractorID: int = 0, isCompleted: bool = False):
+    def __init__(self, id: int = 0, date: str = "", description: str = "", propertyNumber: int = 0, userID: int = 0, priority: int = 0, workReport: list['WorkReport'] = [], contractorID: int = 0, isCompleted: bool = False, roomFacilityId: int = 0, sentToManager: bool = False):
         self.id: int = id
         self.date: str = date
         self.description: str = description
         self.propertyNumber: int = propertyNumber
         self.userID: int = userID
         self.priority: int = priority # 0 1 2
+        self.workReport: list['WorkReport'] = workReport
         self.contractorID: int = contractorID # if it is -1 it is nobody if it is > -1 then it is an actual contrator
+        self.sentToManager: bool = sentToManager
         self.isCompleted: bool = isCompleted
+        self.roomFacilityId: int = roomFacilityId
 
 
     def __repr__(self) -> str:

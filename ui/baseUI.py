@@ -1,5 +1,4 @@
 import os
-from typing import Callable, List, Any
 
 class BaseUI:
     @staticmethod
@@ -7,7 +6,7 @@ class BaseUI:
         '''Returns a string that represents the options the user can do'''
         returnStr = '\n'
         for option in options:
-            returnStr += f'       [{option[0]}]{option[1:]}\n'# Formats the options 
+            returnStr += f'       {option}\n'# Formats the options 
 
         return returnStr
     
@@ -15,6 +14,8 @@ class BaseUI:
     def available_options(possibilites) -> list:
         '''Returns a list of letters, with every single letter the user can choose from'''
         options = ['Q', 'B']
+        if not possibilites:
+            return options
 
         for word in possibilites:
             options.append(word[1])
@@ -58,51 +59,31 @@ class BaseUI:
 
 
 
-    @staticmethod
-    def isValidInput(possibilites: list, choice: str) -> int:
-        if choice == 'q':
-            return 2
-        if all(choice.upper() not in option[0] for option in possibilites):
-            return 0
 
-        return 1
-
-    def returnTable(self, functions: List[Callable[[], Any]], possibilites: List[List[str]], choice: str) -> Any:
-        if not self.isValidInput(possibilites, choice):
-            return input(' ')
-
-        if len(possibilites) != len(functions):
-            return None # raise exception THIS CANNOT HAPPEN
-
-        data = {}
-        for i in range(len(possibilites)):
-            if possibilites[i][0] == choice.upper():
-                return functions[i]()
-
-        #if any(choice.upper() not in option[0] for option in possibilites):
-        #return functions[possibilites.index(
-
-
-    def takeInputAndPrintMenu(self, possibilites: list, menuInformation: tuple) -> str:
+    def takeInputAndPrintMenu(self, possibilites: list, menuInformation: tuple, errorMessage = 'Please choose from the options available\n') -> str:
         '''Asks the user a option based on the option list entered, it prints the baseMenuScreen after every one guess, the menu screen is determained by the second argument, when the user enters a available option, then that option is returned'''
+        error = False
+        menuInformation = list(menuInformation)
         options_list = self.available_options(possibilites) 
 
         while True:
+            if error:
+                menuInformation[2] = errorMessage + menuInformation[2]
+                errorMessage = ''
             self.printBaseMenu(menuInformation[0], menuInformation[1], menuInformation[2])
+    
             user_option = input(' ') 
 
-            if not self.isValidInput(possibilites, user_option):
-                return user_option
-
-            break
-
         
-                    
+            if user_option.upper() in options_list or not possibilites:
+                return user_option
+            
+            error = True
 
 
 
-
-    def printMainMenu(self, name: str, options: list = [], errorMessage: str = '') -> None:
+    @staticmethod
+    def printMainMenu(errorMessage='') -> None:
         clearTerminal()
         print(f'''
 --------------------------------------------------------------------------------
@@ -112,11 +93,27 @@ class BaseUI:
 /_/|_/\_,_/_/|_/   /_/ |_/_/_/           ! ! !
 ~Where dividing by zero makes sense                
 --------------------------------------------------------------------------------
-    {name}:
+	MAIN MENU:
 	-----------
-    {self.getOptions(options)}
+	[M]anager
+	[J]anitor (Maintenance)
+	[S]earh (Front desk)	
+	[Q]uit
 -------------------------------------------------------------------------------
 Choose a option:''', end='')
+        
+    def getValidInput(self, name, prompt, validationFunc, userDict: dict = {}, errorMessage = 'Invalid Input\n') -> str:
+        error = False
+        while True:
+            if error:
+                prompt = errorMessage + prompt
+                errorMessage = ''
+            self.printBaseMenu(name, [f'{key}: {value if value else ''}' for key, value in userDict.items()], prompt)
+            user_input = input(' ')
+        
+            if validationFunc(user_input):
+                return user_input
+            error = True
         
         
 

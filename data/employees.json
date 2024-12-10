@@ -6,24 +6,42 @@
         "homePhone": "+3545432109",
         "address": "654 Pine Ave, Kopavogur",
         "email": "sven.jonsson@example.com",
-        "location": 3
+        "location": "Reykjav\u00edk"
     },
     {
-        "kennitala": 6789012345,
-        "name": "Hanna Thoroddsen",
-        "phone": "+3546789012",
-        "homePhone": "+3544321098",
-        "address": "987 Cedar Blvd, Mosfellsbaer",
-        "email": "hanna.thoroddsen@example.com",
-        "location": 1
+        "kennitala": "0511042930",
+        "name": "helgi thor",
+        "phone": "1111111",
+        "homePhone": "8202938",
+        "address": "hjallalaut 7",
+        "email": "helgithor@gmail.com",
+        "location": "Nuuk"
     },
     {
-        "kennitala": 7890123456,
-        "name": "Bjorn Rognvaldsson",
-        "phone": "+3547890123",
-        "homePhone": "+3543210987",
-        "address": "135 Maple Rd, Isafjordur",
-        "email": "bjorn.rognvaldsson@example.com",
-        "location": 1
+        "kennitala": "0511042931",
+        "name": "John Oli",
+        "phone": "9991111",
+        "homePhone": "7817979",
+        "address": "hvammi 2",
+        "email": "jon@gmail.com",
+        "location": "Nuuk"
+    },
+    {
+        "kennitala": "0192837465",
+        "name": "Gr\u00e9tar m\u00e1r",
+        "phone": "1923746",
+        "homePhone": "1234569",
+        "address": "Jolutirg 1",
+        "email": "email@gmail.com",
+        "location": "Nuuk"
+    },
+    {
+        "kennitala": "9876543212",
+        "name": "Milan",
+        "phone": "0987654",
+        "homePhone": "2343212",
+        "address": "ksanclsa",
+        "email": "Email@mail.com",
+        "location": "Tingwall"
     }
 ]

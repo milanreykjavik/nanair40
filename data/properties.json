@@ -1,16 +1,81 @@
 [
     {
-        "id": "23",
-        "location": "2",
-        "address": "654 Pine Ave, Kopavogur",
-        "condition": "2",
-        "facilities": "bla"
+        "id": "120",
+        "location": "Tingwall",
+        "address": "hjalv 5",
+        "condition": "good",
+        "facilitiesMaintenance": "Hot tub needs fixing",
+        "rooms": {
+            "r1": "room 1",
+            "r2": "room 2"
+        },
+        "facilities": {
+            "h1": "hot tub"
+        }
     },
     {
-        "id": "2",
-        "location": "2",
-        "address": "bla",
-        "condition": "Poor",
-        "facilities": "gugu"
+        "id": "1",
+        "location": "Tingwall",
+        "address": "hvam",
+        "condition": "poor",
+        "facilitiesMaintenance": "hot tub is broken, need some new windows",
+        "rooms": {
+            "r-101": "room 1",
+            "r102": "room 2",
+            "r103": "room 3"
+        },
+        "facilities": {
+            "h1": "hot tun",
+            "f-1": "front desk",
+            "f1": "backroom"
+        }
+    },
+    {
+        "id": "\u00f6",
+        "location": "Nuuk",
+        "address": "b",
+        "condition": "poor",
+        "facilitiesMaintenance": "hot tub is broken :>(",
+        "rooms": {
+            "R-101": "room 1",
+            "R-201": "room 2",
+            "R-301": "room 3"
+        },
+        "facilities": {
+            "h1": "Hot tub",
+            "f1": "front desk"
+        }
+    },
+    {
+        "id": "9",
+        "location": "Kulusuk",
+        "address": "hjolabakki",
+        "condition": "good",
+        "facilitiesMaintenance": "windows are broken",
+        "rooms": {
+            "r101": "room 1",
+            "r102": "room 2",
+            "r103": "room 3"
+        },
+        "facilities": {
+            "f1": "front desk",
+            "h1": "hot tub",
+            "s1": "sauna",
+            "g1": "garage"
+        }
+    },
+    {
+        "id": "P101",
+        "location": "Nuuk",
+        "address": "Bordis 17",
+        "condition": "poor",
+        "facilitiesMaintenance": "lighting in most bathrooms might need fixing",
+        "rooms": {
+            "R101": "room 1",
+            "R102": "room 2"
+        },
+        "facilities": {
+            "F1": "Fron desk"
+        }
     }
 ]

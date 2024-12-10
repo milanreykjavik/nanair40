@@ -18,6 +18,7 @@ class ValidationUI:
     @staticmethod
     def validateKennitala(kennitala) -> str | bool:
         """Checks if the kennitals is valid, includes only numbers and has len = 10, if [b]ack or [q]uit were entered we return the letter"""
+        
         if kennitala.lower() in ('q', 'b'):
             return kennitala
         
@@ -79,3 +80,22 @@ class ValidationUI:
             return False
         
         return True
+    
+    @staticmethod
+    def validateNumber(num):
+        if num.lower() in ('q', 'b'):
+            return num
+        if num.isdigit():
+            if int(num) > 0:
+                return True
+        return False
+    
+    @staticmethod
+    def validatePriority(priority):
+        if priority.lower() in ('q', 'b'):
+            return priority
+        if priority.lower() in ('now', 'emergency', 'as soon as possible'):
+            return True
+        return False
+
+
