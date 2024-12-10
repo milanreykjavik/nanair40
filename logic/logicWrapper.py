@@ -15,29 +15,7 @@ from baseClasses.Contractor import Contractor
 from logic.locationHandler import LocationHandler
 from baseClasses.Location import Location
 from typing import Any
-from datetime import datetime
-from dateutil.relativedelta import relativedelta
 
-def time_diff_category(date1_str, date2_str):
-    # Define the date format
-    date_format = "%d.%m.%Y"
-    
-    # Parse the date strings into datetime objects
-    date1 = datetime.strptime(date1_str, date_format)
-    date2 = datetime.strptime(date2_str, date_format)
-    
-    # Calculate the absolute difference
-    delta = relativedelta(date2, date1)
-    
-    # Check the difference and return appropriate category
-    if delta.years > 0:
-        return 4  # Year
-    elif delta.months > 0:
-        return 3  # Month
-    elif delta.days > 7:
-        return 2  # Week
-    else:
-        return 1  # Day
 
 class Logic_Wrapper:
     def __init__(self) -> None:
@@ -112,20 +90,5 @@ class Logic_Wrapper:
         return self.locationHandler.listLocations(**kwargs)
 
     def listRepeatingWorkOrders(self, **kwargs) -> list[WorkOrder]:
-        repeatingList: list[WorkOrder] = self.workOrderHandler.listWorkOrders(repeating=True)
+        return self.workOrderHandler.listRepeatingWorkOrders(**kwargs)
 
-        currentDate = datetime.now()
-        currentDate = currentDate.strftime("%d.%m.%Y")
-
-        final = []
-        for workOrder in repeatingList:
-            if not workOrder.date:
-                continue
-            if not len(workOrder.workReport):
-                final.append(workOrder)
-                continue
-            tdif = time_diff_category(workOrder.workReport[-1].date, currentDate)
-            if tdif >= workOrder.repeatInterval:
-                final.append(workOrder)
-        return final
-            
