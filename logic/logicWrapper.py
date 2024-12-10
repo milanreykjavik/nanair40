@@ -119,6 +119,8 @@ class Logic_Wrapper:
 
         final = []
         for workOrder in repeatingList:
+            if not workOrder.date:
+                continue
             if not len(workOrder.workReport):
                 final.append(workOrder)
                 continue
