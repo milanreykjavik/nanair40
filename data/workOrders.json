@@ -63,5 +63,20 @@
         "sentToManager": false,
         "isCompleted": false,
         "roomFacilityId": "r2"
+    },
+    {
+        "id": 4,
+        "date": "",
+        "description": "testingrepeating",
+        "propertyNumber": "120",
+        "userID": 0,
+        "priority": 1,
+        "workReport": [],
+        "contractorID": -1,
+        "sentToManager": false,
+        "isCompleted": false,
+        "roomFacilityId": "r1",
+        "repeating": true,
+        "repeatInterval": 2
     }
 ]
