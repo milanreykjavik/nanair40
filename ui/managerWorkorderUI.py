@@ -84,8 +84,19 @@ class ManagerWorkOrder(SearchUI):
 
         ### Maybe add a date function??
 
+        isRecuring = self.takeInputAndPrintMenu(["Yes", "No"], ("Add work ordder", body, "IS this task reccurong(Y/N): "))
+        repeating = False
+        repeatInterval = 0
+        if isRecuring.lower() == "y":
+            repeating = True
+
+        if repeating:
+            self.takeInputAndPrintMenu(["D", "W", "M", "Y"], ("Create a work order", ["[D]aily", "[W]eekly", "[M]onthly", "[Y]early"], "Choose option: "))
+            repeatInterval = 2
+
+
         self.logicWrapper.currentWorkOrderID+=1
-        workOrderInstance = WorkOrder(id=self.logicWrapper.currentWorkOrderID, description=Userdescription, propertyNumber=lookUpPropertyNumber, priority=userPriority, contractorID=lookUpContractor , roomFacilityId= managerRoomFacilityId)
+        workOrderInstance = WorkOrder(id=self.logicWrapper.currentWorkOrderID, description=Userdescription, propertyNumber=lookUpPropertyNumber, priority=int(userPriority), contractorID=int(lookUpContractor), roomFacilityId= managerRoomFacilityId, repeating=repeating, repeatInterval=repeatInterval)
 
 
         self.logicWrapper.addWorkOrder(workOrderInstance)
