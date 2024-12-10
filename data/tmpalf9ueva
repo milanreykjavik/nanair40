@@ -58,10 +58,5 @@
         "propertyNumber": "120",
         "userID": "2707046969",
         "priority": "now",
-        "workReport": [],
-        "contractorID": "5",
-        "sentToManager": false,
-        "isCompleted": false,
-        "roomFacilityId": "r2"
-    }
-]
+        "workReport": [
+            

@@ -43,5 +43,14 @@
         "address": "ksanclsa",
         "email": "Email@mail.com",
         "location": "Tingwall"
+    },
+    {
+        "kennitala": "2707046969",
+        "name": "Milan",
+        "phone": "7696969",
+        "homePhone": "1234567",
+        "address": "testing 12",
+        "email": "milan@ru.is",
+        "location": "Nuuk"
     }
 ]
