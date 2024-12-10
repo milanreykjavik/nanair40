@@ -92,11 +92,14 @@ class JanitorUI(SearchUI):
             return workReportDict['cost'].lower()
         
         # add a kr sign to the end, so that it look better when printing out
-        workReportDict['cost'] += 'Kr'
+        
 
         # create a work report instance that will be sent down to logic layer and then stored in a json file
-        WorkReportInstance = WorkReport(0, WorkOrderId, workReportDict['Description'], workOrder[0].contractorID, now, workReportDict['cost'])
-        self.logicWrapper.addWorkReport(WorkReportInstance)
+        WorkOrderId = int(WorkOrderId)
+        now = now.strftime("%m.%d.%Y")
+        workReportID: int = self.logicWrapper.currentWorkReportID(WorkOrderId)
+        WorkReportInstance = WorkReport(workReportID, WorkOrderId, workReportDict['Description'], int(workOrder[0].contractorID), now, int(workReportDict['cost']))
+        workReportDict['cost'] += 'Kr'
 
 
         self.logicWrapper.editWorkOrder(entry='id', entryValue=workOrder[0].id, workReport = [WorkReportInstance])

@@ -7,5 +7,23 @@
         "date": "2024-12-09",
         "cost": 50,
         "comment": "Completed successfully"
+    },
+    {
+        "id": 1,
+        "workOrderID": 3,
+        "description": "test",
+        "contractorID": 5,
+        "date": "12.10.2024",
+        "cost": 50,
+        "comment": ""
+    },
+    {
+        "id": 2,
+        "workOrderID": 3,
+        "description": "test",
+        "contractorID": 5,
+        "date": "12.10.2024",
+        "cost": 50,
+        "comment": ""
     }
 ]

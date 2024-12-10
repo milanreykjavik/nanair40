@@ -69,6 +69,8 @@ class Logic_Wrapper:
     
     def addWorkReport(self, workReport: 'WorkReport') -> bool:
         return self.workReportHandler.addWorkReport(workReport)
+    def currentWorkReportID(self, workOrderID: int) -> int:
+        return self.workReportHandler.currentWorkReportID(workOrderID)
 
     def listWorkOrders(self, **kwargs) -> list[WorkOrder]:
         return self.workOrderHandler.listWorkOrders(**kwargs)
