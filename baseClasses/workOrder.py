@@ -5,7 +5,7 @@ from baseClasses.workReport import WorkReport
 ADD REPEATING WORK ORDERS
 """
 class WorkOrder:
-    def __init__(self, id: int = 0, date: str = "", description: str = "", propertyNumber: int = 0, userID: int = 0, priority: int = 0, workReport: list['WorkReport'] = [], contractorID: int = 0, isCompleted: bool = False, roomFacilityId: int = 0, sentToManager: bool = False):
+    def __init__(self, id: int = 0, date: str = "", description: str = "", propertyNumber: int = 0, userID: int = 0, priority: int = 0, workReport: list['WorkReport'] = [], contractorID: int = 0, isCompleted: bool = False, roomFacilityId: int = 0, sentToManager: bool = False, repeating: bool = False, repeatInterival: str = ""):
         self.id: int = id
         self.date: str = date
         self.description: str = description
@@ -17,10 +17,12 @@ class WorkOrder:
         self.sentToManager: bool = sentToManager
         self.isCompleted: bool = isCompleted
         self.roomFacilityId: int = roomFacilityId
+        self.repeating: bool = repeating
+        self.repeatInterival: str = repeatInterival
 
 
     def __repr__(self) -> str:
-        return f"WorkOrder(id={self.id}, date={self.date}, description={self.description}, propertyNumber={self.propertyNumber}, userID={self.userID}, priority={self.priority}, contractorID={self.contractorID}, isCompleted={self.isCompleted})"
+        return f"WorkOrder(id={self.id}, date={self.date}, description={self.description}, propertyNumber={self.propertyNumber}, userID={self.userID}, priority={self.priority}, contractorID={self.contractorID}, isCompleted={self.isCompleted}, repeating={self.repeating}, repeatInterival={self.repeatInterival})"
 
 
     def normalize(self, jsonData: list[str]) -> list['WorkOrder']:
