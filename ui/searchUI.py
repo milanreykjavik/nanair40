@@ -13,7 +13,7 @@ class SearchUI(BaseUI):
         self.logicWrapper = logicWrapper
 
     def employeeSearch(self) -> str | bool:
-        options = ['[K]ennitala search', '[L]ocation search']
+        options = ['Kennitala search', 'Location search']
         userOption = self.takeInputAndPrintMenu(options, ('Employee search', options, 'Choose a option'))
 
 
@@ -89,7 +89,7 @@ class SearchUI(BaseUI):
 
     def propertySearch(self) -> str:
                 # use Search class there is Employee Search class there that can search by any param in this case kennitala
-        userOption = self.takeInputAndPrintMenu( ['[L]ocation search', '[P]roperty number search'], ('View property', ['[L]ocation search', '[P]roperty number search'], "Choose a option: "))
+        userOption = self.takeInputAndPrintMenu( ['Location search', 'Property number search'], ('View property', ['Location search', 'Property number search'], "Choose a option: "))
         if userOption.lower() in quitOrback:
             return userOption.lower()
         match userOption.lower():
@@ -167,7 +167,7 @@ class SearchUI(BaseUI):
 
 
     def workOrderSearch(self) -> str | bool:
-        options = ['[I]D search', '[P]roperty number search', '[K]ennitala search']
+        options = ['ID search', 'Property number search', 'Kennitala search']
         userOption = self.takeInputAndPrintMenu(options, ('Search work order', options, 'Choose a option:  '))
         work_orders = []
 

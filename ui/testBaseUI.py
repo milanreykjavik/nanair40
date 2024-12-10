@@ -2,14 +2,15 @@ import os
 
 class BaseUI:
     @staticmethod
+    def quitProgram():
+        return
+
+    @staticmethod
     def getOptions(options: list) -> str:
         '''Returns a string that represents the options the user can do'''
         returnStr = '\n'
         for option in options:
-            if len(option) > 1:
-                returnStr += f'       [{option[0]}]{option[1:]}\n'# Formats the options
-                continue
-            returnStr += ""
+            returnStr += f'       [{option[0]}]{option[0:]}\n'# Formats the options 
 
         return returnStr
     
@@ -61,6 +62,20 @@ class BaseUI:
         print(baseMenu.strip(), end='')
 
 
+    def returnTable(self, userInput: str, previousMenu, possibilites: list, functions: list) -> None:
+        if len(possibilites) != len(functions):
+            return None # raise error this in impossible case
+        userInput = userInput.lower()
+        if userInput == 'q':
+            return self.quitProgram()
+        if userInput == 'b':
+            return previousMenu()
+
+        for i in range(len(possibilites)):
+            if possibilites[i][0].lower() == userInput:
+                return functions[i]()
+
+        return None
 
 
     def takeInputAndPrintMenu(self, possibilites: list, menuInformation: tuple, errorMessage = 'Please choose from the options available\n') -> str:

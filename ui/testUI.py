@@ -1,5 +1,5 @@
 from ui.propertiesUI import PropertiesUI
-from ui.baseUI import BaseUI
+from ui.testBaseUI import BaseUI
 from ui.employeeUI import EmployeeUI
 from ui.contractorsUI import ContractorsUI
 from ui.janitorUI import JanitorUI
@@ -18,84 +18,29 @@ class MainUI(BaseUI):
         self.janitorUI = JanitorUI(self.logicWrapper)
         self.searchUI = SearchUI(self.logicWrapper)
 
-    def mainMenu(self) -> str:
-        optionInput = ''
-        while optionInput.lower() != 'q':
-            self.printMainMenu() 
-
-            optionInput = input(' ')
- 
-
-            match optionInput.lower():  
-                case 'm':  
-                    returnValue = self.ShowManagerMenu() 
-                case 'j':  
-                    returnValue = self.ShowMaintenanceMenu() 
-                case 's':  
-                    returnValue = self.ShowSearchMenu()
-                case 'q':  # Matching case for comparison
-                    return 'q'
-                case _:
-                    continue
-                
-            if returnValue == 'q': # if the user entered q then we go back until the program ends
-               return 'q'
+    def mainMenu(self, error=False) -> None:
+        self.printMainMenu() 
+        possibilites = ['M', 'J', 'S']
+        functions = [self.ShowManagerMenu, self.ShowMaintenanceMenu, self.ShowSearchMenu]
+        optionInput = input(' ')
+        return self.returnTable(optionInput, None, possibilites, functions)
 
 
-    def ShowManagerMenu(self) -> str | bool:
-        optionInput = ''
-        while optionInput.lower() != 'q':
-            options = ['Employee menu', 'Properties menu', 'Work orders menu', 'Contractors']
-
-            optionInput = self.takeInputAndPrintMenu(options, ('Manager', options, 'Choose a option: '))
-
-            
-
-            match optionInput.lower():
-                case 'e':  # Matching case for comparison
-                    returnValue = self.employeeMenu()
-                case 'p':  # Matching case for comparison
-                    returnValue = self.propertiesMenu()
-                case 'w':  # Matching case for comparison
-                    returnValue = self.workOrderMenu()
-                case 'c':  # Matching case for comparison
-                    returnValue = self.contractorsIU.showContractor()
-                case 'b':  # Matching case for comparison
-                    return False
-                case 'q':  # Matching case for comparison
-                    return 'q'
-                
-            if returnValue == 'q':
-                return 'q'
+    def ShowManagerMenu(self, error=False) -> None:
+        options = ['Employee menu', 'Properties menu', 'Work orders menu', 'Contractors']
+        functions = [self.employeeMenu, self.propertiesMenu, self.workOrderMenu, self.contractorsIU.showContractor]
+        optionInput = input("ENT:")
+       #self.takeInputAndPrintMenu(options, ('Manager', options, 'Choose a option: '))
+        return self.returnTable(optionInput, self.mainMenu, options, functions)
 
 
-    def employeeMenu(self) -> str | bool:
-        optionInput = ''
-        while optionInput.lower() != 'q':
-            options = ['Add employee', 'Edit employee', 'List employees']
+    def employeeMenu(self) -> None:
+        options = ['Add employee', 'Edit employee', 'List employees']
+        functions = [self.employeeUI.addEmployee, self.employeeUI.showEmployee, self.employeeUI.showEmployees]
+        optionInput = input("ENT:")
+        #optionInput = self.takeInputAndPrintMenu(options, ('Employee menu', ['[A]dd employee', '[E]dit employee', '[L]ist employees'], 'Choose a option'))
 
-            optionInput = self.takeInputAndPrintMenu(options, ('Employee menu', ['Add employee', 'Edit employee', 'List employees'], 'Choose a option'))
-
-
-
-            match optionInput.lower():
-                case 'a':
-                    returnValue = self.employeeUI.addEmployee() # Go to the employeeUI class and add a new employee
-                    
-                case 'e':
-                    returnValue = self.employeeUI.showEmployee() # Go to the employeeUI class and add edit a employee
-                    
-                case 'l':
-                    returnValue = self.employeeUI.showEmployees() # Go to the employeeUI class and list all employees
-
-                case 'b':
-                    return False
-    
-                case 'q':  # Matching case for comparison
-                    return 'q'
-
-            if returnValue == 'q': # if the user entered q then we go back until the program ends
-                return 'q'
+        return self.returnTable(optionInput, self.ShowManagerMenu, options, functions)
 
 
 
