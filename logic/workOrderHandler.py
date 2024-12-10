@@ -4,6 +4,21 @@ from typing import Any
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
+"""
+    TODO:
+    >    Add list by specific date and add by specific date range
+    >    Same for work reports
+    >    What contractor did for specific date/date range
+    >    What some specific employee has done on date/date range basically same as contractor thing
+"""
+
+def is_date_in_range(check_date_str, start_date_str, end_date_str):
+    check_date = datetime.strptime(check_date_str, "%d-%m-%Y")
+    start_date = datetime.strptime(start_date_str, "%d-%m-%Y")
+    end_date = datetime.strptime(end_date_str, "%d-%m-%Y")
+    
+    return start_date <= check_date <= end_date
+
 def time_diff_category(date1_str, date2_str):
     # Define the date format
     date_format = "%d.%m.%Y"
@@ -106,4 +121,21 @@ class WorkOrderHandler:
             if tdif >= workOrder.repeatInterval:
                 self.workOrderControl.changeOneEntry("id", workOrder.id, isCompleted=False)
                 final.append(workOrder)
+        return final
+
+
+    def listByDateRange(self, start: str, end: str, **kwargs) -> list[WorkOrder]:
+        if not start:
+            return self.listWorkOrders(date=end, **kwargs)
+        if not end:
+            return self.listWorkOrders(date=start, **kwargs)
+
+        workOrders: list[WorkOrder] = self.listWorkOrders(**kwargs)
+        final: list[WorkOrder] = []
+        for workOrder in workOrders:
+            if not workOrder.date:
+                continue
+            if is_date_in_range(workOrder.date, start, end):
+                final.append(workOrder)
+
         return final
