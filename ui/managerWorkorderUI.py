@@ -67,7 +67,7 @@ class ManagerWorkOrder(SearchUI):
 
         
             
-        isContractor = self.takeInputAndPrintMenu(['[Y]es', '[N]o'], ('Create work order', body, 'Contractor? (Y/N): ')) # The manager either chooses yes that there is a contracor or no that there isnt
+        isContractor = self.takeInputAndPrintMenu(['Y', 'N'], ('Create work order', body, 'Contractor? (Y/N): ')) # The manager either chooses yes that there is a contracor or no that there isnt
         if isContractor.lower() in quirOrBack:
             return isContractor.lower()
         lookUpContractor = -1
@@ -84,20 +84,19 @@ class ManagerWorkOrder(SearchUI):
 
         ### Maybe add a date function??
 
-        isRecuring = self.takeInputAndPrintMenu(["[Y]", "[N]"], ("Add work ordder", body, "IS this task reccurong(Y/N): "))
+        isRecuring = self.takeInputAndPrintMenu(["Y", "N"], ("Add work ordder", body, "IS this task reccurong(Y/N): "))
         repeating = False
         repeatInterval = 0
         if isRecuring.lower() == "y":
             repeating = True
-
         if repeating:
-            self.takeInputAndPrintMenu(["[D]", "[W]", "[M]", "[Y]"], ("Create a work order", ["[D]aily", "[W]eekly", "[M]onthly", "[Y]early"], "Choose option: "))
+            self.takeInputAndPrintMenu(["D", "W", "M", "Y"], ("Create a work order", ["[D]aily", "[W]eekly", "[M]onthly", "[Y]early"], "Choose option: "))
             repeatInterval = 2
 
         userPriority=1 # fix this userPriority needs to be an int not string!!!!
 
         self.logicWrapper.currentWorkOrderID+=1
-        workOrderInstance = WorkOrder(id=self.logicWrapper.currentWorkOrderID, description=Userdescription, propertyNumber=lookUpPropertyNumber, priority=int(userPriority), contractorID=int(lookUpContractor), roomFacilityId= managerRoomFacilityId, repeating=repeating, repeatInterival=repeatInterval)
+        workOrderInstance = WorkOrder(id=self.logicWrapper.currentWorkOrderID, description=Userdescription, propertyNumber=lookUpPropertyNumber, priority=int(userPriority), contractorID=int(lookUpContractor), roomFacilityId= managerRoomFacilityId, repeating=repeating, repeatInterval=repeatInterval)
 
 
         self.logicWrapper.addWorkOrder(workOrderInstance)

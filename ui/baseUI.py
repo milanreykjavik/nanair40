@@ -12,6 +12,19 @@ class BaseUI:
             returnStr += ""
 
         return returnStr
+
+    @staticmethod
+    def getOptionsNoBrackets(options: list) -> str:
+        '''Returns a string that represents the options the user can do'''
+        returnStr = '\n'
+        for option in options:
+            if len(option) > 1:
+                returnStr += f'       {option}\n'# Formats the options
+                continue
+            returnStr += ""
+
+        return returnStr
+
     
     @staticmethod
     def available_options(possibilites) -> list:
@@ -60,6 +73,39 @@ class BaseUI:
         clearTerminal()
         print(baseMenu.strip(), end='')
 
+    def printBaseMenuNoBrackets(self, name: str, options: list = [], inputOption: str = '') -> None:
+        '''Prints the menu based on the arguments given'''
+        baseMenu = ''
+        baseMenu += self.getHeader()
+        baseMenu += f'''   {name}
+       -----------------'''
+        baseMenu += self.getOptionsNoBrackets(options)
+        baseMenu += self.getFooter(inputOption)
+
+
+        clearTerminal()
+        print(baseMenu.strip(), end='')
+
+
+    def takeInputAndPrintMenuWithoutBrackets(self, possibilites: list, menuInformation: tuple, errorMessage = 'Please choose from the options available\n') -> str:
+        '''Asks the user a option based on the option list entered, it prints the baseMenuScreen after every one guess, the menu screen is determained by the second argument, when the user enters a available option, then that option is returned'''
+        error = False
+        menuInformation = list(menuInformation)
+        options_list = self.available_options(possibilites) 
+
+        while True:
+            if error:
+                menuInformation[2] = errorMessage + menuInformation[2]
+                errorMessage = ''
+            self.printBaseMenuNoBrackets(menuInformation[0], menuInformation[1], menuInformation[2])
+    
+            user_option = input(' ') 
+
+        
+            if user_option.upper() in options_list or not possibilites:
+                return user_option
+            
+            error = True
 
 
 
@@ -81,6 +127,10 @@ class BaseUI:
             if user_option.upper() in options_list or not possibilites:
                 return user_option
             
+            print(options_list)
+            print(possibilites)
+            print("XXX")
+            exit()
             error = True
 
 

@@ -8,6 +8,11 @@ validation = ValidationUI()
 quitOrback = ['q', 'b']
 
 
+"""
+MAYBE INSTEAD OF MAKING WITHOUT BRACKETS FUNCTION MAKE A FUNCTION ARGUMENT?
+"""
+
+
 class SearchUI(BaseUI):
     def __init__(self, logicWrapper: Logic_Wrapper = None):
         self.logicWrapper = logicWrapper
@@ -21,13 +26,13 @@ class SearchUI(BaseUI):
             returnValue = self.showEmployeeID()
         else:
             employee_list = []
-            lookUpLocation = self.getValidInput("look for employee","Enter Location: ", validation.validateText).capitalize()
+            lookUpLocation = self.getValidInput("look for employee by location","Enter Location: ", validation.validateText).capitalize()
             while not employee_list:
                 if lookUpLocation.lower() in quitOrback:
                     return lookUpLocation.lower()
                 employee_list = self.logicWrapper.listEmployees(location=lookUpLocation)  
                 if not employee_list:
-                    lookUpLocation = self.getValidInput("look for employee","The location you entered doesn't exist\nEnter Location: ", validation.validateText).capitalize()
+                    lookUpLocation = self.getValidInput("look for employee by location","The location you entered doesn't exist\nEnter Location: ", validation.validateText).capitalize()
             returnValue = self.showEmployeesInfo(employee_list)
 
         return returnValue
@@ -82,7 +87,7 @@ class SearchUI(BaseUI):
     
     
 
-        return self.takeInputAndPrintMenu(['[Q]uit', '[B]ack'], (f'List employees', body, 'Choose a option: '))
+        return self.takeInputAndPrintMenuWithoutBrackets(['[Q]uit', '[B]ack'], (f'List employees', body, 'Choose a option: '))
     
 
 
@@ -144,7 +149,7 @@ class SearchUI(BaseUI):
             body.append(line)
 
 
-        return self.takeInputAndPrintMenu(['[Q]uit', '[B]ack'], (f'List properties', body, 'Choose a option'))
+        return self.takeInputAndPrintMenuWithoutBrackets(['[Q]uit', '[B]ack'], (f'List properties', body, 'Choose a option'))
     
 
     def showropertyNumberSearch(self) -> str | bool:
@@ -279,7 +284,7 @@ class SearchUI(BaseUI):
     
     
 
-        return self.takeInputAndPrintMenu(userOption, (f'List contractors', body, options))
+        return self.takeInputAndPrintMenuWithoutBrackets(userOption, (f'List contractors', body, options))
 
 
  
