@@ -94,3 +94,9 @@ class Logic_Wrapper:
 
     def listWorkReports(self, **kwargs) -> list[WorkReport]:
         return self.workReportHandler.listWorkReports(**kwargs)
+
+    def editWorkOrder(self, entry: str, entryValue: Any, **kwargs) -> bool:
+        return self.workOrderHandler.editWorkOrder(entry, entryValue, **kwargs)
+    
+    def editWorkReports(self, entry: str, entryValue: Any, **kwargs) -> bool:
+        return self.workReportHandler.editWorkReport(entry, entryValue, **kwargs)

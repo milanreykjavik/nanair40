@@ -2,12 +2,12 @@ import json
 
 
 class WorkReport:
-    def __init__(self, id: int = 0, workOrderID: int = 0, description: str = "", contractorID: int = 0, employeeID: str = "", date: str = "", cost: int = 0, comment: str = "", isCompleted: bool = False):
+    def __init__(self, id: int = 0, workOrderID: int = 0, description: str = "", contractorID: int = 0, employeeID: int = 0, date: str = "", cost: int = 0, comment: str = "", isCompleted: bool = False):
         self.id: int = id # Work report ID
         self.workOrderID: int = workOrderID # The work order ID the report is about
         self.description: str = description # Contents of the work report
         self.contractorID: int = contractorID # Work report's contractor ID
-        self.employeeID: str = employeeID # Work report's employee ID
+        self.employeeID: int = employeeID # Work report's employee ID
         self.date: str = date # Work report date
         self.cost: int = cost # work report cost
         self.comment: str = comment # comment that a manager has made for the work report

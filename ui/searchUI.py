@@ -172,10 +172,13 @@ class SearchUI(BaseUI):
                 return lookUpLocation.lower()
             property = self.logicWrapper.listProperties(id = lookUpLocation)  
             prompt = 'There is no property number assigned to the property you entered\nPlease try again: '
+        propertyInstance = property[0]
 
-        propertyList = [f'{key}: {value}' for key, value in list(property[0].__dict__.items())[:-2]]
+        valueList = [f'Property number: {propertyInstance.id}', f'Location: {propertyInstance.location}',f'Address: {propertyInstance.address}', f'Condition: {propertyInstance.condition}',
+                     f'Facilities requiring maintenance: {propertyInstance.facilitiesMaintenance}', f'Room count: {len(propertyInstance.rooms)}', f'Facility count: {len(propertyInstance.facilities)}']
+    
 
-        return self.takeInputAndPrintMenuWithoutBrackets(['[Q]uit', '[B]ack'], ('look for property', propertyList, 'Choose a option: '))
+        return self.takeInputAndPrintMenuWithoutBrackets(['[Q]uit', '[B]ack'], ('look for property', valueList, 'Choose a option: '))
 
 
 
@@ -183,6 +186,8 @@ class SearchUI(BaseUI):
     def workOrderSearch(self) -> str | bool:
         options = ['ID search', 'Property number search', 'Kennitala search']
         userOption = self.takeInputAndPrintMenu(options, ('Search work order', options, 'Choose a option:  '))
+        if userOption.lower() in quitOrback:
+            return userOption.lower()
 
         match userOption.lower():
             case 'i':
@@ -190,6 +195,8 @@ class SearchUI(BaseUI):
                 prompt = 'Choose a work order ID'
                 while not workOrderID:
                     lookUpid = self.takeInputAndPrintMenuWithoutBrackets('', ('Search work order', ['Enter the ID of the work report you are looking for'], prompt, ''))
+                    if lookUpid.lower() in quitOrback:
+                        return lookUpid.lower()
                     workOrders = self.logicWrapper.listWorkOrders(id = lookUpid)
                     workOrderID = self.showWorkOrders(workOrders)
                     prompt = 'No work order exists with that ID\nPlease try again:  '
@@ -200,6 +207,8 @@ class SearchUI(BaseUI):
                 prompt = 'Enter a property number: '
                 while not propertiesWorkOrders:
                     lookUpPropertyNumber = self.takeInputAndPrintMenu([], ('Search Work orders','', prompt))
+                    if lookUpPropertyNumber.lower() in quitOrback:
+                        return lookUpPropertyNumber.lower()
                     workOrders = self.logicWrapper.listWorkOrders(propertyNumber = lookUpPropertyNumber)
                     propertiesWorkOrders = self.showWorkOrders(workOrders)
                     prompt = 'No work orders have been assinged to this property number\nEnter a property number: '
@@ -211,6 +220,8 @@ class SearchUI(BaseUI):
                 prompt = 'Enter a kennitala: '
                 while not KennitalaWorkOrders:
                     lookUpKennitala = self.takeInputAndPrintMenu([], ('Search Work orders','', prompt))
+                    if lookUpKennitala.lower() in quitOrback:
+                        return lookUpKennitala.lower()
                     KennitalaWorkOrders = self.logicWrapper.listWorkOrders(userID = lookUpKennitala)
                     body = self.showWorkOrders(KennitalaWorkOrders)
                     prompt = 'No employee with this kennitala has assigned a work order\nEnter a kennitala: '
@@ -249,7 +260,7 @@ class SearchUI(BaseUI):
                 Employee = self.logicWrapper.listEmployees(kennitala = instance.userID)
                 txt += f'       Employee: {Employee[0].name}\n'
             txt += f'       Room/facility: {instance.roomFacilityId}\n'
-            txt += f'       Status:{ 'Not completed' if not instance.isCompleted else ' Completed'}\n\n'
+            txt += f'       Status:{' Not completed' if not instance.isCompleted else ' Completed'}\n\n'
 
             if instance.priority == 'now':
                 now.append(txt)

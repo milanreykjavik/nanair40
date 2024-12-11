@@ -1,53 +1,57 @@
 [
     {
-        "id": 4,
-        "workOrderID": 8,
-        "description": "rfrfrefwef",
-        "contractorID": -1,
-        "employeeID": "11.12.2024",
-        "date": 333,
-        "cost": 0,
-        "comment": ""
-    },
-    {
-        "id": 1,
+        "id": 33,
         "workOrderID": 6,
-        "description": "QNQwxhqowedheodihwe",
+        "description": "sdfwefw",
         "contractorID": 1,
         "employeeID": "0511042930",
         "date": "11.12.2024",
-        "cost": 12000,
-        "comment": ""
+        "cost": 10,
+        "comment": "hurra",
+        "isCompleted": true
     },
     {
-        "id": 1,
+        "id": 34,
+        "workOrderID": 7,
+        "description": "blwefneowinweo",
+        "contractorID": 1,
+        "employeeID": "0511042930",
+        "date": "11.12.2024",
+        "cost": 10,
+        "comment": "wefewrfwefew",
+        "isCompleted": true
+    },
+    {
+        "id": 35,
         "workOrderID": 5,
-        "description": "wecewcewc",
+        "description": "bleblubla",
         "contractorID": -1,
-        "employeeID": "0511042930",
+        "employeeID": "9993332226",
         "date": "11.12.2024",
-        "cost": 1,
-        "comment": ""
+        "cost": 300,
+        "comment": "well done sven youre fired",
+        "isCompleted": true
     },
     {
-        "id": 32,
-        "workOrderID": 1,
-        "description": "test",
-        "contractorID": 1,
-        "employeeID": 1,
-        "date": "12.12.2024",
-        "cost": 500,
-        "comment": "test"
+        "id": 36,
+        "workOrderID": 8,
+        "description": "windows were cleaned, all went well, bobby broke his foot though",
+        "contractorID": 2,
+        "employeeID": "0511042931",
+        "date": "11.12.2024",
+        "cost": 10,
+        "comment": "Wow hopefully bobby gets well soon, thanks for this amazing job",
+        "isCompleted": true
     },
     {
-        "id": 32,
-        "workOrderID": 1,
-        "description": "test",
-        "contractorID": 1,
-        "employeeID": 1,
-        "date": "12.12.2024",
-        "cost": 500,
-        "comment": "test",
+        "id": 37,
+        "workOrderID": 9,
+        "description": "yay done",
+        "contractorID": 2,
+        "employeeID": "9876543212",
+        "date": "11.12.2024",
+        "cost": 2000,
+        "comment": "well done bro",
         "isCompleted": true
     }
 ]

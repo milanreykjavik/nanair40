@@ -48,7 +48,7 @@ class EmployeeUI(SearchUI):
 
         location = None
         destinations = self.logicWrapper.listLocations()
-        employeeLocation =  self.takeInputAndPrintMenu('', ('Add property', [destination.airport for destination in destinations], 'choose a location')).capitalize()
+        employeeLocation =  self.takeInputAndPrintMenuWithoutBrackets('', ('Add property', [destination.airport for destination in destinations], 'choose a location')).capitalize()
         while not location:
             if employeeLocation.lower() in quitOrBack:
                 return employeeLocation.lower()
@@ -83,7 +83,7 @@ class EmployeeUI(SearchUI):
         valueToChange = ''
 
         while valueToChange.lower() not in AVAILABLE_EDIT_OPTIONS_FUNCTIONS: # here we allow the user to choose what he wants to change, the option he enters needs to be in the global dictionary that stores all options and their validation funcition
-            valueToChange = self.takeInputAndPrintMenu('', ('look for employee', employee_list, 'Enter the value of what you would like to change: '))
+            valueToChange = self.takeInputAndPrintMenuWithoutBrackets('', ('look for employee', employee_list, 'Enter the value of what you would like to change: '))
             if valueToChange.lower() in quitOrBack: # if the user entered to quit or go back we return that
                 return valueToChange.lower()
         # ask the user for a new value, the getvalidinput function asks for a new value and validates the value
@@ -91,13 +91,13 @@ class EmployeeUI(SearchUI):
         if valueToChange == 'location':
             location = None
             destinations = self.logicWrapper.listLocations()
-            employeeLocation =  self.takeInputAndPrintMenu('', ('Add property', [destination.airport for destination in destinations], 'choose a location')).capitalize()
+            employeeLocation =  self.takeInputAndPrintMenuWithoutBrackets('', ('Add property', [destination.airport for destination in destinations], 'choose a location')).capitalize()
             while not location:
                 if employeeLocation.lower() in quitOrBack:
                     return employeeLocation.lower()
                 location = self.logicWrapper.listLocations(airport = employeeLocation)
                 if not location:
-                    employeeLocation =  self.takeInputAndPrintMenu('', ('Add property', [destination.airport for destination in destinations], 'Please choose a location from the given options\nchoose a location: ')).capitalize()
+                    employeeLocation =  self.takeInputAndPrintMenuWithoutBrackets('', ('Add property', [destination.airport for destination in destinations], 'Please choose a location from the given options\nchoose a location: ')).capitalize()
             newValue = employeeLocation
 
         else:
@@ -122,7 +122,7 @@ class EmployeeUI(SearchUI):
         
         employee = self.logicWrapper.listEmployees(kennitala = lookUpKennitala) # get the same employee from the json file with the upadted infromation
         # print the a menu with the updated employee information, and asking the user whether he wants to quit or go back
-        return self.takeInputAndPrintMenu(['[Q]uit', '[B]ack'], ('List employees', [f'{key}: {value}' for key, value in list(employee[0].__dict__.items())], 'Employee information has been succesfuly updated!\nChoose a option: '))
+        return self.takeInputAndPrintMenuWithoutBrackets(['[Q]uit', '[B]ack'], ('List employees', [f'{key}: {value}' for key, value in list(employee[0].__dict__.items())], 'Employee information has been succesfuly updated!\nChoose a option: '))
 
 
 
