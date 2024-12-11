@@ -207,9 +207,18 @@ class SearchUI(BaseUI):
                 body = self.showWorkOrders(workOrders)    
 
             case 'k':
-                pass
+                KennitalaWorkOrders = None
+                prompt = 'Enter a kennitala: '
+                while not KennitalaWorkOrders:
+                    lookUpKennitala = self.takeInputAndPrintMenu([], ('Search Work orders','', prompt))
+                    KennitalaWorkOrders = self.logicWrapper.listWorkOrders(userID = lookUpKennitala)
+                    body = self.showWorkOrders(KennitalaWorkOrders)
+                    prompt = 'No employee with this kennitala has assigned a work order\nEnter a kennitala: '
+
+               
+
         if body is None:
-            return self.takeInputAndPrintMenuWithoutBrackets(['[Q]uit', '[B]ack'], ('Search work order', ['No work orders have been assigned to this location'], 'Choose a option: ' ,''))
+            return self.takeInputAndPrintMenuWithoutBrackets(['[Q]uit', '[B]ack'], ('Search work order', ['No work orders werer found'], 'Choose a option: ' ,''))
 
 
         return self.takeInputAndPrintMenuWithoutBrackets(['[Q]uit', '[B]ack'], ('Search work order', body, 'Choose a option: ' ,''))
@@ -266,20 +275,21 @@ class SearchUI(BaseUI):
         body = []
 
         for workreport in workReports:
-            body.append(f'ID = {workreport.id}')
-            body.append(f'Work order ID = {workreport.workOrderID}')
-            body.append(f'description = {workreport.description}')
+            body.append(f'ID: {workreport.id}')
+            body.append(f'Work order ID: {workreport.workOrderID}')
+            body.append(f'description:  {workreport.description}')
             if int(workreport.contractorID) != -1:
                 contractor = self.logicWrapper.listContractors(id = int(workreport.contractorID))
-                body.append(f'Contractor = {contractor[0].name}')
+                body.append(f'Contractor:  {contractor[0].name}')
             else:
-                body.append(f'Contractor = No contractor is assigned to this work report')
+                body.append(f'Contractor: No contractor is assigned to this work report')
             employee = self.logicWrapper.listEmployees(kennitala = workreport.employeeID)
-            body.append(f'Employee = {employee[0].name}')
-            body.append(f'Date = {workreport.date}')
-            body.append(f'Total cost = {workreport.cost}kr')
-
+            body.append(f'Employee:  {employee[0].name}')
+            body.append(f'Date: {workreport.date}')
+            body.append(f'Total cost:  {workreport.cost}kr\n\n')
         
+
+        return body
             
 
 

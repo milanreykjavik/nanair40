@@ -19,6 +19,8 @@ class JanitorUI(SearchUI):
 
     def workOrders(self):
         filter = self.takeInputAndPrintMenu(['P', 'A'], ('Work orders', ['Property', 'All work orders'], 'Choose what you would like to filter by: '))
+        if filter.lower() in quitOrBack:
+            return filter.lower()
         match filter.lower():
             case 'p':
                 property = []
@@ -84,9 +86,20 @@ class JanitorUI(SearchUI):
                     lookUpProperty = self.showPropertyInfo(propertyList, '', prompt)
                     property = self.logicWrapper.listProperties(id = lookUpProperty)
                     prompt = 'Please enter a property number from the options above\nEnter a property number you would like to see work orders from: '
-                currentWorkOrders = self.logicWrapper.listWorkCurrentWorkOrders(isCompleted = False, propertyNumber = lookUpProperty)
+                currentWorkOrders = self.logicWrapper.listWorkCurrentWorkOrders(isCompleted = False, propertyNumber = lookUpProperty, sentToManager = False)
+
+
+
+
+
+
+
+
             case 'a':
-                currentWorkOrders = self.logicWrapper.listWorkCurrentWorkOrders(isCompleted = False)
+                currentWorkOrders = self.logicWrapper.listWorkCurrentWorkOrders(isCompleted = False, sentToManager = False)
+
+
+
 
 
         body = self.showWorkOrders(currentWorkOrders) # call the show work orders function and get a string of all work orders and theit info
@@ -106,6 +119,7 @@ class JanitorUI(SearchUI):
         workOrder = self.logicWrapper.listWorkOrders(id = WorkOrderId) # get all work orders listed to the id
         employee = self.logicWrapper.listEmployees(kennitala = workOrder[0].userID) # get the epmloyee that is assigned to the work order
         now = datetime.now()
+        now = now.strftime("%d.%m.%Y")
         # create a dictionary that keeps track of all values the user enters in related to the dict
         workReportDict = {'Work order id': WorkOrderId, 'Empbloyee': employee[0].name, 'date': now, 'Description': '', 'contractor': '---','cost': ''}
 
@@ -130,9 +144,8 @@ class JanitorUI(SearchUI):
 
         # create a work report instance that will be sent down to logic layer and then stored in a json file
         WorkOrderId = int(WorkOrderId)
-        now = now.strftime("%d.%m.%Y")
         workReportID: int = self.logicWrapper.currentWorkReportID(WorkOrderId)
-        WorkReportInstance = WorkReport(workReportID, WorkOrderId, workReportDict['Description'], int(workOrder[0].contractorID), workOrder[0].userID, int(workReportDict['cost']))
+        WorkReportInstance = WorkReport(workReportID, WorkOrderId, workReportDict['Description'], int(workOrder[0].contractorID), workOrder[0].userID, now, int(workReportDict['cost']))
         workReportDict['cost'] += 'Kr'
         self.logicWrapper.addWorkReport(WorkReportInstance)
 

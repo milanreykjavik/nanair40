@@ -9,6 +9,22 @@ class EmployeeHandler:
         self.employee = Employee()
 
     def addEmployee(self, employee: 'Employee') -> bool:
+        # https://www.quora.com/What-is-maximum-and-minimum-length-of-any-mobile-number-across-the-world
+        if self.listEmployes(kennitala=employee.kennitala):
+            return False
+        if type(employee.kennitala) != int:
+            return False
+        if len(str(employee.kennitala)) != 10:
+            return False
+        if type(employee.phone) != str:
+            return False
+        if len(employee.phone) < 7 or len(employee.phone) > 15:
+            return False
+        if type(employee.homePhone) != str:
+            return False
+        if len(employee.homePhone) < 7 or len(employee.homePhone) > 15:
+            return False
+
         return self.employeeControl.appendIntoFile(employee)
 
 
@@ -17,6 +33,28 @@ class EmployeeHandler:
             return False
         if any(kwarg not in vars(self.employee) for kwarg in kwargs):
             return False
+        # https://www.quora.com/What-is-maximum-and-minimum-length-of-any-mobile-number-across-the-world
+        if not self.listEmployes(entry=entryValue):
+            return False
+
+        if entry == "kennitala":
+            if type(entryValue) != int:
+                return False
+            if len(str(entryValue)) != 10:
+                return False
+        
+        if entry == "phone":
+            if type(entry) != str:
+                return False
+            if len(entry) < 7 or len(entry) > 15:
+                return False
+        
+        if entry == "homePhone":
+            if type(entry) != str:
+                return False
+            if len(entry) < 7 or len(entry) > 15:
+                return False
+
         return self.employeeControl.changeOneEntry(entry, entryValue, **kwargs)
 
 

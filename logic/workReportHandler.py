@@ -50,8 +50,8 @@ class WorkReportHandler:
 
         return workReports
 
-    def currentWorkReportID(self, workOrderID: int) -> int:
-        workReports: list['WorkReport'] = self.listWorkReports(workOrderID=workOrderID)
+    def currentWorkReportID(self) -> int:
+        workReports: list['WorkReport'] = self.listWorkReports()
         if not len(workReports):
             return 1
 
