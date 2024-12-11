@@ -11,14 +11,15 @@ class EmployeeHandler:
     def addEmployee(self, employee: 'Employee') -> bool:
         # https://www.quora.com/What-is-maximum-and-minimum-length-of-any-mobile-number-across-the-world
         # logic layer checking, here the data is confirmed to be true from UI layer, if not false is returned
-        if self.listEmployes(kennitala=employee.kennitala):
-            return False
         if not type(employee.kennitala) == str:
             return False
         if not employee.kennitala.isdigit():
             return False
         if len(str(employee.kennitala)) != 10:
             return False
+        if self.listEmployes(kennitala=employee.kennitala):
+            return False
+        
         if type(employee.phone) != str:
             return False
         if len(employee.phone) < 7 or len(employee.phone) > 15:
@@ -37,12 +38,12 @@ class EmployeeHandler:
         if any(kwarg not in vars(self.employee) for kwarg in kwargs):
             return False
         # https://www.quora.com/What-is-maximum-and-minimum-length-of-any-mobile-number-across-the-world
-
         if entry == "kennitala":
             if not entryValue.isdigit():
                 return False
-            
             if len(str(entryValue)) != 10:
+                return False
+            if not self.listEmployes(kennitala=entryValue):
                 return False
         
         if entry == "phone":

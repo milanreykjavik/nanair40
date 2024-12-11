@@ -144,7 +144,7 @@ class JanitorUI(SearchUI):
         # create a work report instance that will be sent down to logic layer and then stored in a json file
         WorkOrderId = int(WorkOrderId)
         workReportID: int = self.logicWrapper.currentWorkReportID()
-        WorkReportInstance = WorkReport(workReportID, WorkOrderId, workReportDict['Description'], int(workOrder[0].contractorID), workOrder[0].userID, now, int(workReportDict['cost']))
+        WorkReportInstance = WorkReport(workReportID, WorkOrderId, workReportDict['Description'], int(workOrder[0].contractorID), workOrder[0].userID, now, int(workReportDict['cost']), workOrder[0].propertyNumber)
         workReportDict['cost'] += 'Kr'
         self.logicWrapper.addWorkReport(WorkReportInstance)
 

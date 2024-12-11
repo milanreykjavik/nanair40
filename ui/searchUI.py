@@ -277,7 +277,27 @@ class SearchUI(BaseUI):
 
 
 
+    def workReportSearch(self):
+        userSelection = self.takeInputAndPrintMenu(['Propery search', 'Employee search'], ('Search work orders', ['Propery search', 'Employee search'], 'Choose a option'))
+        if userSelection.lower() in quitOrback:
+            return userSelection.lower()
+        match userSelection.lower():
+            case 'p':
+                propertiesWorkReports = None
+                prompt = 'Enter a property number: '
+                while not propertiesWorkReports:
+                    lookUpPropertyNumber = self.takeInputAndPrintMenu([], ('Search Work reports','', prompt))
+                    if lookUpPropertyNumber.lower() in quitOrback:
+                        return lookUpPropertyNumber.lower()
+                    workReports = self.logicWrapper.listWorkReports(propertyNumber = lookUpPropertyNumber)
+                    propertiesWorkReports = self.showWorkReports(workReports)
+                    prompt = 'No work reports have been assinged to this property number\nEnter a property number: '
+                workOrders = self.logicWrapper.listWorkReports(propertyNumber = lookUpPropertyNumber)  
+                body = self.showWorkReports(workOrders)    
 
+
+
+        return self.takeInputAndPrintMenuWithoutBrackets([], ('Search work reports', body, 'Choose a option: '))
 
     def showWorkReports(self, workReports: list[WorkReport]) -> str:
         if not workReports:
@@ -302,6 +322,9 @@ class SearchUI(BaseUI):
 
         return body
             
+
+
+
 
 
     def showContractorsInfo(self, options = 'choose a option', userOption = ['[Q]uit', '[B]ack']) -> str | bool:
