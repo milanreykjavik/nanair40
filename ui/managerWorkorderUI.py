@@ -90,11 +90,19 @@ class ManagerWorkOrder(SearchUI):
         if isRecuring.lower() == "y":
             repeating = True
         if repeating:
-            self.takeInputAndPrintMenu(["D", "W", "M", "Y"], ("Create a work order", ["[D]aily", "[W]eekly", "[M]onthly", "[Y]early"], "Choose option: "))
-            repeatInterval = 2 # to be changed
-
-
-        self.logicWrapper.currentWorkOrderID+=1
+            repeatIntervalStr = self.takeInputAndPrintMenu(["D", "W", "M", "Y"], ("Create a work order", ["[D]aily", "[W]eekly", "[M]onthly", "[Y]early"], "Choose option: "))
+            match repeatIntervalStr.upper():
+                case "D":
+                    repeatInterval = 1
+                case "W":
+                    repeatInterval = 2
+                case "M":
+                    repeatInterval = 3
+                case "Y":
+                    repeatInterval = 4
+                case _:
+                    return repeatIntervalStr
+        
         workOrderInstance = WorkOrder(id=self.logicWrapper.currentWorkOrderID, description=Userdescription, propertyNumber=lookUpPropertyNumber, priority = userPriority, contractorID=int(lookUpContractor), roomFacilityId= managerRoomFacilityId, repeating=repeating, repeatInterval=repeatInterval)
 
 

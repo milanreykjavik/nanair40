@@ -60,6 +60,7 @@ class Logic_Wrapper:
         return self.propertyHandler.editProperty(entry, entryValue, **kwargs)
 
     def addWorkOrder(self, work: 'WorkOrder') -> bool:
+        self.currentWorkOrderID+=1
         return self.workOrderHandler.addWorkOrder(work)
 
     def editWorkOrder(self, entry: str, entryValue: Any, **kwargs) -> bool:
@@ -81,6 +82,7 @@ class Logic_Wrapper:
         return self.workOrderHandler.listWorkOrders(**kwargs)
 
     def addContractor(self, contractor: 'Contractor') -> bool:
+        self.currentContractorID+=1
         return self.contractorHandler.addContractor(contractor)
 
     def editContractor(self, entry: str, entryValue: Any, **kwargs) -> bool:
