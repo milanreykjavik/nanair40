@@ -1,9 +1,9 @@
-from contractorController import ContractorController
-from employeeController import EmployeeController
-from locationController import LocationController
-from propertyController import PropertyController
-from workOrderController import WorkController
-from workReportController import WorkReportController
+from dataControl.contractorController import ContractorController
+from dataControl.employeeController import EmployeeController
+from dataControl.locationController import LocationController
+from dataControl.propertyController import PropertyController
+from dataControl.workOrderController import WorkController
+from dataControl.workReportController import WorkReportController
 from typing import Any
 
 
