@@ -91,7 +91,7 @@ class ManagerWorkOrder(SearchUI):
             repeating = True
         if repeating:
             self.takeInputAndPrintMenu(["D", "W", "M", "Y"], ("Create a work order", ["[D]aily", "[W]eekly", "[M]onthly", "[Y]early"], "Choose option: "))
-            repeatInterval = 2
+            repeatInterval = 2 # to be changed
 
 
         self.logicWrapper.currentWorkOrderID+=1
@@ -134,7 +134,7 @@ class ManagerWorkOrder(SearchUI):
 
         valueToChange = ''
         while valueToChange.lower() not in AVAILABLE_EDIT_OPTIONS: # keep asking the user what he wants to change until he enters a value that is in the global variable list that has all availavle edit options
-            valueToChange = self.takeInputAndPrintMenu('', ('Edit work orders', [f'{key}: {value}' for key, value in workOrderDict.items()], 'Choose what value to change: '))
+            valueToChange = self.takeInputAndPrintMenu([], ('Edit work orders', [f'{key}: {value}' for key, value in workOrderDict.items()], 'Choose what value to change: '))
             if valueToChange.lower() in quirOrBack:
                 return valueToChange.lower()
 
@@ -175,7 +175,7 @@ class ManagerWorkOrder(SearchUI):
             case 'room id':
                 newValue = ''
                 while not newValue: # While loop continues until enters a valid id for either room or facility
-                    roomOrfacility = self.takeInputAndPrintMenu('', ('Edit work orders', [f'{key}: {value}' for key, value in workOrderDict.items()], 'Room or facility?: ')) # Ask the manager whether a facility or a room needs fixing
+                    roomOrfacility = self.takeInputAndPrintMenu([], ('Edit work orders', [f'{key}: {value}' for key, value in workOrderDict.items()], 'Room or facility?: ')) # Ask the manager whether a facility or a room needs fixing
                     if roomOrfacility.lower() in quirOrBack:
                         return newValue.lower()
                     match roomOrfacility.lower(): 
@@ -193,28 +193,14 @@ class ManagerWorkOrder(SearchUI):
                 self.logicWrapper.editWorkOrder(entry='id', entryValue=WorkOrderInstance.id, roomFacilityId = newValue)
                 
         workOrderDict[valueToChange.lower()] = newValue
-        return self.takeInputAndPrintMenu(['[Q]uit', '[B]ack'], (f'Create work order', [f'{key}: {value}' for key, value in workOrderDict.items()], f'Work order information has been succesfully updated!\nChoose a option: '))
-
-        
-        
+        return self.takeInputAndPrintMenu(['Quit', 'Back'], (f'Create work order', [f'{key}: {value}' for key, value in workOrderDict.items()], f'Work order information has been succesfully updated!\nChoose a option: '))
 
 
-        
-
-       
-
-
-
-
-                
-
-            
-
-            
-
-            
-        
-
-    def completedWorkOrder():
+    def completedWorkOrder(self):
+        uncomplete: list = self.logicWrapper.listWorkReports(isCompleted=False)
+        body = self.showWorkReports(uncomplete)
+        retVal = self.takeInputAndPrintMenuWithoutBrackets([], ('Complete work reports', body, 'Choose a work report you want to mark as finished!\nVhoose a option:'))
+        for unc for uncomplete:
+            if retVal == str(unc.id):
         pass
 

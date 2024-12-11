@@ -92,3 +92,5 @@ class Logic_Wrapper:
     def listRepeatingWorkOrders(self, **kwargs) -> list[WorkOrder]:
         return self.workOrderHandler.listRepeatingWorkOrders(**kwargs)
 
+    def listWorkReports(self, **kwargs) -> list[WorkReport]:
+        return self.workReportHandler.listWorkReports(**kwargs)
