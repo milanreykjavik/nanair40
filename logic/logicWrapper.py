@@ -94,8 +94,8 @@ class Logic_Wrapper:
     def listLocations(self, **kwargs) -> list[Location]:
         return self.locationHandler.listLocations(**kwargs)
 
-    def listRepeatingWorkOrders(self, **kwargs) -> list[WorkOrder]:
-        return self.workOrderHandler.listRepeatingWorkOrders(**kwargs)
+    def checkRepeatingWorkOrders(self, **kwargs) -> bool:
+        return self.workOrderHandler.checkRepeatingWorkOrders(**kwargs)
 
     def listWorkReports(self, **kwargs) -> list[WorkReport]:
         return self.workReportHandler.listWorkReports(**kwargs)

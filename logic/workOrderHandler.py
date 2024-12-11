@@ -106,7 +106,7 @@ class WorkOrderHandler:
         return newWorkOrder
 
 
-    def listRepeatingWorkOrders(self, **kwargs) -> list[WorkOrder]:
+    def checkRepeatingWorkOrders(self, **kwargs) -> bool:
         repeatingList: list[WorkOrder] = self.listWorkOrders(repeating=True)
 
         currentDate = datetime.now()
@@ -122,8 +122,9 @@ class WorkOrderHandler:
             tdif = time_diff_category(workOrder.workReport[-1].date, currentDate)
             if tdif >= workOrder.repeatInterval:
                 self.dataWrapper.workOrderChange("id", workOrder.id, isCompleted=False)
+                self.dataWrapper.workOrderChange("id", workOrder.id, userID=0)
                 final.append(workOrder)
-        return final
+        return True
 
 
     def listByDateRange(self, start: str, end: str, **kwargs) -> list[WorkOrder]:
