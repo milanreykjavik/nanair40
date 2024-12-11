@@ -13,6 +13,8 @@ class EmployeeHandler:
         # logic layer checking, here the data is confirmed to be true from UI layer, if not false is returned
         if self.listEmployes(kennitala=employee.kennitala):
             return False
+        if not type(employee.kennitala) == str:
+            return False
         if not employee.kennitala.isdigit():
             return False
         if len(str(employee.kennitala)) != 10:
