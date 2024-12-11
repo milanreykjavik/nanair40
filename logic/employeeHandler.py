@@ -1,11 +1,10 @@
 from baseClasses.Employee import Employee
-from dataControl.employeeController import EmployeeController
 from typing import Any
 
 
 class EmployeeHandler:
-    def __init__(self) -> None:
-        self.employeeControl = EmployeeController()
+    def __init__(self, dataWrapper=None) -> None:
+        self.dataWrapper = dataWrapper
         self.employee = Employee()
 
     def addEmployee(self, employee: 'Employee') -> bool:
@@ -29,7 +28,7 @@ class EmployeeHandler:
         if len(employee.homePhone) < 7 or len(employee.homePhone) > 15:
             return False
 
-        return self.employeeControl.appendIntoFile(employee)
+        return self.dataWrapper.employeeInsert(employee)
 
 
     def editEmployee(self, entry: str, entryValue: Any, **kwargs) -> bool:
@@ -58,14 +57,14 @@ class EmployeeHandler:
             if len(entry) < 7 or len(entry) > 15:
                 return False
 
-        return self.employeeControl.changeOneEntry(entry, entryValue, **kwargs)
+        return self.dataWrapper.employeeChange(entry, entryValue, **kwargs)
 
 
     def listEmployes(self, **kwargs) -> list['Employee']:
         if any(kwarg not in vars(self.employee) for kwarg in kwargs):
             return []
 
-        employees: list['Employee'] = self.employeeControl.readFile()
+        employees: list['Employee'] = self.dataWrapper.employeeFetch()
         if not len(kwargs):
             return employees
 

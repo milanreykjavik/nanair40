@@ -14,17 +14,20 @@ from logic.contractorHandler import ContractorHandler
 from baseClasses.Contractor import Contractor
 from logic.locationHandler import LocationHandler
 from baseClasses.Location import Location
+from dataControl.dataWrapper import DataWrapper
 from typing import Any
+
 
 
 class Logic_Wrapper:
     def __init__(self) -> None:
-        self.employeeHandler = EmployeeHandler()
-        self.propertyHandler = PropertyHandler()
-        self.workOrderHandler = WorkOrderHandler()
-        self.workReportHandler = WorkReportHandler()
-        self.contractorHandler = ContractorHandler()
-        self.locationHandler = LocationHandler()
+        self.dataWrapper = DataWrapper()
+        self.employeeHandler = EmployeeHandler(self.dataWrapper)
+        self.propertyHandler = PropertyHandler(self.dataWrapper)
+        self.workOrderHandler = WorkOrderHandler(self.dataWrapper)
+        self.workReportHandler = WorkReportHandler(self.dataWrapper)
+        self.contractorHandler = ContractorHandler(self.dataWrapper)
+        self.locationHandler = LocationHandler(self.dataWrapper)
         self.currentContractors: list['Contractor'] = self.contractorHandler.listContractors()
         if len(self.currentContractors):
             self.currentContractorID: int = int(self.currentContractors[-1].id)

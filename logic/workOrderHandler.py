@@ -1,5 +1,4 @@
 from baseClasses.workOrder import WorkOrder
-from dataControl.workOrderController import WorkController
 from typing import Any
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
@@ -45,12 +44,12 @@ def time_diff_category(date1_str, date2_str):
 
 
 class WorkOrderHandler:
-    def __init__(self) -> None:
-        self.workOrderControl = WorkController()
+    def __init__(self, dataWrapper=None) -> None:
+        self.dataWrapper = dataWrapper
         self.workOrder = WorkOrder()
 
     def addWorkOrder(self, workOrder: 'WorkOrder') -> bool:
-        return self.workOrderControl.appendIntoFile(workOrder)
+        return self.dataWrapper.workOrderInsert(workOrder)
 
     def editWorkOrder(self, entry: str, entryValue: Any, **kwargs) -> bool:
         if not len(kwargs):
@@ -58,14 +57,14 @@ class WorkOrderHandler:
         if any(kwarg not in vars(self.workOrder) for kwarg in kwargs):
             return False
         
-        return self.workOrderControl.changeOneEntry(entry, entryValue, **kwargs)
+        return self.dataWrapper.workOrderChange(entry, entryValue, **kwargs)
 
 
     def listWorkOrders(self, **kwargs) -> list['WorkOrder']:
         if any(kwarg not in vars(self.workOrder) for kwarg in kwargs):
             return []
 
-        workOrder: list['WorkOrder'] = self.workOrderControl.readFile()
+        workOrder: list['WorkOrder'] = self.dataWrapper.workOrderFetch()
         if not len(kwargs):
             return workOrder
 
@@ -86,7 +85,7 @@ class WorkOrderHandler:
         if any(kwarg not in vars(self.workOrder) for kwarg in kwargs):
             return []
 
-        workOrder: list['WorkOrder'] = self.workOrderControl.readFile()
+        workOrder: list['WorkOrder'] = self.dataWrapper.workOrderFetch()
         if not len(kwargs):
             return workOrder
 
@@ -122,7 +121,7 @@ class WorkOrderHandler:
                 continue
             tdif = time_diff_category(workOrder.workReport[-1].date, currentDate)
             if tdif >= workOrder.repeatInterval:
-                self.workOrderControl.changeOneEntry("id", workOrder.id, isCompleted=False)
+                self.dataWrapper.workOrderChange("id", workOrder.id, isCompleted=False)
                 final.append(workOrder)
         return final
 

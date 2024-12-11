@@ -20,53 +20,53 @@ class DataWrapper:
     def employeeInsert(self, data) -> bool:
         return self.employeeController.appendIntoFile(data)
 
-    def employeeChange(self, entry: str, entryValue: Any, **kwargs):
+    def employeeChange(self, entry: str, entryValue: Any, **kwargs) -> bool:
         return self.employeeController.changeOneEntry(entry, entryValue, **kwargs)
 
     def employeeFetch(self):
         return self.employeeController.readFile()
 
-    def propertyFetch():
-        pass
+    def propertyFetch(self):
+        return self.propertyController.readFile()
 
-    def propertyInsert():
-        pass
+    def propertyChange(self, entry: str, entryValue: Any, **kwargs) -> bool:
+        return self.propertyController.changeOneEntry(entry, entryValue, **kwargs)
 
-    def propertyChange():
-        pass
+    def propertyInsert(self, data) -> bool:
+        return self.propertyController.appendIntoFile(data)
 
-    def workOrderFetch():
-        pass
+    def workOrderFetch(self):
+        return self.workOrderController.readFile()
 
-    def workOrderInsert():
-        pass
+    def workOrderInsert(self, data) -> bool:
+        return self.workOrderController.appendIntoFile(data)
 
-    def workOrderChange():
-        pass
+    def workOrderChange(self, entry: str, entryValue: Any, **kwargs) -> bool:
+        return self.workOrderController.changeOneEntry(entry, entryValue, **kwargs)
 
-    def workReportInsert():
-        pass
+    def workReportInsert(self, data) -> bool:
+        return self.workReportController.appendIntoFile(data)
 
-    def workReportChange():
-        pass
+    def workReportChange(self, entry: str, entryValue: Any, **kwargs) -> bool:
+        return self.workReportController.changeOneEntry(entry, entryValue, **kwargs)
 
-    def workReportFetch():
-        pass
+    def workReportFetch(self):
+        return self.workReportController.readFile()
 
-    def contractorFetch():
-        pass
+    def contractorFetch(self):
+        return self.contractorController.readFile()
 
-    def contractorInsert():
-        pass
+    def contractorInsert(self, data) -> bool:
+        return self.contractorController.appendIntoFile(data)
 
-    def contractorChange():
-        pass
+    def contractorChange(self, entry: str, entryValue: Any, **kwargs) -> bool:
+        return self.contractorController.changeOneEntry(entry, entryValue, **kwargs)
 
-    def locationFetch():
-        pass
+    def locationFetch(self):
+        return self.locationController.readFile()
 
-    def locationInsert():
-        pass
+    def locationInsert(self, data) -> bool:
+        return self.locationController.appendIntoFile(data)
 
-    def locationChange():
-        pass
+    def locationChange(self, entry: str, entryValue: Any, **kwargs) -> bool:
+        return self.locationController.changeOneEntry(entry, entryValue, **kwargs)
