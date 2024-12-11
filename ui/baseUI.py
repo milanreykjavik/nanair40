@@ -126,11 +126,7 @@ class BaseUI:
         
             if user_option.upper() in options_list or not possibilites:
                 return user_option
-            
-            print(options_list)
-            print(possibilites)
-            print("XXX")
-            exit()
+        
             error = True
 
 

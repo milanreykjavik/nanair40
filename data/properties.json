@@ -77,5 +77,21 @@
         "facilities": {
             "F1": "Fron desk"
         }
+    },
+    {
+        "id": "p202",
+        "location": "Nuuk",
+        "address": "idcowecioew",
+        "condition": "good",
+        "facilitiesMaintenance": "ekkert",
+        "rooms": {
+            "r101": "room 1",
+            "r102": "room 2"
+        },
+        "facilities": {
+            "f1": "front desk",
+            "h1": "how tub",
+            "s1": "swimming pool"
+        }
     }
 ]

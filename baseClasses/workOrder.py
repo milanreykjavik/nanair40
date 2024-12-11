@@ -5,7 +5,7 @@ from baseClasses.workReport import WorkReport
 ADD REPEATING WORK ORDERS
 """
 class WorkOrder:
-    def __init__(self, id: int = 0, date: str = "", description: str = "", propertyNumber: str = "", userID: int = 0, priority: int = 0, workReport: list['WorkReport'] = [], contractorID: int = 0, isCompleted: bool = False, roomFacilityId: int = 0, sentToManager: bool = False, repeating: bool = False, repeatInterval: int = 0):
+    def __init__(self, id: int = 0, date: str = "", description: str = "", propertyNumber: str = "", userID: int = 0, priority: str = '', workReport: list['WorkReport'] = [], contractorID: int = 0, isCompleted: bool = False, roomFacilityId: int = 0, sentToManager: bool = False, repeating: bool = False, repeatInterval: int = 0):
         self.id: int = id
         self.date: str = date
         self.description: str = description

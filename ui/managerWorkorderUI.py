@@ -15,23 +15,23 @@ class ManagerWorkOrder(SearchUI):
 
     def addNewWorkOrder(self):
         body = []
-        Userdescription = self.takeInputAndPrintMenu('', ('Create work order', '', 'Description of work order: ')) # Get a description on what needs to be done
+        Userdescription = self.takeInputAndPrintMenuWithoutBrackets('', ('Create work order', '', 'Description of work order: ')) # Get a description on what needs to be done
         if Userdescription in quirOrBack:
             return Userdescription
         body.append(f'Work description: {Userdescription}')
 
         property = [] 
-        lookUpPropertyNumber = self.takeInputAndPrintMenu('', ('Create work order', body, 'Enter a property number: ')) # Ask the user for a property number
+        lookUpPropertyNumber = self.takeInputAndPrintMenuWithoutBrackets('', ('Create work order', body, 'Enter a property number: ')) # Ask the user for a property number
         while not property: # While loops keeps going until the wrapper is able return a property instance, it only returns a instance when a correct property number is entered
             if lookUpPropertyNumber in quirOrBack:
                 return lookUpPropertyNumber
             property = self.logicWrapper.listProperties(id = lookUpPropertyNumber) # Check whether a property exists with the number, if it does then a list of a single isntance is returned
             if not property:
-                lookUpPropertyNumber = self.takeInputAndPrintMenu('', ('Create work order', body, 'A property doesnt exist with that property number\nEnter a property number: ')) # Ask the user for a property number
+                lookUpPropertyNumber = self.takeInputAndPrintMenuWithoutBrackets('', ('Create work order', body, 'A property doesnt exist with that property number\nEnter a property number: ')) # Ask the user for a property number
 
         body.append(f'Property Number: {lookUpPropertyNumber}')
         managerRoomFacilityId = ''
-        roomOrfacility = self.takeInputAndPrintMenu('', ('Create work order', body, 'Room or facility?: ')) # Ask the manager whether a facility or a room needs fixing
+        roomOrfacility = self.takeInputAndPrintMenuWithoutBrackets('', ('Create work order', body, 'Room or facility?: ')) # Ask the manager whether a facility or a room needs fixing
         while not managerRoomFacilityId: # While loop continues until enters a valid id for either room or facility
             if roomOrfacility.lower() in quirOrBack:
                 return roomOrfacility.lower()
@@ -41,12 +41,12 @@ class ManagerWorkOrder(SearchUI):
                 case 'facility':
                     idDict = property[0].facilities # if the manager chose a facility then we use the facility dict
                 case _:
-                    roomOrfacility = self.takeInputAndPrintMenu('', ('Create work order', body, 'Please pick either room or facility\nRoom or facility?: ')) # Ask the manager whether a facility or a room needs fixing
+                    roomOrfacility = self.takeInputAndPrintMenuWithoutBrackets('', ('Create work order', body, 'Please pick either room or facility\nRoom or facility?: ')) # Ask the manager whether a facility or a room needs fixing
                     continue
 
-            managerRoomFacilityId = self.takeInputAndPrintMenu('', ('Create work order', [f'{value}: {key}' for key, value in idDict.items()], 'Choose a ID: '))
+            managerRoomFacilityId = self.takeInputAndPrintMenuWithoutBrackets('', ('Create work order', [f'{value}: {key}' for key, value in idDict.items()], 'Choose a ID: '))
             while managerRoomFacilityId not in idDict: # print a menu with all the id's the user can choose from, while loop continues until the user enters a id that matches a id in the dictionary
-                managerRoomFacilityId = self.takeInputAndPrintMenu('', ('Create work order', [f'{value}: {key}' for key, value in idDict.items()], 'Please choose a valid ID from the options above\nChoose a ID: '))
+                managerRoomFacilityId = self.takeInputAndPrintMenuWithoutBrackets('', ('Create work order', [f'{value}: {key}' for key, value in idDict.items()], 'Please choose a valid ID from the options above\nChoose a ID: '))
                 if managerRoomFacilityId in quirOrBack:
                     return managerRoomFacilityId
             
@@ -54,20 +54,20 @@ class ManagerWorkOrder(SearchUI):
         body.append(f'Room/facility id: {managerRoomFacilityId}')
             
         priority = False
-        userPriority = self.takeInputAndPrintMenu('', ('Create work order', body, 'How important? (Emergency, now, as soon as possible): '))
+        userPriority = self.takeInputAndPrintMenuWithoutBrackets('', ('Create work order', body, 'How important? (Emergency, now, as soon as possible): '))
         while not priority: # While loop continues until the user enters a valid priority description
             if userPriority in quirOrBack:
                 return userPriority
             if validation.validatePriority(userPriority):
                 priority = True
             else:
-                userPriority = self.takeInputAndPrintMenu('', ('Create work order', body, 'Please choose one of three available options\nHow important? (Emergency, now, as soon as possible): '))
+                userPriority = self.takeInputAndPrintMenuWithoutBrackets('', ('Create work order', body, 'Please choose one of three available options\nHow important? (Emergency, now, as soon as possible): '))
 
         body.append(f'Priority: {userPriority}') 
 
         
             
-        isContractor = self.takeInputAndPrintMenu(['Y', 'N'], ('Create work order', body, 'Contractor? (Y/N): ')) # The manager either chooses yes that there is a contracor or no that there isnt
+        isContractor = self.takeInputAndPrintMenuWithoutBrackets(['Y', 'N'], ('Create work order', body, 'Contractor? (Y/N): ')) # The manager either chooses yes that there is a contracor or no that there isnt
         if isContractor.lower() in quirOrBack:
             return isContractor.lower()
         lookUpContractor = -1
@@ -93,10 +93,9 @@ class ManagerWorkOrder(SearchUI):
             self.takeInputAndPrintMenu(["D", "W", "M", "Y"], ("Create a work order", ["[D]aily", "[W]eekly", "[M]onthly", "[Y]early"], "Choose option: "))
             repeatInterval = 2
 
-        userPriority=1 # fix this userPriority needs to be an int not string!!!!
 
         self.logicWrapper.currentWorkOrderID+=1
-        workOrderInstance = WorkOrder(id=self.logicWrapper.currentWorkOrderID, description=Userdescription, propertyNumber=lookUpPropertyNumber, priority=int(userPriority), contractorID=int(lookUpContractor), roomFacilityId= managerRoomFacilityId, repeating=repeating, repeatInterval=repeatInterval)
+        workOrderInstance = WorkOrder(id=self.logicWrapper.currentWorkOrderID, description=Userdescription, propertyNumber=lookUpPropertyNumber, priority = userPriority, contractorID=int(lookUpContractor), roomFacilityId= managerRoomFacilityId, repeating=repeating, repeatInterval=repeatInterval)
 
 
         self.logicWrapper.addWorkOrder(workOrderInstance)
@@ -187,7 +186,7 @@ class ManagerWorkOrder(SearchUI):
                         case _:
                             continue
                     newValue = ''
-                    while newValue.lower() not in idDict:  
+                    while newValue not in idDict:  
                         newValue = self.takeInputAndPrintMenu('', ('Edit work orders', [f'{value}: {key}' for key, value in idDict.items()], 'Choose a new ID: '))
                         if newValue.lower() in quirOrBack:
                             return newValue.lower()
