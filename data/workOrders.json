@@ -1,14 +1,14 @@
 [
     {
         "id": 0,
-        "date": "",
+        "date": "11.12.2024",
         "description": "testing",
         "propertyNumber": "120",
-        "userID": "2707046969",
+        "userID": 0,
         "priority": "now",
         "workReport": [],
         "contractorID": -1,
-        "sentToManager": true,
+        "sentToManager": false,
         "isCompleted": false,
         "roomFacilityId": "r1",
         "repeating": true,

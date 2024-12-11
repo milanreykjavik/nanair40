@@ -3,6 +3,7 @@ from ui.baseUI import BaseUI
 from ui.validationUI import ValidationUI
 from ui.searchUI import SearchUI
 from baseClasses.workOrder import WorkOrder
+from datetime import datetime
 
 validation = ValidationUI()
 AVAILABLE_EDIT_OPTIONS = ['description', 'property number', 'priority', 'contractor', 'room id']
@@ -102,8 +103,11 @@ class ManagerWorkOrder(SearchUI):
                     repeatInterval = 4
                 case _:
                     return repeatIntervalStr
-        
-        workOrderInstance = WorkOrder(id=self.logicWrapper.currentWorkOrderID, description=Userdescription, propertyNumber=lookUpPropertyNumber, priority = userPriority, contractorID=int(lookUpContractor), roomFacilityId= managerRoomFacilityId, repeating=repeating, repeatInterval=repeatInterval)
+
+        now = datetime.now()
+        now = now.strftime("%d.%m.%Y")
+ 
+        workOrderInstance = WorkOrder(id=self.logicWrapper.currentWorkOrderID, description=Userdescription, date=now, propertyNumber=lookUpPropertyNumber, priority = userPriority, contractorID=int(lookUpContractor), roomFacilityId= managerRoomFacilityId, repeating=repeating, repeatInterval=repeatInterval)
 
 
         self.logicWrapper.addWorkOrder(workOrderInstance)

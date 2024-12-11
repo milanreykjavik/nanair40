@@ -112,18 +112,20 @@ class WorkOrderHandler:
         currentDate = datetime.now()
         currentDate = currentDate.strftime("%d.%m.%Y")
 
-        final = []
         for workOrder in repeatingList:
             if not workOrder.date:
                 continue
             if not workOrder.isCompleted:
-                final.append(workOrder)
+                continue
+            # just in case check
+            if not len(workOrder.workReport):
                 continue
             tdif = time_diff_category(workOrder.workReport[-1].date, currentDate)
             if tdif >= workOrder.repeatInterval:
+                # prob can be in one func
                 self.dataWrapper.workOrderChange("id", workOrder.id, isCompleted=False)
                 self.dataWrapper.workOrderChange("id", workOrder.id, userID=0)
-                final.append(workOrder)
+                self.dataWrapper.workOrderChange("id", workOrder.id, sentToManager=False)
         return True
 
 
