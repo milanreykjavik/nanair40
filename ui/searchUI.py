@@ -9,6 +9,8 @@ validation = ValidationUI()
 quitOrback = ['q', 'b', 'Q', 'B']
 
 
+
+
 class SearchUI(BaseUI):
     def __init__(self, logicWrapper: Logic_Wrapper = None):
         self.logicWrapper = logicWrapper
@@ -295,7 +297,16 @@ class SearchUI(BaseUI):
                 workOrders = self.logicWrapper.listWorkReports(propertyNumber = lookUpPropertyNumber)  
                 body = self.showWorkReports(workOrders)    
 
-
+            case 'e':
+                KennitalaWorkReports = None
+                prompt = 'Enter a kennitala: '
+                while not KennitalaWorkReports:
+                    lookUpKennitala = self.takeInputAndPrintMenu([], ('Search Work reports','', prompt))
+                    if lookUpKennitala.lower() in quitOrback:
+                        return lookUpKennitala.lower()
+                    KennitalaWorkReports = self.logicWrapper.listWorkReports(employeeID = lookUpKennitala)
+                    body = self.showWorkReports(KennitalaWorkReports)
+                    prompt = 'No employee with this kennitala has assigned a work report\nEnter a kennitala: '
 
         return self.takeInputAndPrintMenuWithoutBrackets([], ('Search work reports', body, 'Choose a option: '))
 
