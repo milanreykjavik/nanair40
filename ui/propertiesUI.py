@@ -113,7 +113,7 @@ class PropertiesUI(SearchUI):
         '''User searches for a property number and can edit information on that property number'''
         property = []
         # while loop continues asking the user for a property numner until he enters a proptery number that is in the system
-        lookUpproperty = self.getValidInput("Edit property","Enter property number: ", validation.validateText)
+        lookUpproperty = self.getValidInput("Edit property","Enter property number: ", validation.validateText).upper()
         while not property: 
             # ask the user for a property numnber to look up
             if lookUpproperty.lower() in quitOrBack:
@@ -121,7 +121,7 @@ class PropertiesUI(SearchUI):
             # ask the logic layer for the property number user entered, None is returned if the property number doesnt exist
             property = self.logicWrapper.listProperties(id = lookUpproperty)
             if not property:
-                lookUpproperty = self.getValidInput("Edit property","A property property doesn´t exist with that property number\nEnter property number: ", validation.validateText)
+                lookUpproperty = self.getValidInput("Edit property","A property property doesn´t exist with that property number\nEnter property number: ", validation.validateText).upper()
 
 
         # property items dict keeps track of the current values of the property the user entered
