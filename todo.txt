@@ -1,7 +1,6 @@
 check if all chars user inputed are in whitelist!!!!
 
 COULD MOVE NORMALIZE AND TOJSON TO ONE FILE THAT IS BEING INHERETED
-ON EVERY RUN REMOVE TMP FILES
 
 replace dateutil to use datetime
 

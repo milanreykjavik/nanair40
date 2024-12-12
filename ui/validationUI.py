@@ -51,10 +51,10 @@ class ValidationUI:
         if email.lower() in ('q', 'b'):
             return email
         
-        if '@' in email:
+        emailPattern = r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+        if re.fullmatch(emailPattern, email):
             return True
-        else:
-            return False 
+        return False
 
 
     @staticmethod
