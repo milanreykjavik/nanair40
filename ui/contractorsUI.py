@@ -41,11 +41,11 @@ class ContractorsUI(SearchUI):
 
         location = None
         destinations = self.logicWrapper.listLocations()
-        employeeLocation =  self.takeInputAndPrintMenu('', ('Add property', [destination.airport for destination in destinations], 'choose a location')).capitalize()
+        employeeLocation =  self.takeInputAndPrintMenuWithoutBrackets('', ('Add property', [destination.airport for destination in destinations], 'choose a location')).capitalize()
         while not location:
             location = self.logicWrapper.listLocations(airport = employeeLocation)
             if not location:
-                employeeLocation =  self.takeInputAndPrintMenu('', ('Add property', [destination.airport for destination in destinations], 'Please choose a location from the given options\nchoose a location: ')).capitalize()
+                employeeLocation =  self.takeInputAndPrintMenuWithoutBrackets('', ('Add property', [destination.airport for destination in destinations], 'Please choose a location from the given options\nchoose a location: ')).capitalize()
         contractorClass.__dict__['location'] = employeeLocation
 
 
@@ -58,7 +58,7 @@ class ContractorsUI(SearchUI):
         self.logicWrapper.addContractor(newContractor)
 
         # Print a menu with all of the contractor information that was just created, the user can either quit or go back
-        return self.takeInputAndPrintMenu(['[Q]uit', '[B]ack'], ('Add Constractor', [f'{key}: {value}' for key, value in newContractor.__dict__.items()], 'The Contractor has been succesfully created\nChoose a option: '))
+        return self.takeInputAndPrintMenuWithoutBrackets(['[Q]uit', '[B]ack'], ('Add Constractor', [f'{key}: {value}' for key, value in newContractor.__dict__.items()], 'The Contractor has been succesfully created\nChoose a option: '))
         
 
 
@@ -85,13 +85,13 @@ class ContractorsUI(SearchUI):
         if valueToChange == 'location':
             location = None
             destinations = self.logicWrapper.listLocations()
-            employeeLocation =  self.takeInputAndPrintMenu('', ('Add property', [destination.airport for destination in destinations], 'choose a location')).capitalize()
+            employeeLocation =  self.takeInputAndPrintMenuWithoutBrackets('', ('Add property', [destination.airport for destination in destinations], 'choose a location')).capitalize()
             while not location:
                 if employeeLocation.lower() in quitOrBack:
                     return employeeLocation.lower()
                 location = self.logicWrapper.listLocations(airport = employeeLocation)
                 if not location:
-                    employeeLocation =  self.takeInputAndPrintMenu('', ('Add property', [destination.airport for destination in destinations], 'Please choose a location from the given options\nchoose a location: ')).capitalize()
+                    employeeLocation =  self.takeInputAndPrintMenuWithoutBrackets('', ('Add property', [destination.airport for destination in destinations], 'Please choose a location from the given options\nchoose a location: ')).capitalize()
             contractorDict['location'] = employeeLocation
             newValue = employeeLocation
         else:
@@ -111,7 +111,7 @@ class ContractorsUI(SearchUI):
             case 'location':
                 self.logicWrapper.editContractor(entry='id', entryValue=lookUpContractor, location = newValue)
 
-        return self.takeInputAndPrintMenu(['[Q]uit', '[B]ack'], ('List employees', [f'{key}: {value}' for key, value in list(contractorDict.items())], 'Employee information has been succesfuly updated!\nChoose a option: '))
+        return self.takeInputAndPrintMenuWithoutBrackets(['[Q]uit', '[B]ack'], ('List employees', [f'{key}: {value}' for key, value in list(contractorDict.items())], 'Employee information has been succesfuly updated!\nChoose a option: '))
 
 
 
