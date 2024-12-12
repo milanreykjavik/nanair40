@@ -40,7 +40,7 @@ class PropertiesUI(SearchUI):
         #  call the logic layer to return a list of all location instances
         destinations = self.logicWrapper.listLocations()
         # ask the user what location he wants to assign the property, also prints menu with available locations
-        employeeLocation =  self.takeInputAndPrintMenu('', ('Add property', [destination.airport for destination in destinations], 'choose a location')).capitalize()
+        employeeLocation =  self.takeInputAndPrintMenuWithoutBrackets('', ('Add property', [destination.airport for destination in destinations], 'choose a location')).capitalize()
         while not location:
             if employeeLocation.lower() in quitOrBack: # quit or go back
                 return employeeLocation.lower()
@@ -48,7 +48,7 @@ class PropertiesUI(SearchUI):
             location = self.logicWrapper.listLocations(airport = employeeLocation)
             if not location:
                 # ask user again if invalid inputt
-                employeeLocation =  self.takeInputAndPrintMenu('', ('Add property', [destination.airport for destination in destinations], 'Please choose a location from the given options\nchoose a location: ')).capitalize()
+                employeeLocation =  self.takeInputAndPrintMenuWithoutBrackets('', ('Add property', [destination.airport for destination in destinations], 'Please choose a location from the given options\nchoose a location: ')).capitalize()
         PropertyDict['location'] = employeeLocation
 
 
@@ -105,7 +105,7 @@ class PropertiesUI(SearchUI):
         self.logicWrapper.addProperty(propertyInstance)
 
         # print the menu and give the option to either quit or go back
-        return self.takeInputAndPrintMenu(['[Q]uit', '[B]ack'], ('Add Property', [f'{key}: {value}' for key, value in PropertyDict.items()], 'The Property has been succesfully created\nChoose a option: '))
+        return self.takeInputAndPrintMenuWithoutBrackets(['[Q]uit', '[B]ack'], ('Add Property', [f'{key}: {value}' for key, value in PropertyDict.items()], 'The Property has been succesfully created\nChoose a option: '))
         
 
 
@@ -128,7 +128,7 @@ class PropertiesUI(SearchUI):
         propertyItemsDict = {'location': property[0].location, 'address': property[0].address, 'condition': property[0].condition, 'facilities maintenance': property[0].facilitiesMaintenance}
         valueToChange = ''
         while valueToChange not in propertyItemsDict: # ask the user what he wants to change until he enters a value that is in the dictionary
-            valueToChange = self.takeInputAndPrintMenu('', ('Edit property', [f'{key}: {value}' for key, value in propertyItemsDict.items()], 'Choose a value to change'))
+            valueToChange = self.takeInputAndPrintMenuWithoutBrackets('', ('Edit property', [f'{key}: {value}' for key, value in propertyItemsDict.items()], 'Choose a value to change: '))
             if valueToChange.lower() in quitOrBack:
                 return valueToChange.lower()
 
@@ -137,7 +137,7 @@ class PropertiesUI(SearchUI):
             # call logic layer to get a list of all locations in the system
             destinations = self.logicWrapper.listLocations()
             # ask the user for a location while printing the options onto the screen
-            employeeLocation =  self.takeInputAndPrintMenu('', ('Add property', [destination.airport for destination in destinations], 'choose a location')).capitalize()
+            employeeLocation =  self.takeInputAndPrintMenuWithoutBrackets('', ('Add property', [destination.airport for destination in destinations], 'choose a location: ')).capitalize()
             while not location:
                 if employeeLocation.lower() in quitOrBack: 
                     return employeeLocation.lower()
@@ -146,12 +146,12 @@ class PropertiesUI(SearchUI):
                 if not location:
                     # if no locations matches user input then user is asked again
                     location = None
-                    employeeLocation =  self.takeInputAndPrintMenu('', ('Add property', [destination.airport for destination in destinations], 'Please choose a location from the given options\nchoose a location: ')).capitalize()
+                    employeeLocation =  self.takeInputAndPrintMenuWithoutBrackets('', ('Add property', [destination.airport for destination in destinations], 'Please choose a location from the given options\nchoose a location: ')).capitalize()
             propertyItemsDict['location'] = employeeLocation
             newValue = employeeLocation
         # ask the user for a new value based on what he chose to change, the new value is validated in the getvalidinput function
         else: 
-            newValue = self.getValidInput('Edit employee',f"Enter a new value for {valueToChange} {'(Excellent, Good, Fair, Poor)' if valueToChange.lower() == 'condition' else ''}", AVAILABLE_EDIT_OPTIONS_FUNCTIONS[valueToChange], propertyItemsDict , '\nInvalid input')
+            newValue = self.getValidInput('Edit employee',f"Enter a new value for {valueToChange} {'(Excellent, Good, Fair, Poor)' if valueToChange.lower() == 'condition' else ''}", AVAILABLE_EDIT_OPTIONS_FUNCTIONS[valueToChange], propertyItemsDict , 'Invalid input\n')
             if newValue.lower() in quitOrBack:
                 return newValue.lower()
             propertyItemsDict[valueToChange.lower()] = newValue # new value added to the properyItemsDict
@@ -168,7 +168,7 @@ class PropertiesUI(SearchUI):
                 self.logicWrapper.editProperty(entry='id', entryValue=lookUpproperty, condition = newValue)
 
         # print menu telling the user that the values have been changed, and he can either quit or go back
-        return self.takeInputAndPrintMenu('', ('Edit employee', [f'{key}: {value}' for key, value in propertyItemsDict.items()], 'Property information has been succesfully updated\nChoose a option: '))
+        return self.takeInputAndPrintMenuWithoutBrackets('', ('Edit employee', [f'{key}: {value}' for key, value in propertyItemsDict.items()], 'Property information has been succesfully updated\nChoose a option: '))
 
         
 

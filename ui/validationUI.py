@@ -1,3 +1,7 @@
+from datetime import datetime
+import re
+
+
 class ValidationUI:
     @staticmethod
     def validateName(name) -> str | bool:
@@ -97,5 +101,38 @@ class ValidationUI:
         if priority.lower() in ('now', 'emergency', 'as soon as possible'):
             return True
         return False
+    
+
+    @staticmethod
+    def validate_date(dateString):
+        if dateString.lower() in ('q', 'b'):
+            return dateString
+        try:
+            # Attempt to parse the string with the given format
+            date = datetime.strptime(dateString, '%d.%m.%Y')
+            # Check if the day and month are valid
+            if not (1 <= date.day <= 31):
+                return False
+            if not (1 <= date.month <= 12):
+                return False
+            return True
+        except ValueError as e:
+            return False
+
+    @staticmethod
+    def validateOpeningHours(hoursStr):
+        # Allow 'q' or 'b' as special cases
+        if hoursStr.lower() in ('q', 'b'):
+            return hoursStr
+
+        # Pattern for a single time in HH:MM format
+        # HH: 00-23
+        # MM: 00-59
+        pattern = r"^([01]\d|2[0-3]):[0-5]\d$"
+        
+        match = re.match(pattern, hoursStr)
+        if not match:
+            return False
+        return True
 
 

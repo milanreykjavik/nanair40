@@ -32,12 +32,12 @@ class Logic_Wrapper:
         if len(self.currentContractors):
             self.currentContractorID: int = int(self.currentContractors[-1].id)
         else:
-            self.currentContractorID = 0
+            self.currentContractorID = 1
         self.currentWorkOrders: list['WorkOrder'] = self.workOrderHandler.listWorkOrders()
         if len(self.currentWorkOrders):
             self.currentWorkOrderID: int = int(self.currentWorkOrders[-1].id)
         else:
-            self.currentWorkOrderID = 0
+            self.currentWorkOrderID = 1
 
 
 
@@ -61,6 +61,7 @@ class Logic_Wrapper:
 
     def addWorkOrder(self, work: 'WorkOrder') -> bool:
         self.currentWorkOrderID+=1
+        work.id = self.currentWorkOrderID
         return self.workOrderHandler.addWorkOrder(work)
 
     def editWorkOrder(self, entry: str, entryValue: Any, **kwargs) -> bool:
@@ -83,6 +84,7 @@ class Logic_Wrapper:
 
     def addContractor(self, contractor: 'Contractor') -> bool:
         self.currentContractorID+=1
+        contractor.id = self.currentContractorID
         return self.contractorHandler.addContractor(contractor)
 
     def editContractor(self, entry: str, entryValue: Any, **kwargs) -> bool:

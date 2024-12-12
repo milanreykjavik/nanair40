@@ -18,8 +18,6 @@ class WorkReportHandler:
         self.workReport = WorkReport()
 
     def addWorkReport(self, work: 'WorkReport') -> bool:
-        if not logic.validator.checkEntries(work.__dict__.values()):
-            return False
         if type(work.cost) != int:
             return False
         if work.cost < 0:

@@ -13,7 +13,7 @@ def is_date_in_range(check_date_str, start_date_str, end_date_str):
     
     return start_date <= check_date <= end_date
 
-
+"""
 def time_diff_category(date1_str, date2_str):
     # Define the date format
     date_format = "%d.%m.%Y"
@@ -60,7 +60,6 @@ def time_diff_category(date1_str, date2_str):
         return 2  # Week
     else:
         return 1  # Day
-"""
 
 
 class WorkOrderHandler:
@@ -69,9 +68,6 @@ class WorkOrderHandler:
         self.workOrder = WorkOrder()
 
     def addWorkOrder(self, workOrder: 'WorkOrder') -> bool:
-        if not logic.validator.checkEntries(workOrder.__dict__.values()):
-            return False
-
         return self.dataWrapper.workOrderInsert(workOrder)
 
     def editWorkOrder(self, entry: str, entryValue: Any, **kwargs) -> bool:
@@ -93,6 +89,7 @@ class WorkOrderHandler:
             return []
 
         workOrder: list['WorkOrder'] = self.dataWrapper.workOrderFetch()
+
         if not len(kwargs):
             return workOrder
 
@@ -146,10 +143,10 @@ class WorkOrderHandler:
             if not workOrder.isCompleted:
                 continue
             # just in case check
-            if not len(workOrder.workReport):
+            if not workOrder.dateCompleted:
                 continue
             try:
-                tdif = time_diff_category(workOrder.workReport[-1].date, currentDate)
+                tdif = time_diff_category(workOrder.dateCompleted, currentDate)
             except:
                 return False
             if tdif >= workOrder.repeatInterval:

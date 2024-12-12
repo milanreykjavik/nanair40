@@ -56,5 +56,5 @@ class WorkController:
             with open(self.filePath, "r") as f:
                 data = json.load(f)
                 return self.workOrder.normalize(data) 
-        except:
+        except Exception as e:
             return []

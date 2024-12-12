@@ -199,7 +199,7 @@ class MainUI(BaseUI):
                 case 'r':
                     returnValue = self.searchUI.workReportSearch()
                 case 'c':
-                    returnValue = self.searchUI.showContractorsInfo()
+                    returnValue = self.contractorsIU.showContractors()
                 case 'b':
                     return False
                 case 'q':  # Matching case for comparison

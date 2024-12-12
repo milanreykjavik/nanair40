@@ -4,7 +4,9 @@ from ui.validationUI import ValidationUI
 from ui.searchUI import SearchUI
 
 validation = ValidationUI()
-AVAILABLE_EDIT_OPTIONS_FUNCTIONS = {'name': validation.validateName, 'phone': validation.validatePhone, 'opening hours': validation.validateText, 'location': validation.validateText}
+AVAILABLE_EDIT_OPTIONS_FUNCTIONS = {'name': validation.validateName, 'phone': validation.validatePhone, 'opening hours': validation.validateOpeningHours, 'location': validation.validateText}
+ERROR_MESSAGES = {'name': 'Invalid name, Please enter only letters\n', 'phone': 'Phone number has to only include numbers and be of the length 7-15\n', 
+                  'opening hours': 'Opening hours must be in the format given in the brackets, for example 10:20\n', 'location': 'Please choose from the options above\n'}
 quitOrBack = ['q', 'b']
 
 class ContractorsUI(SearchUI):
@@ -17,7 +19,7 @@ class ContractorsUI(SearchUI):
 
         match userInput.lower():
             case 'l':
-                return self.showContractorsInfo()
+                return self.showContractors()
             case 'a':
                 return self.addContractor()
             case 'e':
@@ -28,13 +30,13 @@ class ContractorsUI(SearchUI):
     def addContractor(self):
         contractorClass = Contractor()
         fields = [    # These are all of the keys, prompts, and values that we need to ask the user
-            ('name', "Enter the name of the contractor: ", validation.validateName),
-            ('phone', "Enter the phone number (Has to be 7 numbers long): ", validation.validatePhone),
-            ('openingHours', "Write the opening hours(OPENING-CLOSING): ", validation.validateText),
+            ('name', "Enter the name of the contractor: ", validation.validateName, 'Invalid name, Please enter only letters\n'),
+            ('phone', "Enter the phone number: ", validation.validatePhone, 'Phone number has to only include numbers and be of the length 7-15\n'),
+            ('openingHours', "Write the opening hours(OPENING:CLOSING): ", validation.validateOpeningHours, 'Opening hours must be in the format given in the brackets, for example 10:20\n'),
         ]
         
-        for key, prompt, validationFunc in fields: # This loops for all keys, prompts and functions the user needs to be askes
-            value = self.getValidInput('Add contractor',prompt, validationFunc, contractorClass.__dict__)
+        for key, prompt, validationFunc, errorMessage in fields: # This loops for all keys, prompts and functions the user needs to be askes
+            value = self.getValidInput('Add contractor',prompt, validationFunc, contractorClass.__dict__, errorMessage)
             if value.lower() in quitOrBack: # If the user entered q or b, then we go back one page or quit
                 return value.lower()
             contractorClass.__dict__[key] = value
@@ -66,7 +68,8 @@ class ContractorsUI(SearchUI):
     def editContractor(self):
         contractor = []
         while not contractor: # whilee loop keeps going until the wrapper sends a instance to the list
-            lookUpContractor = self.showContractorsInfo('Enter contractor ID to edit: ', '')
+            contractorList = self.logicWrapper.listContractors()
+            lookUpContractor = self.showContractorsInfo(contractorList, 'Enter contractor ID to edit: ', '')
             if lookUpContractor.lower() in quitOrBack:
                 return lookUpContractor.lower()
             contractor = self.logicWrapper.listContractors(id=lookUpContractor)  # Call the wrapper and check if a employee exists with the kennitala the user entered
@@ -76,7 +79,7 @@ class ContractorsUI(SearchUI):
 
         valueToChange = ''
         # user is asked for a value to change until he enters a value that is in the AVAILABLE_EDIT_OPTIONS_FUNCTIONS global variable
-        while valueToChange not in AVAILABLE_EDIT_OPTIONS_FUNCTIONS: 
+        while valueToChange.lower() not in AVAILABLE_EDIT_OPTIONS_FUNCTIONS: 
             # user asked for a value to change
             valueToChange = self.getValidInput('Edit contractor', 'Enter the value of what you would like to change: ', validation.validateText, contractorDict)
 
@@ -95,7 +98,10 @@ class ContractorsUI(SearchUI):
             contractorDict['location'] = employeeLocation
             newValue = employeeLocation
         else:
-            newValue = self.getValidInput('Edit contractor',  'Enter the new value: ', AVAILABLE_EDIT_OPTIONS_FUNCTIONS[valueToChange.lower()], contractorDict)
+            newValue = self.getValidInput('Edit contractor',  'Enter the new value: ', AVAILABLE_EDIT_OPTIONS_FUNCTIONS[valueToChange.lower()], contractorDict, ERROR_MESSAGES[valueToChange.lower()])
+        
+        if newValue.lower() in quitOrBack:
+            return newValue.lower()
 
         # new value added to the dictionary that is keeping track of the contractors values
         contractorDict[valueToChange.lower()] = newValue
@@ -103,16 +109,19 @@ class ContractorsUI(SearchUI):
         # match what the user wants to change, the logic wrapper is called where he changes the value in the employee json file
         match valueToChange.lower(): 
             case 'name':
-                self.logicWrapper.editContractor(entry= 'id', entryValue=lookUpContractor, name = newValue)
+                self.logicWrapper.editContractor(entry= 'id', entryValue=int(lookUpContractor), name = newValue)
             case 'phone':
-                self.logicWrapper.editContractor(entry='id', entryValue=lookUpContractor, phone = newValue)
+                self.logicWrapper.editContractor(entry='id', entryValue=int(lookUpContractor), phone = newValue)
             case 'opening hours':
-                self.logicWrapper.editContractor(entry='id', entryValue=lookUpContractor, openingHours = newValue)
+                self.logicWrapper.editContractor(entry='id', entryValue=int(lookUpContractor), openingHours = newValue)
             case 'location':
-                self.logicWrapper.editContractor(entry='id', entryValue=lookUpContractor, location = newValue)
+                self.logicWrapper.editContractor(entry='id', entryValue=int(lookUpContractor), location = newValue)
 
-        return self.takeInputAndPrintMenuWithoutBrackets(['[Q]uit', '[B]ack'], ('List employees', [f'{key}: {value}' for key, value in list(contractorDict.items())], 'Employee information has been succesfuly updated!\nChoose a option: '))
+        return self.takeInputAndPrintMenuWithoutBrackets(['[Q]uit', '[B]ack'], ('Edit contractors', [f'{key}: {value}' for key, value in list(contractorDict.items())], 'Employee information has been succesfuly updated!\nChoose a option: '))
 
 
 
         
+    def showContractors(self):
+        contractorList = self.logicWrapper.listContractors()
+        return self.showContractorsInfo(contractorList)

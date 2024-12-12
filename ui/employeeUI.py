@@ -138,5 +138,5 @@ class EmployeeUI(SearchUI):
 
     def showEmployees(self) -> str:
             '''prints a table of all employees in the system, after printing the user is asked whether he wants to quit or go back'''
-            employeesList = self.logicWrapper.listEmployees()
-            return self.showEmployeesInfo(employeesList)
+            employeesList = self.logicWrapper.listEmployees() # get a list of all employee instances
+            return self.showEmployeesInfo(employeesList) # send that list to the showemployee funcion that prints a table of all employees

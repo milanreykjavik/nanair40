@@ -3,6 +3,7 @@ from ui.baseUI import BaseUI
 from ui.validationUI import ValidationUI
 from ui.searchUI import SearchUI
 from baseClasses.workOrder import WorkOrder
+from datetime import datetime
 
 validation = ValidationUI()
 AVAILABLE_EDIT_OPTIONS = ['description', 'property number', 'priority', 'contractor', 'room id']
@@ -85,7 +86,8 @@ class ManagerWorkOrder(SearchUI):
             contractor = []
             while not contractor: # While loop continues until a contractor is chosen that is within the system
                 # prints al available contractors and the manager can choose from the available options
-                lookUpContractor = self.showContractorsInfo('Choose a contractor ID: ', '')
+                contractorList = self.logicWrapper.listContractors()
+                lookUpContractor = self.showContractorsInfo(contractorList, 'Choose a contractor ID: ', '')
                 if lookUpContractor in quirOrBack:
                     return lookUpContractor
                 # ask thelogic layer whether a contractor exists with the id entered, none is returned if not and while loop resets
@@ -115,7 +117,8 @@ class ManagerWorkOrder(SearchUI):
                 case _:
                     return repeatIntervalStr
         #crearing a work order instance that will be sent to logic layer
-        workOrderInstance = WorkOrder(id=self.logicWrapper.currentWorkOrderID, description=Userdescription, propertyNumber=lookUpPropertyNumber, priority = userPriority, contractorID=int(lookUpContractor), roomFacilityId= managerRoomFacilityId, repeating=repeating, repeatInterval=repeatInterval)
+        now = datetime.strftime(datetime.now(), "%d.%m.%Y")
+        workOrderInstance = WorkOrder(id=self.logicWrapper.currentWorkOrderID, description=Userdescription, date=now, propertyNumber=lookUpPropertyNumber, priority = userPriority, contractorID=int(lookUpContractor), roomFacilityId= managerRoomFacilityId, repeating=repeating, repeatInterval=repeatInterval)
         self.logicWrapper.addWorkOrder(workOrderInstance)
        
 
@@ -260,10 +263,11 @@ class ManagerWorkOrder(SearchUI):
         # allow the manager to leave an additional comment
         additionalComment = self.takeInputAndPrintMenuWithoutBrackets([], ('Complete work reports', body, 'Add a additional comment: '))
 
+        now=datetime.strftime(datetime.now(), "%d.%m.%Y")
         # change values of work report and work order instances by calling logic wrapper
         self.logicWrapper.editWorkReports(entry='id', entryValue = int(retVal), isCompleted = True)
         self.logicWrapper.editWorkReports(entry='id', entryValue = int(retVal), comment = additionalComment)
-        self.logicWrapper.editWorkOrder(entry='id', entryValue=workReport[0].workOrderID, isCompleted = True)
+        self.logicWrapper.editWorkOrder(entry='id', entryValue=workReport[0].workOrderID, isCompleted = True, dateCompleted=now)
 
         return self.takeInputAndPrintMenuWithoutBrackets(['Quit', 'Back'], (f'Create work order', [f'Work report {workReport[0].id} has been marked as complete!'], f'Choose a option: '))
 

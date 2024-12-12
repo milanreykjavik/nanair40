@@ -5,6 +5,7 @@ from baseClasses.workOrder import WorkOrder
 from baseClasses.Employee import Employee
 from baseClasses.Property import Property
 from baseClasses.workReport import WorkReport
+from baseClasses.Contractor import Contractor
 validation = ValidationUI()
 quitOrback = ['q', 'b', 'Q', 'B']
 
@@ -63,7 +64,7 @@ class SearchUI(BaseUI):
 
     def showEmployeesInfo(self, employee_list: list[Employee]) -> str:
         if not employee_list:
-            return self.takeInputAndPrintMenu(['[Q]uit', '[B]ack'], (f'List employees', '', 'No employees registered to this location\nChoose a option: '))
+            return self.takeInputAndPrintMenu(['[Q]uit', '[B]ack'], (f'List employees', '', 'No employees registered\nChoose a option: '))
 
         body = []
 
@@ -126,6 +127,9 @@ class SearchUI(BaseUI):
 
 
     def showPropertyInfo(self, propertyList: list[Property], options: str = ['[Q]uit', '[B]ack'], prompt: str = 'Choose a option') -> str:
+        if not propertyList:
+            return self.takeInputAndPrintMenu(['[Q]uit', '[B]ack'], (f'List properties', '', 'No properties registered\nChoose a option: '))
+
 
         # use Search class there is Employee Search class there that can search by any param in this case kennitala
 
@@ -281,7 +285,7 @@ class SearchUI(BaseUI):
 
 
     def workReportSearch(self):
-        userSelection = self.takeInputAndPrintMenu(['Propery search', 'Employee search'], ('Search work reports', ['Propery search', 'Employee search'], 'Choose a option'))
+        userSelection = self.takeInputAndPrintMenu(['Property search', 'Employee search' , 'Date range search'], ('Search work reports', ['Propery search', 'Employee search', 'Date range search'], 'Choose a option'))
         if userSelection.lower() in quitOrback:
             return userSelection.lower()
         match userSelection.lower():
@@ -308,6 +312,18 @@ class SearchUI(BaseUI):
                     KennitalaWorkReports = self.logicWrapper.listWorkReports(employeeID = lookUpKennitala)
                     body = self.showWorkReports(KennitalaWorkReports)
                     prompt = 'No employee with this kennitala has assigned a work report\nEnter a kennitala: '
+            case 'd':
+                startingDate = self.getValidInput('Search work reports', 'Choose a starting date(DD.MM.YYYY)', validation.validate_date, {}, 'Invalid date, please follow the given format\n')
+
+
+                if startingDate.lower() in quitOrback:
+                    return startingDate.lower()
+                endDate = self.getValidInput('Search work reports', 'Choose a ending date(DD.MM.YYYY)', validation.validate_date, {}, 'Invalid date, please follow the given format\n')
+                if endDate.lower() in quitOrback:
+                    return endDate.lower()
+
+                workReports = self.logicWrapper.listByDateRange(start=startingDate, end=endDate)
+                body = self.showWorkReports(workReports)
 
         return self.takeInputAndPrintMenuWithoutBrackets([], ('Search work reports', body, 'Choose a option: '))
 
@@ -339,7 +355,10 @@ class SearchUI(BaseUI):
 
 
 
-    def showContractorsInfo(self, options = 'choose a option', userOption = ['[Q]uit', '[B]ack']) -> str | bool:
+    def showContractorsInfo(self, contractorsList: (list[Contractor]),options = 'choose a option', userOption = ['[Q]uit', '[B]ack']) -> str | bool:
+        if not contractorsList:
+            return self.takeInputAndPrintMenu(['[Q]uit', '[B]ack'], (f'List contractors', '', 'No contracctors registered\nChoose a option: '))
+
         contractors = self.logicWrapper.listContractors()
         body = []
 
