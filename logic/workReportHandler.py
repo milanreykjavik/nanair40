@@ -1,11 +1,12 @@
 from baseClasses.workReport import WorkReport
 from typing import Any
 from datetime import datetime
+import logic.validator
 
 def is_date_in_range(check_date_str, start_date_str, end_date_str):
-    check_date = datetime.strptime(check_date_str, "%d-%m-%Y")
-    start_date = datetime.strptime(start_date_str, "%d-%m-%Y")
-    end_date = datetime.strptime(end_date_str, "%d-%m-%Y")
+    check_date = datetime.strptime(check_date_str, "%d.%m.%Y")
+    start_date = datetime.strptime(start_date_str, "%d.%m.%Y")
+    end_date = datetime.strptime(end_date_str, "%d.%m.%Y")
     
     return start_date <= check_date <= end_date
 
@@ -17,6 +18,13 @@ class WorkReportHandler:
         self.workReport = WorkReport()
 
     def addWorkReport(self, work: 'WorkReport') -> bool:
+        if not logic.validator.checkEntries(work.__dict__.values()):
+            return False
+        if type(work.cost) != int:
+            return False
+        if work.cost < 0:
+            return False
+
         return self.dataWrapper.workReportInsert(work)
 
     def editWorkReport(self, entry: str, entryValue: Any, **kwargs) -> bool:
@@ -24,6 +32,17 @@ class WorkReportHandler:
             return False
         if any(kwarg not in vars(self.workReport) for kwarg in kwargs):
             return False
+
+        if not entry:
+            return False
+        if not entryValue:
+            return False
+
+        if entry == "cost":
+            if type(entryValue) != int:
+                return False
+            if entryValue < 0:
+                return False
         
         return self.dataWrapper.workReportChange(entry, entryValue, **kwargs)
 
@@ -43,9 +62,6 @@ class WorkReportHandler:
                 # hack around to check if result that might be int or float partialy contains our target number
                 if str(v) not in str(workReports[i].__dict__[k]):
                     del workReports[i]
-
-    # LIST WORK REPORTS MAYBE
-
 
         return workReports
 
@@ -68,7 +84,10 @@ class WorkReportHandler:
         for workReport in workReports:
             if not workReport.date:
                 continue
-            if is_date_in_range(workReport.date, start, end):
-                final.append(workReport)
+            try:
+                if is_date_in_range(workReport.date, start, end):
+                    final.append(workReport)
+            except:
+                pass
 
         return final

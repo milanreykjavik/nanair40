@@ -1,5 +1,6 @@
 from baseClasses.Property import Property
 from typing import Any
+import logic.validator
 
 
 class PropertyHandler:
@@ -8,6 +9,11 @@ class PropertyHandler:
         self.property = Property()
 
     def addProperty(self, property: 'Property') -> bool:
+        if not logic.validator.checkEntries(property.__dict__.values()):
+            return False
+        if self.listProperties(id=property.id):
+            return False
+
         return self.dataWrapper.propertyInsert(property)
 
 
@@ -16,6 +22,16 @@ class PropertyHandler:
             return False
         if any(kwarg not in vars(self.property) for kwarg in kwargs):
             return False
+        if not entry:
+            return False
+        if not entryValue:
+            return False
+        if entry == "id":
+            if type(entryValue) != str:
+                return False
+            if not self.listProperties(id=entryValue):
+                return False
+
         return self.dataWrapper.propertyChange(entry, entryValue, **kwargs)
 
 

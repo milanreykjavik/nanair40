@@ -1,12 +1,12 @@
 import json
 
 class Contractor:
-    def __init__(self, id: int = 0, name: str = "", phone: str = "", openingHours: str = "", location: int = 0) -> None:
+    def __init__(self, id: int = 0, name: str = "", phone: str = "", openingHours: str = "", location: str = "") -> None:
         self.id: int = id # Contractors ID
         self.name: str = name # Contractors name
         self.phone: str = phone # Contractors phone
         self.openingHours: str = openingHours # might change to dae
-        self.location: int = location # Contractors location
+        self.location: str = location # Contractors location
 
     # String format for handling Contractor 
     def __repr__(self) -> str:

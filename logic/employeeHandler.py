@@ -1,5 +1,6 @@
 from baseClasses.Employee import Employee
 from typing import Any
+import logic.validator
 
 
 class EmployeeHandler:
@@ -10,39 +11,18 @@ class EmployeeHandler:
     def addEmployee(self, employee: 'Employee') -> bool:
         # https://www.quora.com/What-is-maximum-and-minimum-length-of-any-mobile-number-across-the-world
         # logic layer checking, here the data is confirmed to be true from UI layer, if not false is returned
-        if not type(employee.kennitala) == str:
+        if not logic.validator.checkEntries(employee.__dict__.values()):
             return False
-        if not employee.kennitala.isdigit():
-            return False
-        if len(str(employee.kennitala)) != 10:
+        if not logic.validator.validateKennitala(employee.kennitala):
             return False
         if self.listEmployes(kennitala=employee.kennitala):
             return False
-        phoneWhitelist = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "+"]
-        if type(employee.phone) != str:
+        if not logic.validator.validatePhone(employee.phone):
             return False
-        if len(employee.phone) < 7 or len(employee.phone) > 15:
+        if not logic.validator.validatePhone(employee.homePhone):
             return False
-        cnt = 0
-        for i in employee.phone:
-            if i == "+":
-                cnt+=1
-            if cnt >= 2:
-                return False
-            if i not in phoneWhitelist:
-                return False
-        if type(employee.homePhone) != str:
+        if not logic.validator.validateEmail(employee.email):
             return False
-        if len(employee.homePhone) < 7 or len(employee.homePhone) > 15:
-            return False
-        cnt = 0
-        for i in employee.homePhone:
-            if i == "+":
-                cnt+=1
-            if cnt >= 2:
-                return False
-            if i not in phoneWhitelist:
-                return False
 
         return self.dataWrapper.employeeInsert(employee)
 
@@ -53,42 +33,25 @@ class EmployeeHandler:
         if any(kwarg not in vars(self.employee) for kwarg in kwargs):
             return False
         # https://www.quora.com/What-is-maximum-and-minimum-length-of-any-mobile-number-across-the-world
+        if not entry:
+            return False
+        if not entryValue:
+            return False
         if entry == "kennitala":
-            if not entryValue.isdigit():
-                return False
-            if len(str(entryValue)) != 10:
+            if not logic.validator.validateKennitala(entryValue):
                 return False
             if not self.listEmployes(kennitala=entryValue):
                 return False
-        if entry == "phone":
-            if type(entryValue) != str:
-                return False
-            if len(entryValue) < 7 or len(entryValue) > 15:
-                return False
-        phoneWhitelist = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "+"]
-        cnt = 0
-        for i in entryValue:
-            if i == "+":
-                cnt+=1
-            if cnt >= 2:
-                return False
-            if i not in phoneWhitelist:
-                return False
-        
-        if entry == "homePhone":
-            if type(entryValue) != str:
-                return False
-            if len(entryValue) < 7 or len(entryValue) > 15:
-                return False
-        cnt = 0
-        for i in entryValue:
-            if i == "+":
-                cnt+=1
-            if cnt >= 2:
-                return False
-            if i not in phoneWhitelist:
+           
+
+        if entry == "phone" or entry == "homePhone":
+            if not logic.validator.validatePhone(entryValue):
                 return False
 
+        if entry == "email":
+            if not logic.validator.validateEmail(entryValue):
+                return False
+                   
         return self.dataWrapper.employeeChange(entry, entryValue, **kwargs)
 
 

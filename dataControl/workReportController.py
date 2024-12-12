@@ -1,20 +1,8 @@
 import json
-import os
-import tempfile
 from typing import Any
 
 from baseClasses.workReport import WorkReport
-
-def atomicWrite(fp, data):
-    dirName = os.path.dirname(fp)
-    with tempfile.NamedTemporaryFile("w", delete=False, dir=dirName) as tmpFile:
-        json.dump(data, tmpFile, indent=4)
-        tmpFileName = tmpFile.name
-        tmpFile.flush()
-        os.fsync(tmpFile.fileno()) # if you cut off the power of kernel panics
-
-    os.replace(tmpFileName, fp)
-
+from dataControl.writer import atomicWrite
 
 
 class WorkReportController:

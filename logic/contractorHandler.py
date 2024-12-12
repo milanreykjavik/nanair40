@@ -1,5 +1,6 @@
 from baseClasses.Contractor import Contractor
 from typing import Any
+import logic.validator
 
 
 class ContractorHandler:
@@ -8,6 +9,12 @@ class ContractorHandler:
         self.contractor = Contractor()
 
     def addContractor(self, contractor: 'Contractor') -> bool:
+        if not logic.validator.checkEntries(contractor.__dict__.values()):
+            return False
+        if not logic.validator.validatePhone(contractor.phone):
+            return False
+        if not logic.validator.validateOpeningHours(contractor.openingHours):
+            return False
         return self.dataWrapper.contractorInsert(contractor)
 
 
@@ -16,6 +23,16 @@ class ContractorHandler:
             return False
         if any(kwarg not in vars(self.contractor) for kwarg in kwargs):
             return False
+        if not entry:
+            return False
+        if not entryValue:
+            return False
+        if entry == "phone":
+            if not logic.validator.validatePhone(entryValue):
+                return False
+        if entry == "openingHours":
+            if not logic.validator.validateOpeningHours(entryValue):
+                return False
         return self.dataWrapper.contractorChange(entry, entryValue, **kwargs)
 
 

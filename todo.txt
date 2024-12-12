@@ -1,18 +1,8 @@
 check if all chars user inputed are in whitelist!!!!
-ADD MORE VALIDATION TO LOGIC LAYER, EXAMPLE WHEN CREATING A EMPLOYEE IF THE KENNITALA IS ALREADY IN USE OR THAT THE LOCATION ENTERED EXISTS AND SO ON
-something seems to be wrong with the list property function when assigning a id
-make the system assign ID to workOrders 
-
-
-Be able to change who did work in work report and not work order if person gets sick for example
-ManagerWorkOrder to be changed repeatInterval
-
 
 COULD MOVE NORMALIZE AND TOJSON TO ONE FILE THAT IS BEING INHERETED
 ON EVERY RUN REMOVE TMP FILES
 
-
-DATE SEARCH
-REPEATING
 replace dateutil to use datetime
-FIX KENNITALA SEARCH
+
+TEST STOPING PROGRAM WHILE WRITING DATA

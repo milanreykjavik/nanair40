@@ -5,10 +5,15 @@ from dataControl.propertyController import PropertyController
 from dataControl.workOrderController import WorkController
 from dataControl.workReportController import WorkReportController
 from typing import Any
-
+import os
 
 class DataWrapper:
     def __init__(self) -> None:
+        # clean tmp files everytime program is ran
+        try:
+            os.remove("data/tmp*")
+        except:
+            pass
         self.employeeController = EmployeeController()
         self.propertyController = PropertyController()
         self.workOrderController = WorkController()

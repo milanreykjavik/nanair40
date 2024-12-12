@@ -1,5 +1,6 @@
 from baseClasses.Location import Location
 from typing import Any
+import logic.validator
 
 
 class LocationHandler:
@@ -8,6 +9,8 @@ class LocationHandler:
         self.location = Location()
 
     def addLocation(self, location: 'Location') -> bool:
+        if not logic.validator.checkEntries(location.__dict__.values()):
+            return False
         return self.dataWrapper.locationInsert(location)
 
 
@@ -15,6 +18,10 @@ class LocationHandler:
         if not len(kwargs):
             return False
         if any(kwarg not in vars(self.location) for kwarg in kwargs):
+            return False
+        if not entry:
+            return False
+        if not entryValue:
             return False
         return self.dataWrapper.locationChange(entry, entryValue, **kwargs)
 
