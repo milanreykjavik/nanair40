@@ -1,7 +1,0 @@
-check if all chars user inputed are in whitelist!!!!
-
-COULD MOVE NORMALIZE AND TOJSON TO ONE FILE THAT IS BEING INHERETED
-
-replace dateutil to use datetime
-
-TEST STOPING PROGRAM WHILE WRITING DATA

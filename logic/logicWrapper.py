@@ -1,7 +1,3 @@
-"""
-fix to camelCase not python_case
-"""
-
 from logic.employeeHandler import EmployeeHandler
 from baseClasses.Employee import Employee
 from logic.PropertyHandler import PropertyHandler
