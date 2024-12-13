@@ -1,0 +1,62 @@
+[
+    {
+        "id": 1,
+        "workOrderID": 2,
+        "description": "Everything went well , no problems worked on property p302",
+        "contractorID": -1,
+        "employeeID": "0204778742",
+        "date": "13.12.2024",
+        "cost": 100,
+        "propertyNumber": "P302",
+        "comment": "Well done William",
+        "isCompleted": true
+    },
+    {
+        "id": 2,
+        "workOrderID": 6,
+        "description": "All went well, all regular",
+        "contractorID": 2,
+        "employeeID": "0711668672",
+        "date": "13.12.2024",
+        "cost": 1999,
+        "propertyNumber": "P303",
+        "comment": "",
+        "isCompleted": false
+    },
+    {
+        "id": 3,
+        "workOrderID": 25,
+        "description": "Nothing went well bjarki broke his arm, but the work got finished",
+        "contractorID": 3,
+        "employeeID": "0101909235",
+        "date": "13.12.2024",
+        "cost": 12222,
+        "propertyNumber": "P307",
+        "comment": "",
+        "isCompleted": false
+    },
+    {
+        "id": 4,
+        "workOrderID": 15,
+        "description": "Very regular no problems came up",
+        "contractorID": -1,
+        "employeeID": "0208889273",
+        "date": "13.12.2024",
+        "cost": 100,
+        "propertyNumber": "P305",
+        "comment": "",
+        "isCompleted": false
+    },
+    {
+        "id": 5,
+        "workOrderID": 21,
+        "description": "All went well we finnished the work that was assigned.",
+        "contractorID": -1,
+        "employeeID": "0101909235",
+        "date": "13.12.2024",
+        "cost": 400,
+        "propertyNumber": "P306",
+        "comment": "",
+        "isCompleted": false
+    }
+]

@@ -1,0 +1,164 @@
+[
+    {
+        "kennitala": "0507809234",
+        "name": "Helgi \u00fe\u00f3r skarph\u00e9\u00f0insson",
+        "phone": "7760092",
+        "homePhone": "7760092",
+        "address": "Hjallalaut 8",
+        "email": "Helgiskarp@icloud.com",
+        "location": "Reykjavik"
+    },
+    {
+        "kennitala": "0204778742",
+        "name": "William jamal",
+        "phone": "876471236",
+        "homePhone": "876471236",
+        "address": "Sjovaland 7",
+        "email": "William@gmail.com",
+        "location": "Thorshofn"
+    },
+    {
+        "kennitala": "0711668672",
+        "name": "Daniel sturridge",
+        "phone": "99872415",
+        "homePhone": "00726384",
+        "address": "Arnarh\u00f6l 9",
+        "email": "Daniel@gamil.is",
+        "location": "Nuuk"
+    },
+    {
+        "kennitala": "0912980909",
+        "name": "Chuck norris",
+        "phone": "00000000",
+        "homePhone": "0000000",
+        "address": "Kulsgata 8",
+        "email": "Chuckgoatnorris@gmail.is",
+        "location": "Kulusuk"
+    },
+    {
+        "kennitala": "0208889273",
+        "name": "Magnus m\u00e1r",
+        "phone": "834675443",
+        "homePhone": "23784743",
+        "address": "\u00de\u00f3rsgata 9",
+        "email": "Magnus@gmail.com",
+        "location": "Tingwall"
+    },
+    {
+        "kennitala": "0208408761",
+        "name": "Gr\u00e9tar \u00fe\u00f3r \u00f3skarsson",
+        "phone": "23723723",
+        "homePhone": "23982312",
+        "address": "Hei\u00f0arholt 9",
+        "email": "Gretar@hotmail.is",
+        "location": "Longyearbyen"
+    },
+    {
+        "kennitala": "0101909235",
+        "name": "Bjarki Gunnarsson",
+        "phone": "55512345",
+        "homePhone": "55567890",
+        "address": "Laugavegur 12",
+        "email": "bjarki.gunnarsson@example.is",
+        "location": "Reykjavik"
+    },
+    {
+        "kennitala": "0302909236",
+        "name": "Anna Kristinsd\u00f3ttir",
+        "phone": "8889087",
+        "homePhone": "8889087",
+        "address": "Sk\u00f3lav\u00f6r\u00f0ust\u00edgur 15",
+        "email": "anna.kristinsdottir@example.is",
+        "location": "Reykjavik"
+    },
+    {
+        "kennitala": "0404778743",
+        "name": "Sigur\u00f0ur Hallgr\u00edmsson",
+        "phone": "876471237",
+        "homePhone": "876471237",
+        "address": "Fiskisl\u00f3\u00f0 3",
+        "email": "sigurdur.hallgrimsson@example.is",
+        "location": "Thorshofn"
+    },
+    {
+        "kennitala": "0504778744",
+        "name": "Gudr\u00fan Karlsd\u00f3ttir",
+        "phone": "876471238",
+        "homePhone": "876471238",
+        "address": "Sj\u00e1vargata 10",
+        "email": "gudrun.karlsdottir@example.is",
+        "location": "Thorshofn"
+    },
+    {
+        "kennitala": "0801668673",
+        "name": "Hans Olsen",
+        "phone": "99872416",
+        "homePhone": "00726385",
+        "address": "Nuussuaq 10",
+        "email": "hans.olsen@example.is",
+        "location": "Nuuk"
+    },
+    {
+        "kennitala": "0911668674",
+        "name": "Kirsten Johansen",
+        "phone": "99872417",
+        "homePhone": "00726386",
+        "address": "Qinngorput 22",
+        "email": "kirsten.johansen@example.is",
+        "location": "Nuuk"
+    },
+    {
+        "kennitala": "1012980910",
+        "name": "Nuka Kleist",
+        "phone": "00000001",
+        "homePhone": "00000002",
+        "address": "Kulusuk Bygdevej 1",
+        "email": "nuka.kleist@example.is",
+        "location": "Kulusuk"
+    },
+    {
+        "kennitala": "1112980911",
+        "name": "Pilutaq Poulsen",
+        "phone": "00000003",
+        "homePhone": "00000004",
+        "address": "Kulusuk Bygdevej 2",
+        "email": "pilutaq.poulsen@example.is",
+        "location": "Kulusuk"
+    },
+    {
+        "kennitala": "0308889274",
+        "name": "Erlingur Sigvaldason",
+        "phone": "834675444",
+        "homePhone": "23784744",
+        "address": "Tingbrekka 2",
+        "email": "erlingur.sigvaldason@example.is",
+        "location": "Tingwall"
+    },
+    {
+        "kennitala": "0408889275",
+        "name": "Sigr\u00ed\u00f0ur Thorvaldsd\u00f3ttir",
+        "phone": "834675445",
+        "homePhone": "23784745",
+        "address": "Tingsgata 3",
+        "email": "sigridur.thorvaldsdottir@example.is",
+        "location": "Tingwall"
+    },
+    {
+        "kennitala": "0308408762",
+        "name": "Isak Johnsen",
+        "phone": "23723724",
+        "homePhone": "23982313",
+        "address": "Vei 232",
+        "email": "isak.johnsen@example.is",
+        "location": "Longyearbyen"
+    },
+    {
+        "kennitala": "0408408763",
+        "name": "Lena Svensson",
+        "phone": "23723725",
+        "homePhone": "23982314",
+        "address": "Vei 233",
+        "email": "lena.svensson@example.is",
+        "location": "Longyearbyen"
+    }
+]

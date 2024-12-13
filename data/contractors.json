@@ -1,0 +1,16 @@
+[
+    {
+        "id": 2,
+        "name": "M\u00e1lning ehf",
+        "phone": "4535342",
+        "openingHours": "10-20",
+        "location": "Reykjavik"
+    },
+    {
+        "id": 3,
+        "name": "Window cleaners",
+        "phone": "89237823",
+        "openingHours": "12-22",
+        "location": "Tingwall"
+    }
+]

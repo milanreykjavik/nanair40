@@ -1,0 +1,116 @@
+[
+    {
+        "id": "P302",
+        "location": "Reykjavik",
+        "address": "\u00de\u00f3rsvellir 9",
+        "condition": "Excellent",
+        "facilitiesMaintenance": "Windows need cleaning",
+        "rooms": {
+            "R101": "room 1",
+            "R102": "room 2",
+            "R103": "room 3",
+            "R104": "room 4"
+        },
+        "facilities": {
+            "H1": "Hot tub",
+            "F1": "Fron desk",
+            "S1": "Sauna",
+            "Sw1": "Swimming pool"
+        }
+    },
+    {
+        "id": "P303",
+        "location": "Thorshofn",
+        "address": "Hafnargata 12",
+        "condition": "Good",
+        "facilitiesMaintenance": "Windows need cleaning",
+        "rooms": {
+            "R101": "room 1",
+            "R102": "room 2",
+            "R103": "room 3",
+            "R104": "room 4"
+        },
+        "facilities": {
+            "H1": "Hot tub",
+            "F1": "Fron desk",
+            "S1": "Sauna",
+            "Sw1": "Swimming pool"
+        }
+    },
+    {
+        "id": "P304",
+        "location": "Nuuk",
+        "address": "Nuussuaq 10",
+        "condition": "Fair",
+        "facilitiesMaintenance": "Windows need cleaning",
+        "rooms": {
+            "R101": "room 1",
+            "R102": "room 2",
+            "R103": "room 3",
+            "R104": "room 4"
+        },
+        "facilities": {
+            "H1": "Hot tub",
+            "F1": "Fron desk",
+            "S1": "Sauna",
+            "Sw1": "Swimming pool"
+        }
+    },
+    {
+        "id": "P305",
+        "location": "Kulusuk",
+        "address": "Kulusuk Bygdevej 3",
+        "condition": "Poor",
+        "facilitiesMaintenance": "Windows need cleaning",
+        "rooms": {
+            "R101": "room 1",
+            "R102": "room 2",
+            "R103": "room 3",
+            "R104": "room 4"
+        },
+        "facilities": {
+            "H1": "Hot tub",
+            "F1": "Fron desk",
+            "S1": "Sauna",
+            "Sw1": "Swimming pool"
+        }
+    },
+    {
+        "id": "P306",
+        "location": "Tingwall",
+        "address": "Tingbrekka 5",
+        "condition": "Excellent",
+        "facilitiesMaintenance": "Windows need cleaning",
+        "rooms": {
+            "R101": "room 1",
+            "R102": "room 2",
+            "R103": "room 3",
+            "R104": "room 4"
+        },
+        "facilities": {
+            "H1": "Hot tub",
+            "F1": "Fron desk",
+            "S1": "Sauna",
+            "Sw1": "Swimming pool"
+        }
+    },
+    {
+        "id": "P307",
+        "location": "Longyearbyen",
+        "address": "Vei 234",
+        "condition": "Good",
+        "facilitiesMaintenance": "Windows need cleaning",
+        "rooms": {
+            "R101": "room 1",
+            "R102": "room 2",
+            "R103": "room 3",
+            "R104": "room 4"
+        },
+        "facilities": {
+            "H1": "Hot tub",
+            "F1": "Fron desk",
+            "S1": "Sauna",
+            "Sw1": "Swimming pool"
+        }
+    }
+]
