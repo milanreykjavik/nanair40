@@ -13,33 +13,7 @@ def is_date_in_range(check_date_str, start_date_str, end_date_str):
     
     return start_date <= check_date <= end_date
 
-"""
-def time_diff_category(date1_str, date2_str):
-    # Define the date format
-    date_format = "%d.%m.%Y"
-    
-    # Parse the date strings into datetime objects
-    date1 = datetime.strptime(date1_str, date_format)
-    date2 = datetime.strptime(date2_str, date_format)
-    
-    # Calculate the absolute difference in terms of days
-    delta_days = (date2 - date1).days
-    
-    # Calculate years and months manually
-    years = delta_days // 365
-    remaining_days = delta_days % 365
-    months = remaining_days // 30
-    
-    # Check the difference and return appropriate category
-    if years > 0:
-        return 4  # Year
-    elif months > 0:
-        return 3  # Month
-    elif delta_days > 7:
-        return 2  # Week
-    else:
-        return 1  # Day
-"""
+
 def time_diff_category(date1_str, date2_str):
     # Define the date format
     date_format = "%d.%m.%Y"
