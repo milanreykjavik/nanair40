@@ -1,0 +1,17 @@
+[
+    {
+        "id": 0,
+        "date": "",
+        "description": "testing",
+        "propertyNumber": "120",
+        "userID": "2707046969",
+        "priority": "now",
+        "workReport": [],
+        "contractorID": -1,
+        "sentToManager": true,
+        "isCompleted": false,
+        "roomFacilityId": "r1",
+        "repeating": true,
+        "repeatInterval": 1
+    }
+]

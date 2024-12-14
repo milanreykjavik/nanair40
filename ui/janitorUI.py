@@ -18,6 +18,7 @@ class JanitorUI(SearchUI):
 
 
     def workOrders(self):
+        self.logicWrapper.checkRepeatingWorkOrders()
         filter = self.takeInputAndPrintMenu(['P', 'A'], ('Work orders', ['Property', 'All work orders'], 'Choose what you would like to filter by: '))
         if filter.lower() in quitOrBack:
             return filter.lower()

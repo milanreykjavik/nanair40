@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "workOrderID": 0,
+        "description": "testing12",
+        "contractorID": -1,
+        "employeeID": "2707046969",
+        "date": "11.12.2024",
+        "cost": 400,
+        "propertyNumber": "120",
+        "comment": "",
+        "isCompleted": false
+    }
+]
